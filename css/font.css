@@ -1,0 +1,24 @@
+/* 1. 引入系统字体，包括 Times New Roman */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Lato, Roboto, "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", "SimSun", "Times New Roman", sans-serif;
+}
+
+/* 2. 针对中文优化字体 - 优先使用宋体 */
+body:lang(zh) {
+    font-family: 'SimSun', "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+/* 3. 繁体中文优化字体 */
+body:lang(zh-TW), body:lang(zh-HK) {
+    font-family: 'SimSun', "Microsoft JhengHei", "PingFang SC", sans-serif;
+}
+
+/* 4. 针对英文和数字使用 Times New Roman */
+body:lang(en), body:lang('en-*') {
+    font-family: 'Times New Roman', 'Arial', sans-serif;
+}
+
+/* 5. 确保默认字体不覆盖前面的设置 */
+body {
+    font-family: 'Times New Roman', 'Arial', 'Segoe UI', "Helvetica Neue", Lato, Roboto, sans-serif;
+}
