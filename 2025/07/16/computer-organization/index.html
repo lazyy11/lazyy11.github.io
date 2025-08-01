@@ -12,7 +12,7 @@
 <meta property="article:tag" content="computer-organization">
 <meta property="article:tag" content="408">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lazy11.top/img/lazy-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lazy11.top/2025/07/16/computer-organization/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+<meta name="twitter:image" content="https://lazy11.top/img/lazy-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lazy11.top/2025/07/16/computer-organization/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
     (() => {
       
     const saveToLocal = {
@@ -1506,4 +1506,62 @@
   } else {
     window.loadOtherComment = loadWaline
   }
-})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+})()</script></div><script>(() => {
+  const option = null
+  const config = {"site_uv":true,"site_pv":true,"page_pv":false,"token":"your-token"}
+
+  const runTrack = () => {
+    umami.track(props => ({ ...props, url: window.location.pathname, title: GLOBAL_CONFIG_SITE.title }))
+  }
+
+  const loadUmamiJS = () => {
+    btf.getScript('https://umami.lazy11.top/script.js', {
+      'data-website-id': 'your-website-id',
+      'data-auto-track': 'false',
+      ...option
+    }).then(runTrack)
+  }
+
+  const getData = async (isPost) => {
+    const now = Date.now()
+    const keyUrl = isPost ? `&url=${window.location.pathname}` : ''
+    const headerList = { 'Accept': 'application/json' }
+    if (true) headerList['Authorization'] = `Bearer ${config.token}`
+    else headerList['x-umami-api-key'] = config.token
+    const res = await fetch(`https://umami.lazy11.top/api/websites/your-website-id/stats?startAt=0000000000&endAt=${now}${keyUrl}`, {
+      method: "GET",
+      headers: headerList
+    })
+    return await res.json()
+  }
+
+  const insertData = async () => {
+    try {
+      if (GLOBAL_CONFIG_SITE.isPost && config.page_pv) {
+        const pagePV = document.getElementById('umamiPV')
+        if (pagePV) {
+          const data = await getData(true)
+          pagePV.textContent = data.pageviews.value
+        }
+      } else {
+        const data = (config.site_uv || config.site_pv) && await getData()
+        if (config.site_uv) {
+          const siteUV = document.getElementById('umami-site-uv')
+          if (siteUV) siteUV.textContent = data.visitors.value
+        }
+        if (config.site_pv) {
+          const sitePV = document.getElementById('umami-site-pv')
+          if (sitePV) sitePV.textContent = data.pageviews.value
+        }
+      }
+    } catch (e) {
+      console.error('Failed to load Umami Analytics:', e)
+    }
+  }
+
+  btf.addGlobalFn('pjaxComplete', runTrack, 'umami_analytics_run_track')
+  btf.addGlobalFn('pjaxComplete', insertData, 'umami_analytics_insert')
+
+  loadUmamiJS()
+  insertData()
+})()</script></div></body></html>
