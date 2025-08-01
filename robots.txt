@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# 允许爬取所有文章和页面
+Allow: /2024/
+Allow: /2025/
+Allow: /categories/
+Allow: /tags/
+Allow: /archives/
+Allow: /about/
+Allow: /link/
+Allow: /artitalk/
+
+# 禁止爬取管理相关目录（如果有的话）
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# sitemap位置
+Sitemap: https://lazy11.top/sitemap.xml
+
+# 爬取延迟（秒）
+Crawl-delay: 1 
