@@ -16,6 +16,7 @@ body:lang(zh-TW), body:lang(zh-HK) {
 /* 4. 针对英文和数字使用 Times New Roman */
 body:lang(en), body:lang('en-*') {
     font-family: 'Times New Roman', 'Arial', sans-serif;
+    font-size: 36px;
 }
 
 /* 5. 确保默认字体不覆盖前面的设置 */
