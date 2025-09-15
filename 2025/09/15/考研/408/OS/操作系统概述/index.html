@@ -1,0 +1,799 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>操作系统概述 | Lazy's Blog</title><meta name="author" content="Lazy,lazy11@foxmail.com"><meta name="copyright" content="Lazy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="操作系统概述 概念要点 1. 操作系统的基本概念   操作系统的定义  定义：控制和管理整个计算机系统的硬件与软件资源，合理组织、调度计算机工作与资源分配，为用户和其他软件提供方便接口与环境的程序集合，是计算机系统最基本的系统软件。 系统分层：计算机系统自下而上分为硬件、操作系统、应用程序、用户（与计算机组成原理分层不同），操作系统是硬件与用户&#x2F;应用程序的中介，负责协调应用程序对硬件资源的分配与使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统概述">
+<meta property="og:url" content="https://lazy11.top/2025/09/15/%E8%80%83%E7%A0%94/408/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Lazy&#39;s Blog">
+<meta property="og:description" content="操作系统概述 概念要点 1. 操作系统的基本概念   操作系统的定义  定义：控制和管理整个计算机系统的硬件与软件资源，合理组织、调度计算机工作与资源分配，为用户和其他软件提供方便接口与环境的程序集合，是计算机系统最基本的系统软件。 系统分层：计算机系统自下而上分为硬件、操作系统、应用程序、用户（与计算机组成原理分层不同），操作系统是硬件与用户&#x2F;应用程序的中介，负责协调应用程序对硬件资源的分配与使">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lazy11.top/img/lazy-icon.png">
+<meta property="article:published_time" content="2025-09-15T08:34:52.000Z">
+<meta property="article:modified_time" content="2025-09-15T15:10:50.970Z">
+<meta property="article:author" content="Lazy">
+<meta property="article:tag" content="OS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lazy11.top/img/lazy-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lazy11.top/2025/09/15/%E8%80%83%E7%A0%94/408/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '操作系统概述',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">21</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "/img/lazy-icon.png" data-lazy-src="/img/index.png" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">操作系统概述</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">操作系统概述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-09-15T08:34:52.000Z" title="Created 2025-09-15 16:34:52">2025-09-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-09-15T15:10:50.970Z" title="Updated 2025-09-15 23:10:50">2025-09-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%80%83%E7%A0%94/">考研</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%80%83%E7%A0%94/408/">408</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%80%83%E7%A0%94/408/OS/">OS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span class="waline-pageview-count" data-path="/2025/09/15/%E8%80%83%E7%A0%94/408/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1>操作系统概述</h1>
+<h2 id="概念要点">概念要点</h2>
+<h3 id="1-操作系统的基本概念"><strong>1. 操作系统的基本概念</strong></h3>
+<ul>
+<li>
+<p><strong>操作系统的定义</strong></p>
+<ul>
+<li><strong>定义</strong>：控制和管理整个计算机系统的硬件与软件资源，合理组织、调度计算机工作与资源分配，为用户和其他软件提供方便接口与环境的程序集合，是计算机系统最基本的系统软件。</li>
+<li><strong>系统分层</strong>：计算机系统自下而上分为硬件、操作系统、应用程序、用户（与计算机组成原理分层不同），操作系统是硬件与用户/应用程序的中介，负责协调应用程序对硬件资源的分配与使用。</li>
+</ul>
+</li>
+<li>
+<p><strong>操作系统的功能和目标</strong></p>
+<ul>
+<li><strong>核心功能</strong>：
+<ul>
+<li><strong>处理机管理</strong>：以进程（或线程）为基本单位，包含进程控制、同步、通信、死锁处理、调度等，多道程序环境下需解决进程并发执行的冲突与共享问题。</li>
+<li><strong>存储器管理</strong>：核心是为多道程序提供良好运行环境，包含内存分配与回收、地址映射（逻辑地址→物理地址）、内存保护与共享（防止越权访问）、内存扩充（如虚拟存储技术）。</li>
+<li><strong>设备管理</strong>：完成用户I/O请求，提高设备利用率，包含缓冲管理（缓解CPU与I/O速度矛盾）、设备分配、设备处理、虚拟设备（将临界资源转为共享设备）。</li>
+<li><strong>文件管理</strong>：由文件系统负责，管理计算机中以文件形式存在的信息，包含文件存储空间管理、目录管理、文件读/写管理与保护（确保文件安全性与一致性）。</li>
+</ul>
+</li>
+<li><strong>用户接口</strong>：
+<ul>
+<li><strong>命令接口</strong>：按作业控制方式分为两类——
+<ul>
+<li><strong>联机命令接口</strong>（交互式，用户逐句输入命令，命令解释程序即时响应，适用于分时/实时系统）、</li>
+<li><strong>脱机命令接口</strong>（批处理，用户通过作业控制说明书间接控制作业，适用于批处理系统）。</li>
+</ul>
+</li>
+<li><strong>程序接口</strong>：由一组系统调用（也称广义指令）组成，是编程人员请求操作系统服务的唯一途径；图形用户界面（GUI）基于程序接口实现，通过鼠标/键盘操作调用系统调用，但GUI本身非操作系统核心部分。</li>
+</ul>
+</li>
+<li><strong>核心目标</strong>：
+<ul>
+<li>① 扩充机器功能——将无软件支持的“裸机”改造为功能更强、使用更方便的“扩充机器”（或虚拟机）</li>
+<li>② 提高资源利用率——通过多道程序并发与资源共享，使CPU、内存、设备等保持“忙碌”状态。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>操作系统的特征</strong></p>
+<ul>
+<li><strong>并发 (Concurrence)</strong>
+<ul>
+<li><strong>定义</strong>：两个或多个事件在同一时间间隔内发生，多道程序环境下，内存中多道程序分时交替执行，实现CPU“忙时利用”（如某程序I/O暂停时，调度另一程序运行）。</li>
+<li><strong>与并行的区别</strong>：并行是“同一时刻发生”（需多CPU、多流水线等硬件支持），并发是“同一时间间隔内交替发生”（单CPU即可实现）；例如“9:00-10:00交替吃面包和写字”是并发，“左手吃面包同时右手写字”是并行。</li>
+<li><strong>核心作用</strong>：引入“进程”的根本目的是实现程序的并发执行，解决单道程序下CPU空闲的问题。</li>
+</ul>
+</li>
+<li><strong>共享 (Sharing)</strong>
+<ul>
+<li><strong>定义</strong>：系统资源可供内存中多个并发执行的进程共同使用，按共享方式分为两类：
+<ul>
+<li><strong>互斥共享</strong>：适用于临界资源（如打印机、磁带机、栈、变量），一段时间内仅允许一个进程访问，需遵循“请求→分配→使用→释放”流程，避免结果混乱（如打印机交替打印多文档会导致内容错乱）。</li>
+<li><strong>同时访问</strong>：宏观上多进程“同时”访问，微观上分时交替访问（如磁盘设备、重入代码编写的文件），例如多个用户可“同时”读取同一磁盘文件。</li>
+</ul>
+</li>
+<li><strong>与并发的关系</strong>：两者互为存在条件——无程序并发则无需资源共享，无有效资源共享则程序无法并发执行（如多进程争抢CPU却无调度机制，会导致并发崩溃）。</li>
+</ul>
+</li>
+<li><strong>虚拟 (Virtual)</strong>
+<ul>
+<li><strong>定义</strong>：将一个物理实体（如CPU、内存、I/O设备）虚拟为多个逻辑对应物，核心技术分为两类：
+<ul>
+<li><strong>时分复用技术</strong>：如“虚拟处理器”——单CPU通过多道程序分时使用，使每个终端用户感觉有专属CPU（如分时系统的时间片轮转）。</li>
+<li><strong>空分复用技术</strong>：如“虚拟存储器”——通过内存与外存协作，逻辑上扩充内存容量（用户感知的内存大于实际物理内存）；又如“虚拟设备”——将单物理I/O设备虚拟为多逻辑I/O设备，允许多用户“同时”使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>异步 (Asynchronism)</strong>
+<ul>
+<li><strong>定义</strong>：多道程序并发执行时，进程因资源竞争（如CPU、I/O）呈现“走走停停”的状态，以不可预知的速度推进（如某进程因I/O暂停，后续恢复时间不确定）。</li>
+<li><strong>关键要求</strong>：操作系统需保证“运行环境相同则进程多次执行结果一致”，避免因异步性导致的时间相关错误（如全局变量访问顺序不当）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-操作系统的发展历程"><strong>2. 操作系统的发展历程</strong></h3>
+<ul>
+<li>
+<p><strong>手工操作阶段（无操作系统）</strong></p>
+<ul>
+<li><strong>核心特征</strong>：用户独占全机，所有操作（程序装入、运行控制、结果输出）均需人工干预，无软件协助管理硬件。</li>
+<li><strong>突出问题</strong>：
+<ul>
+<li>① 资源利用率极低（一台计算机同一时间仅服务一个用户）</li>
+<li>② CPU利用率不充分（CPU等待手工操作，如用户换磁带、输入指令），人机速度矛盾突出。</li>
+</ul>
+</li>
+<li><strong>解决思路</strong>：用高速机器操作替代手工操作，为批处理系统诞生奠定基础。</li>
+</ul>
+</li>
+<li>
+<p><strong>批处理阶段（操作系统萌芽）</strong></p>
+<ul>
+<li><strong>单道批处理系统</strong>
+<ul>
+<li><strong>技术基础</strong>：基于“脱机技术”（在主机外的卫星机上预处理作业，将一批作业输入磁带，再传入主机连续处理），配备“监督程序（Monitor）”控制作业自动执行。</li>
+<li><strong>核心特征</strong>：
+<ul>
+<li>① 自动性（磁带中作业可自动逐个运行，无需人工干预）</li>
+<li>② 顺序性（作业按磁带顺序调入内存，先入先执行）</li>
+<li>③ 单道性（内存始终仅存放一道作业，前一作业完成/异常后才调入下一道）。</li>
+</ul>
+</li>
+<li><strong>突出问题</strong>：CPU与I/O速度不匹配——作业执行中发起I/O请求时，高速CPU需等待低速I/O完成，导致CPU空闲。</li>
+</ul>
+</li>
+<li><strong>多道批处理系统</strong>
+<ul>
+<li><strong>技术核心</strong>：引入“多道程序设计技术”——将多个用户作业存放在外存后备队列，作业调度程序按算法选多道作业调入内存，在管理程序控制下穿插运行（某作业I/O时，CPU切换至另一作业）。</li>
+<li><strong>核心特征</strong>：
+<ul>
+<li>① 多道性（内存同时存放多道相互独立的程序）</li>
+<li>② 宏观并行（多道作业均处于“运行中”状态，未全部完成）</li>
+<li>③ 微观串行（多道程序分时占用CPU，交替执行）。</li>
+</ul>
+</li>
+<li><strong>实现关键</strong>：需解决四大问题——处理器分配（多进程争抢CPU的调度规则）、内存分配（多道程序的内存空间隔离）、I/O设备分配（避免设备冲突）、程序/数据组织（保证安全性与一致性）。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>① 优点——资源利用率高（CPU、内存、设备充分共享）、系统吞吐量大（单位时间完成更多作业）</li>
+<li>② 缺点——无交互能力（用户无法干预作业运行，如查看进度、修改参数）、用户响应时间长。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>分时操作系统</strong></p>
+<ul>
+<li><strong>核心技术</strong>：“分时技术”——将CPU运行时间划分为短时间片（如10ms），按时间片轮流分配给各联机作业，若作业在时间片内未完成，则暂停并释放CPU，等待下一轮调度。</li>
+<li><strong>核心特征</strong>：
+<ul>
+<li>① 同时性（多终端用户共享一台主机，同时与主机交互）</li>
+<li>② 交互性（用户通过终端输入命令，系统即时响应，如编辑文档时实时保存）</li>
+<li>③ 独立性（用户感觉独占主机，互不干扰）</li>
+<li>④ 及时性（用户请求在短时间内得到响应，通常为秒级）。</li>
+</ul>
+</li>
+<li><strong>与批处理的区别</strong>：以“人机交互”为核心，而非“自动批处理”；批处理系统适合无交互需求的大型作业（如科学计算），分时系统适合需频繁交互的场景（如编程、文档处理）。</li>
+</ul>
+</li>
+<li>
+<p><strong>实时操作系统</strong></p>
+<ul>
+<li><strong>诞生背景</strong>：分时系统无法满足“快速响应外部事件”的需求（如导弹制导、飞机订票需在毫秒/秒级内处理请求）。</li>
+<li><strong>时间约束分类</strong>：
+<ul>
+<li>① 硬实时系统——动作必须绝对在规定时刻/范围完成（如导弹控制，超时会导致严重后果）</li>
+<li>② 软实时系统——偶尔超时无永久损害（如飞机订票、银行管理）。</li>
+</ul>
+</li>
+<li><strong>核心特征</strong>：
+<ul>
+<li>① 及时性（在规定时间内完成外部事件处理）</li>
+<li>② 可靠性（关键任务不允许出错，如医疗设备的实时监控）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>其他发展阶段</strong></p>
+<ul>
+<li><strong>网络操作系统</strong>：伴随计算机网络诞生，核心功能是将网络中多台计算机有机结合，实现通信、数据传送与资源共享（如文件、打印机共享）。</li>
+<li><strong>分布式操作系统</strong>：管理“分布式计算机系统”（多台计算机地位平等，无主从关系，通过通信协同完成任务），核心特征是分布性（资源/任务分散在多台计算机）与并行性（任务可拆分到多台计算机并行执行），与网络OS的本质区别是“协同完成同一任务”。</li>
+<li><strong>个人计算机操作系统</strong>：面向单用户桌面场景，广泛用于文字处理、娱乐等，典型例子有Windows、Linux、macOS，特点是交互性强、易用性高。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-操作系统的运行环境"><strong>3. 操作系统的运行环境</strong></h3>
+<ul>
+<li>
+<p><strong>CPU运行模式</strong></p>
+<ul>
+<li><strong>模式分类与权限</strong>：
+<ul>
+<li><strong>内核态（管态/核心态）</strong>：运行操作系统内核程序，可执行所有指令（含特权指令），CPU模式位设为0；内核是OS最底层软件，管理核心资源，连接应用程序与硬件。</li>
+<li><strong>用户态（目态）</strong>：运行应用程序，仅可执行非特权指令（如普通数据运算、用户地址空间访问），不可直接操作硬件资源，CPU模式位设为1。</li>
+</ul>
+</li>
+<li><strong>指令分类</strong>：
+<ul>
+<li><strong>特权指令</strong>：仅内核态可执行，直接操作系统资源或影响系统安全，如I/O指令、关中断指令、内存清零指令、修改程序状态字（PSW）指令。</li>
+<li><strong>非特权指令</strong>：用户态可执行，不直接访问系统资源，如赋值指令、加法指令，若用户态执行特权指令，会触发异常并被OS阻止。</li>
+</ul>
+</li>
+<li><strong>内核核心功能（运行在内核态）</strong>：
+<ul>
+<li><strong>时钟管理</strong>：
+<ul>
+<li>① 计时功能——提供标准系统时间</li>
+<li>② 调度支持——通过时钟中断实现进程切换（如分时系统的时间片轮转）、衡量作业运行进度。</li>
+</ul>
+</li>
+<li><strong>中断机制</strong>：OS的“驱动核心”，最初用于提高CPU利用率（I/O时CPU执行其他指令），后续支撑进程调度、设备驱动、文件访问等功能；中断处理仅小部分属内核（保护/恢复现场、转移控制权），减少处理开销。</li>
+<li><strong>原语</strong>：OS底层的原子性小程序，特点是
+<ul>
+<li>① 运行原子性（操作不可分割，需关中断保证）</li>
+<li>② 运行时间短、调用频繁；如进程切换、设备分配、缓冲区初始化。</li>
+</ul>
+</li>
+<li><strong>系统数据结构处理</strong>：管理OS核心数据结构，如进程控制块（PCB）、设备控制块（DCB）、内存分配表、文件目录，实现进程管理（状态切换、调度）、存储器管理（空间分配）、设备管理（缓冲控制）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>中断和异常</strong></p>
+<ul>
+<li><strong>定义与分类</strong>：
+<ul>
+<li><strong>中断（外中断）</strong>：来自CPU执行指令外部的事件，与当前指令无关，分两类：
+<ul>
+<li>① 可屏蔽中断（通过INTR线请求，如I/O结束中断，可通过屏蔽字控制是否响应）</li>
+<li>② 不可屏蔽中断（通过NMI线请求，如电源掉电，必须立即响应）。</li>
+</ul>
+</li>
+<li><strong>异常（内中断）</strong>：来自CPU执行指令内部的事件，与当前指令相关，不可屏蔽，分三类：
+<ul>
+<li>① 故障（如缺页、除数为0、非法操作码，可修复后返回原指令重新执行）</li>
+<li>② trap/自陷（如系统调用的陷入指令，预先安排的“异常”，用于用户态→内核态切换）</li>
+<li>③ 终止（如控制器出错、存储器校验错，不可修复，需终止进程）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>处理过程</strong>：
+<ol>
+<li><strong>触发与状态切换</strong>：CPU执行用户程序时检测到异常（执行中）或中断请求（执行后），立即从用户态切换到内核态（<strong>硬件自动完成，如修改模式位为0</strong>）。</li>
+<li><strong>现场保护</strong>：
+<ul>
+<li><strong>硬件</strong>自动保存被中断程序的程序计数器（PC）、程序状态字（PSW），</li>
+<li><strong>OS</strong>补充保存通用寄存器内容，避免后续处理破坏原进程状态。</li>
+</ul>
+</li>
+<li><strong>处理与返回</strong>：OS识别中断/异常类型，调用对应<strong>处理程序</strong>（如缺页异常→页置换程序，I/O中断→设备处理程序）；若可修复（如缺页），处理后返回被打断的指令（异常）或下一条指令（中断）；若不可修复（如硬件故障），终止用户程序。</li>
+</ol>
+<blockquote>
+<ul>
+<li><strong>中断向量表</strong>：存放各类中断/异常处理程序入口地址的表格，位于内存低地址区（如x86的0~1KB），每种中断/异常对应一个入口（按类型编号索引），CPU通过查表获得处理程序地址。</li>
+<li><strong>中断处理程序</strong>：专门处理某类中断/异常的程序，分为两类——
+<ul>
+<li><strong>通用处理程序</strong>：由OS提供，处理常见中断/异常（如I/O中断、缺页异常）</li>
+<li><strong>设备驱动程序</strong>：由设备制造商提供，处理特定设备的中断（如网卡中断、硬盘中断）。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><strong>与子程序调用的区别</strong>：
+<ul>
+<li>① 独立性——中断处理程序与被中断程序无关，子程序从属于主程序</li>
+<li>② 触发方式——中断随机发生，子程序调用由CALL指令预先安排</li>
+<li>③ 硬件依赖——中断需硬件支持（如中断控制器），子程序仅需软件</li>
+<li>④ 现场保存——中断需保存PSW（程序状态），子程序无需（状态不变）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>系统调用</strong></p>
+<ul>
+<li><strong>定义与作用</strong>：OS为应用程序提供的内核服务接口，是用户程序请求OS管理共享资源（如内存、I/O、文件）的唯一途径；所有与共享资源相关的操作必须通过系统调用完成，确保系统安全与稳定。</li>
+<li><strong>功能分类</strong>：
+<ul>
+<li>设备管理（设备请求/释放/启动）、文件管理（文件读/写/创建/删除）、进程控制（进程创建/撤销/阻塞/唤醒）、进程通信（消息/信号传递）、内存管理（内存分配/回收/地址查询）。</li>
+</ul>
+</li>
+<li><strong>处理过程</strong>：
+<ol>
+<li><strong>用户态准备</strong>：用户程序将系统调用号（标识请求类型）、参数压入堆栈，执行“陷入指令”（非特权指令，触发自陷异常）。</li>
+<li><strong>状态切换与现场保护</strong>：陷入指令触发用户态→内核态切换，硬件自动保存PC、PSW，OS补充保存通用寄存器内容。</li>
+<li><strong>内核处理</strong>：OS通过“系统调用入口表”（按调用号查地址）找到对应服务子程序，执行服务（如分配内存、读取文件）。</li>
+<li><strong>返回用户态</strong>：服务完成后，OS恢复被中断进程的现场（PC、PSW、通用寄存器），将CPU模式位设为1，返回用户程序继续执行。</li>
+</ol>
+</li>
+<li><strong>与库函数的关系</strong>：① 运行态——库函数运行在用户态，系统调用运行在内核态；② 依赖关系——部分库函数通过系统调用实现（如C语言的<code>fopen()</code>调用文件管理系统调用）；③ 开销——系统调用需上下文切换（用户态↔内核态），开销大于库函数（无切换）。</li>
+</ul>
+</li>
+<li>
+<p><strong>程序运行环境补充</strong></p>
+<ul>
+<li><strong>程序的链接与装入</strong>：
+<ul>
+<li>① 装入方式——绝对装入（适用于单道程序，装入地址固定）、可重定位装入（装入时修改地址，适用于多道程序）、动态运行时装入（运行时动态修改地址，支持程序共享）</li>
+<li>② 链接方式——静态链接（编译时合并所有目标模块）、装入时动态链接（装入内存时链接）、运行时动态链接（执行时按需链接，节省内存）。</li>
+</ul>
+</li>
+<li><strong>程序运行时内存映像</strong>：用户程序加载到内存后，内存空间分为代码段（存放指令）、数据段（存放全局/静态变量）、栈段（存放函数栈帧、局部变量）、堆段（动态内存分配区域，如<code>malloc()</code>申请的空间），OS通过地址映射将逻辑地址（程序中的地址）转换为物理地址（内存实际地址），确保程序正确访问内存。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-操作系统结构"><strong>4. 操作系统结构</strong></h3>
+<ul>
+<li>
+<p><strong>分层结构</strong></p>
+<ul>
+<li><strong>定义</strong>：将OS按功能划分为若干层次，底层（层0）直接对接硬件，顶层（层N）提供用户接口，每层仅允许调用紧邻低层的功能与服务（单向依赖），不允许跨层调用。</li>
+<li><strong>优点</strong>：
+<ul>
+<li>① 便于调试与验证——低层调试通过后再调试高层，若某层出错，错误必在该层（低层已验证正确）</li>
+<li>② 易扩充与维护——修改某层或新增层时，只要不改变层间接口，不影响其他层。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>① 层次划分困难——需平衡功能独立性与调用效率，依赖关系固定后灵活性差</li>
+<li>② 系统效率低——完成一个功能需穿越多层（如文件读→文件管理层→设备管理层→硬件），增加层间通信开销。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>模块化结构</strong></p>
+<ul>
+<li><strong>定义</strong>：按功能将OS划分为若干独立模块（如进程管理模块、内存管理模块），明确模块间的接口（数据传递格式、调用规则），模块可进一步细分为子模块（如进程管理→进程控制、进程调度）；核心原则是“模块独立性”——内聚性高（模块内部功能紧密）、耦合度低（模块间交互少）。</li>
+<li><strong>优点</strong>：
+<ul>
+<li>① 提高可理解性与可维护性——模块功能单一，结构清晰</li>
+<li>② 增强适应性——支持动态加载模块（如Linux内核模块）</li>
+<li>③ 加速开发——多团队并行开发不同模块。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>① 接口设计困难——难以满足所有模块的实际交互需求，后续修改可能破坏接口一致性</li>
+<li>② 调试复杂——模块开发齐头并进，无明确依赖顺序，错误可能跨模块。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>宏内核（单内核/大内核）</strong></p>
+<ul>
+<li><strong>定义</strong>：OS的核心功能模块（进程管理、内存管理、设备管理、文件管理）作为一个紧密整体运行在内核态，模块间通过共享数据直接通信，无需额外交互机制。</li>
+<li><strong>优点</strong>：系统性能高——模块间通信无需上下文切换（均在内核态），开销小，适合对性能要求高的场景。</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>① 代码规模大，维护困难——所有核心功能耦合在一起，修改一个模块需重编译整个内核</li>
+<li>② 可靠性低——单个模块错误（如设备驱动bug）可能导致整个内核崩溃</li>
+<li>③ 可扩展性差——新增功能（如新型设备驱动）需修改内核源码。</li>
+</ul>
+</li>
+<li><strong>现状</strong>：主流OS（Windows、Linux、macOS、Android、iOS）均基于宏内核，融合微内核优点形成“混合内核”（如Linux的内核模块机制）。</li>
+</ul>
+</li>
+<li>
+<p><strong>微内核</strong></p>
+<ul>
+<li><strong>定义</strong>：仅保留OS最基本的核心功能在内核态（体积小），其余功能（如文件管理、设备管理）移至用户态的“服务器进程”实现；客户程序（应用程序）与服务器通过微内核提供的“消息传递机制”交互。</li>
+<li><strong>内核态核心功能</strong>：
+<ul>
+<li>进程（线程）管理：进程通信（消息传递）、进程切换、调度（仅保留机制，如优先级队列，策略在用户态服务器）。</li>
+<li>低级存储器管理：地址映射（页表机制，依赖硬件），虚拟存储策略（如页面置换算法）在用户态服务器。</li>
+<li>中断和陷入处理：捕获中断/异常事件，识别类型后转发给对应用户态服务器（如I/O中断→设备服务器）。</li>
+</ul>
+</li>
+<li><strong>核心设计原则</strong>：“机制与策略分离”——机制（实现功能的具体执行逻辑，如调度的优先级队列）放内核态，策略（功能的优化规则，如优先级如何确定、页面置换算法选择）放用户态服务器，确保内核精简。</li>
+<li><strong>优点</strong>：
+<ul>
+<li>① 扩展性强——新增功能仅需在用户态添加服务器，无需修改内核</li>
+<li>② 可靠性高——用户态模块崩溃（如文件服务器出错）不影响内核，重启模块即可</li>
+<li>③ 可移植性好——硬件相关代码仅在内核，服务器与硬件无关，移植时修改内核少量代码</li>
+<li>④ 支持分布式计算——基于消息传递机制，易实现跨节点通信。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：性能开销大——客户与服务器交互需频繁在用户态与内核态间切换（传递消息），比宏内核多一层开销。</li>
+</ul>
+</li>
+<li>
+<p><strong>外核</strong></p>
+<ul>
+<li><strong>定义</strong>：运行在内核态，核心功能是“直接分配物理资源”（如磁盘块、内存页、CPU时间片）并“检查资源使用安全性”（防止用户程序越权访问他人资源）；每个用户可运行自属的操作系统（虚拟机OS），但仅能使用已分配的资源。</li>
+<li><strong>优点</strong>：
+<ul>
+<li>① 减少资源“映射层”——无需像虚拟机那样维护“虚拟地址→物理地址”重映射表（外核直接记录资源分配关系）</li>
+<li>② 轻量高效——仅负责资源分配与安全检查，不干预用户OS逻辑，内核代码量小。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-操作系统引导"><strong>5. 操作系统引导</strong></h3>
+<ul>
+<li><strong>引导定义</strong>：计算机通电后，通过CPU执行特定程序，逐步识别硬件、磁盘分区、操作系统，最终启动OS的“一环扣一环”过程，核心是将OS从外存（如硬盘）加载到内存并执行。</li>
+<li><strong>核心步骤（基于BIOS引导）</strong>：
+<ol>
+<li><strong>激活CPU与执行BIOS</strong>：CPU通电后，自动读取ROM中的<code>boot</code>程序，将指令寄存器指向BIOS（Basic Input/Output System，基本输入/输出系统）的第一条指令，开始执行BIOS。</li>
+<li><strong>硬件自检（POST）</strong>：BIOS先在内存起始地址构建“中断向量表”（为后续中断处理做准备），然后执行通电自检（Power-on Self Test），检查CPU、内存、硬盘、显卡等硬件是否正常；若故障，主板发出蜂鸣提示并中止启动；若正常，屏幕显示硬件信息。</li>
+<li><strong>选择引导设备</strong>：BIOS按“启动顺序”（CMOS设置或用户交互选择），将控制权交给排序第一的存储设备（如硬盘、U盘、光驱），CPU读取该设备的“引导扇区”内容到内存。</li>
+<li><strong>加载主引导记录（Master Boot Record，MBR）</strong>：引导设备的第一个扇区（512字节）为MBR，作用是识别“引导硬盘”（通过特定标识符区分）；若设备非引导盘，BIOS检查下一个启动设备；若无可用设备，计算机死机。</li>
+<li><strong>扫描分区表与加载活动分区</strong>：MBR包含“硬盘分区表”，记录硬盘的分区信息（如分区大小、类型）；MBR扫描分区表，找到“活动分区”（含操作系统的分区，通过标识符区分），将控制权移交活动分区。</li>
+<li><strong>加载分区引导记录（Partition Boot Record，PBR）</strong>：活动分区的第一个扇区为PBR，作用是搜索活动分区根目录下的“启动管理器”（如Windows的<code>Bootmgr</code>、Linux的<code>GRUB</code>）并加载。</li>
+<li><strong>加载启动管理器与OS选择</strong>：启动管理器运行后，若计算机安装多系统（如Windows+Linux），会显示OS选择界面，供用户选择要启动的系统；若单系统，直接进入下一步。</li>
+<li><strong>加载操作系统</strong>：启动管理器将选中OS的“初始化程序”（如Windows的<code>ntldr</code>、Linux的<code>vmlinuz</code>）加载到内存，初始化程序完成OS内核加载、硬件驱动初始化、进程创建（如初始化进程），最终完成引导。</li>
+</ol>
+</li>
+<li><strong>引导程序</strong>：分为两种</li>
+</ul>
+<h3 id="6-虚拟机"><strong>6. 虚拟机</strong></h3>
+<ul>
+<li><strong>定义</strong>：利用虚拟化技术将一台物理计算机虚拟化为多台“逻辑计算机”（虚拟机），每台虚拟机拥有独立的虚拟CPU、内存、I/O设备，可运行自属的操作系统（客户OS），隐藏物理硬件特性，为用户提供统一的计算环境。</li>
+<li><strong>虚拟机管理程序（VMM）分类</strong>：
+<ul>
+<li><strong>第一类VMM（裸金属架构）</strong>
+<ul>
+<li><strong>运行环境</strong>：直接运行在裸机上，是唯一运行在最高特权级（内核态）的程序，具备多道程序调度能力。</li>
+<li><strong>核心特征</strong>：
+<ul>
+<li>① 硬件模拟——向上提供与物理机完全一致的虚拟硬件（如虚拟CPU、磁盘、网卡），客户OS无需修改即可运行（如Windows、Linux可直接安装在虚拟机上）</li>
+<li>② 特权指令处理——客户OS执行特权指令时，陷入VMM，由VMM模拟执行（确保安全）。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：性能高（直接操作硬件，无中间层开销），适合服务器虚拟化（如数据中心的云主机）。</li>
+<li><strong>示例</strong>：VMware ESXi、Citrix Hypervisor。</li>
+</ul>
+</li>
+<li><strong>第二类VMM（寄居架构）</strong>
+<ul>
+<li><strong>运行环境</strong>：依赖“宿主操作系统”（如Windows、Linux）分配与调度硬件资源，作为普通进程运行（用户态），不直接操作硬件。</li>
+<li><strong>核心特征</strong>：
+<ul>
+<li>① 虚拟设备——模拟完整的计算机硬件（如虚拟磁盘是宿主OS的一个文件，虚拟内存是宿主OS分配的内存块）</li>
+<li>② 安装方式——客户OS安装在虚拟磁盘上，启动时VMM模拟计算机开机流程。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：易用性高（无需修改宿主OS，直接安装为应用程序），适合桌面虚拟化（如个人电脑运行多个OS）。</li>
+<li><strong>缺点</strong>：性能低于第一类VMM（需通过宿主OS间接操作硬件，多一层开销）。</li>
+<li><strong>示例</strong>：VMware Workstation、VirtualBox。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>关键概念</strong>：① 客户操作系统——运行在虚拟机上的OS（如虚拟机中的Windows）；② 宿主操作系统——运行在物理机上，为第二类VMM提供资源的OS（如个人电脑的Linux）。</li>
+<li><strong>典型应用</strong>：云主机服务——一台物理服务器运行多台虚拟机，每个虚拟机对用户而言是“独立服务器”，可自定义OS与软件，成本远低于独占物理服务器。</li>
+</ul>
+<h3 id="7-本章疑难点辨析"><strong>7. 本章疑难点辨析</strong></h3>
+<ul>
+<li>
+<p><strong>并发与并行的区别与联系</strong></p>
+<ul>
+<li><strong>核心区别</strong>：时间维度不同——并发是“同一时间间隔内发生”（如单CPU上3个程序分时交替执行，9:00-9:10内均有执行），并行是“同一时刻发生”（如3个CPU同时执行3个程序，9:00:00时刻3个程序均在运行）。</li>
+<li><strong>联系</strong>：并发是并行的基础——无并发分时技术，多CPU的并行无法高效利用（如单CPU无法并行）；并行是并发的高级形式——多CPU使并发程序可真正同时执行，提升整体效率。</li>
+</ul>
+</li>
+<li>
+<p><strong>特权指令与非特权指令的安全边界</strong></p>
+<ul>
+<li><strong>划分原则</strong>：是否影响系统安全与资源管理——特权指令直接操作系统核心资源（如I/O、内存保护），若用户程序可执行，会导致系统崩溃（如内存清零指令会删除OS数据）；非特权指令仅操作用户地址空间（如局部变量运算），无安全风险。</li>
+<li><strong>切换控制</strong>：用户态→内核态的唯一途径是中断/异常（如系统调用的自陷、缺页异常），防止用户程序擅自执行特权指令；内核态→用户态通过“中断返回指令”（特权指令）实现，主动释放高权限。</li>
+</ul>
+</li>
+<li>
+<p><strong>访管指令与访管中断</strong></p>
+<ul>
+<li><strong>访管指令</strong>：运行在用户态的非特权指令，核心功能是“自愿请求OS服务”，触发“访管中断”（自愿中断）。</li>
+<li><strong>访管中断</strong>：由访管指令触发的异常，使CPU从用户态切换到内核态，OS执行对应服务（如用户程序通过访管指令请求内存分配，触发访管中断后，OS执行内存分配程序）。</li>
+<li><strong>作用</strong>：解决“用户态无法执行特权操作”的矛盾——用户程序通过访管指令“主动进管”，间接使用OS的特权功能，确保系统安全。</li>
+</ul>
+</li>
+<li>
+<p><strong>微内核的四大核心设计特征</strong></p>
+<ul>
+<li><strong>足够小的内核</strong>：仅保留最基本的核心功能（进程通信、地址映射、中断处理），内核代码量极小（通常几万行）。</li>
+<li><strong>基于客户/服务器（C/S）模式</strong>：OS功能拆分为“客户程序”（应用程序）与“服务器进程”（如文件服务器、设备服务器），两者通过微内核的消息传递交互，无直接调用。</li>
+<li><strong>机制与策略分离</strong>：机制（实现功能的执行逻辑，如进程调度的队列管理）放内核，策略（功能的优化规则，如调度算法选择）放用户态服务器，使内核灵活且易维护。</li>
+<li><strong>采用面向对象技术</strong>：通过“抽象”“封装”隐藏硬件细节，通过“继承”“多态”增强可扩展性，确保OS的正确性与可靠性。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Q-A">Q&amp;A</h2>
+<ul>
+<li>中断，系统调用与用户态和内核态的关系，谁发生在谁那</li>
+</ul>
+<blockquote>
+<p>它们都是从“用户态”切换到“内核态”的方式，但触发原因和机制不同。</p>
+<ul>
+<li><strong>用户态 (User Mode)</strong>：应用程序运行的模式，权限受限，不能直接访问硬件。</li>
+<li><strong>内核态 (Kernel Mode)</strong>：操作系统内核运行的模式，拥有最高权限，可以访问所有硬件和系统资源。</li>
+<li><strong>系统调用 (System Call)</strong>：是<strong>应用程序主动</strong>发起的请求。当运行在用户态的程序需要执行高权限操作（如读写文件、创建进程）时，它会请求内核服务，这个请求过程就是系统调用。CPU会因此从用户态切换到内核态来执行内核代码，完成后再返回用户态。</li>
+<li><strong>中断 (Interrupt)</strong>：通常是<strong>硬件被动</strong>发起的事件。当外部设备（如硬盘、网卡、键盘）完成一个操作或需要CPU注意时，会发出一个中断信号。CPU会立即暂停当前任务（无论是在用户态还是内核态），切换到内核态去处理这个中断事件，处理完再恢复之前的任务。</li>
+</ul>
+</blockquote>
+<ul>
+<li>什么是引导程序，它在哪里</li>
+</ul>
+<blockquote>
+<p>引导程序 (Bootloader) 是计算机开机时运行的第一个核心软件，它的主要任务是<strong>将操作系统的内核从硬盘加载到内存中，然后将控制权交给内核</strong>，从而启动整个操作系统。</p>
+<ul>
+<li><strong>位置分两部分</strong>：
+<ol>
+<li><strong>第一阶段引导程序</strong>：位于<strong>主板的ROM芯片</strong>中，也就是我们常说的BIOS或UEFI。它负责开机自检（POST）并找到可启动的设备（如硬盘）。</li>
+<li><strong>第二阶段引导程序</strong>：位于<strong>硬盘的特定区域</strong>（如主引导记录MBR或EFI分区）。BIOS找到它之后，会将它加载到内存中运行。这个程序（如Windows Boot Manager或GRUB）才真正负责加载操作系统的内核。</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>什么是内核</li>
+</ul>
+<blockquote>
+<p>内核 (Kernel) 是操作系统的<strong>核心</strong>，是连接软件应用和硬件的桥梁。它负责管理计算机的所有资源，可以被看作是系统的“大脑”或“管理者”。</p>
+<ul>
+<li><strong>主要职责包括</strong>：
+<ol>
+<li><strong>进程管理</strong>：决定哪个程序可以使用CPU。</li>
+<li><strong>内存管理</strong>：为程序分配和回收内存空间。</li>
+<li><strong>设备管理</strong>：通过驱动程序控制所有硬件设备（如硬盘、鼠标、网卡）。</li>
+<li><strong>提供系统调用</strong>：给上层应用程序提供一个安全访问硬件资源的接口。</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>bios在哪，它和内存中的rom的关系</li>
+</ul>
+<blockquote>
+<p><strong>BIOS</strong> 是一段固化在<strong>主板上的一个物理ROM芯片</strong>里的程序。</p>
+<p>它和 “内存中的ROM” 存在一种<strong>映射 (Mapping)</strong> 和 <strong>映像 (Shadowing)</strong> 的关系：</p>
+<ol>
+<li><strong>物理位置</strong>：BIOS的物理载体是主板上的ROM芯片，这块芯片是独立于内存条（RAM）的。</li>
+<li><strong>内存映射</strong>：计算机启动时，系统会将主板上这块ROM芯片的地址<strong>映射</strong>到内存地址空间的一个特定高地址区域。这样，当CPU需要读取BIOS指令时，它访问的是这些特定的内存地址，而系统硬件会自动将这些访问重定向到物理ROM芯片上。</li>
+<li><strong>BIOS映像 (Shadowing)</strong>：因为ROM芯片的读取速度远慢于内存（RAM），为了提高启动速度，大多数系统会执行一个叫“BIOS Shadowing”的操作：开机时，将ROM芯片中的BIOS代码**完整地复制一份到更快的内存（RAM）**中。之后，系统会禁用原来的ROM映射，让CPU直接从内存中读取和执行BIOS代码，从而大大提升性能。</li>
+</ol>
+<p>所以，“内存中的ROM”可以理解为物理ROM在内存地址空间中的<strong>映射</strong>，或者是为了提速而复制到内存（RAM）中的那个<strong>副本</strong>。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://lazy11.top">Lazy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lazy11.top/2025/09/15/%E8%80%83%E7%A0%94/408/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">https://lazy11.top/2025/09/15/%E8%80%83%E7%A0%94/408/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OS/">OS</a></div><div class="post-share"><div class="social-share" data-image="/img/lazy-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/09/14/%E8%80%83%E7%A0%94/408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%92%E5%BA%8F/" title="排序"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">排序</div></div><div class="info-2"><div class="info-item-1">数据结构：排序算法 排序的基本概念   排序的定义  定义：重新排列表中元素，使表中元素满足按关键字有序的过程。输入为 n 个记录 R1,R2,…,RnR_1,R_2,\dots,R_nR1​,R2​,…,Rn​（对应关键字 k1,k2,…,knk_1,k_2,\dots,k_nk1​,k2​,…,kn​），输出为记录的重排 R1′,R2′,…,Rn′R_1&#x27;,R_2&#x27;,\dots,R_n&#x27;R1′​,R2′​,…,Rn′​，满足 k1′≤k2′≤⋯≤kn′k_1&#x27; \leq k_2&#x27; \leq \dots \leq k_n&#x27;k1′​≤k2′​≤⋯≤kn′​（“≤”可替换为其他比较符号）。    算法稳定性  定义：若待排序表中存在关键字相同的元素 RiR_iRi​ 和 RjR_jRj​（keyi=keyjkey_i = key_jkeyi​=keyj​），且排序前 RiR_iRi​ 在 RjR_jRj​ 之前，排序后 RiR_iRi​ 仍在 RjR_jRj​...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Lazy</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lazyy11"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/lazyy11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:lazy11@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is Lazy's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">操作系统概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E8%A6%81%E7%82%B9"><span class="toc-number">1.1.</span> <span class="toc-text">概念要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 操作系统的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 操作系统的发展历程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. 操作系统的运行环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.4.</span> <span class="toc-text">4. 操作系统结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC"><span class="toc-number">1.1.5.</span> <span class="toc-text">5. 操作系统引导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-number">1.1.6.</span> <span class="toc-text">6. 虚拟机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%9C%AC%E7%AB%A0%E7%96%91%E9%9A%BE%E7%82%B9%E8%BE%A8%E6%9E%90"><span class="toc-number">1.1.7.</span> <span class="toc-text">7. 本章疑难点辨析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Q-A"><span class="toc-number">1.2.</span> <span class="toc-text">Q&amp;A</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/%E8%80%83%E7%A0%94/408/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" title="操作系统概述">操作系统概述</a><time datetime="2025-09-15T08:34:52.000Z" title="Created 2025-09-15 16:34:52">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/14/%E8%80%83%E7%A0%94/408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%92%E5%BA%8F/" title="排序">排序</a><time datetime="2025-09-14T01:59:15.000Z" title="Created 2025-09-14 09:59:15">2025-09-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/11/%E8%80%83%E7%A0%94/408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%9F%A5%E6%89%BE/" title="查找">查找</a><time datetime="2025-09-11T07:06:43.000Z" title="Created 2025-09-11 15:06:43">2025-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/10/%E8%80%83%E7%A0%94/%E6%95%B0%E5%AD%A6/%E9%AB%98%E6%95%B0/%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/" title="二重积分">二重积分</a><time datetime="2025-09-10T13:02:05.000Z" title="Created 2025-09-10 21:02:05">2025-09-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/10/%E8%80%83%E7%A0%94/%E6%95%B0%E5%AD%A6/%E9%AB%98%E6%95%B0/%E4%B8%80%E5%85%83%E7%A7%AF%E5%88%86%E5%AD%A6%E7%9A%84%E5%BA%94%E7%94%A8/" title="一元积分学的应用">一元积分学的应用</a><time datetime="2025-09-10T12:51:19.000Z" title="Created 2025-09-10 20:51:19">2025-09-10</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Lazy</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (true) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://waline.lazy11.top/',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章..." type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
