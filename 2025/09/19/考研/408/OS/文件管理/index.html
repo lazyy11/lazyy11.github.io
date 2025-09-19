@@ -1,0 +1,1245 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>文件管理 | Lazy's Blog</title><meta name="author" content="Lazy,lazy11@foxmail.com"><meta name="copyright" content="Lazy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="操作系统：文件管理 学习导览（408）  文件系统基础（概念&#x2F;FCB&#x2F;inode&#x2F;打开文件表） 文件的逻辑结构（顺序&#x2F;索引&#x2F;索引顺序&#x2F;散列） 文件的物理结构（连续&#x2F;链接&#x2F;FAT&#x2F;索引&#x2F;混合） 外存空闲空间管理（空闲表&#x2F;链表&#x2F;位示图&#x2F;成组链接） 目录（结构&#x2F;实现）与共享（硬&#x2F;软链接） 文件保护（rwx&#x2F;目录权限语义&#x2F;ACL） 文件系统结构与布局、挂载（MBR&#x2F;超级块&#x2F;根目录&#x2F;数据区&#x2F;挂载） 虚拟文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件管理">
+<meta property="og:url" content="https://lazy11.top/2025/09/19/%E8%80%83%E7%A0%94/408/OS/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="Lazy&#39;s Blog">
+<meta property="og:description" content="操作系统：文件管理 学习导览（408）  文件系统基础（概念&#x2F;FCB&#x2F;inode&#x2F;打开文件表） 文件的逻辑结构（顺序&#x2F;索引&#x2F;索引顺序&#x2F;散列） 文件的物理结构（连续&#x2F;链接&#x2F;FAT&#x2F;索引&#x2F;混合） 外存空闲空间管理（空闲表&#x2F;链表&#x2F;位示图&#x2F;成组链接） 目录（结构&#x2F;实现）与共享（硬&#x2F;软链接） 文件保护（rwx&#x2F;目录权限语义&#x2F;ACL） 文件系统结构与布局、挂载（MBR&#x2F;超级块&#x2F;根目录&#x2F;数据区&#x2F;挂载） 虚拟文件">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lazy11.top/img/lazy-icon.png">
+<meta property="article:published_time" content="2025-09-19T08:13:51.000Z">
+<meta property="article:modified_time" content="2025-09-19T12:16:31.035Z">
+<meta property="article:author" content="Lazy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lazy11.top/img/lazy-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lazy11.top/2025/09/19/%E8%80%83%E7%A0%94/408/OS/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '文件管理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">21</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "/img/lazy-icon.png" data-lazy-src="/img/index.png" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">文件管理</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">文件管理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-09-19T08:13:51.000Z" title="Created 2025-09-19 16:13:51">2025-09-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-09-19T12:16:31.035Z" title="Updated 2025-09-19 20:16:31">2025-09-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span class="waline-pageview-count" data-path="/2025/09/19/%E8%80%83%E7%A0%94/408/OS/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1>操作系统：文件管理</h1>
+<h3 id="学习导览（408）">学习导览（408）</h3>
+<ul>
+<li>文件系统基础（概念/FCB/inode/打开文件表）</li>
+<li>文件的逻辑结构（顺序/索引/索引顺序/散列）</li>
+<li>文件的物理结构（连续/链接/FAT/索引/混合）</li>
+<li>外存空闲空间管理（空闲表/链表/位示图/成组链接）</li>
+<li>目录（结构/实现）与共享（硬/软链接）</li>
+<li>文件保护（rwx/目录权限语义/ACL）</li>
+<li>文件系统结构与布局、挂载（MBR/超级块/根目录/数据区/挂载）</li>
+<li>虚拟文件系统 VFS（对象模型与调用路径）</li>
+<li>本章疑难点、408核心清单、易错速记、附加理解（超纲）</li>
+</ul>
+<h3 id="文件系统基础"><strong>文件系统基础</strong></h3>
+<ul>
+<li>
+<p><strong>文件的基本概念</strong></p>
+<ul>
+<li><strong>定义</strong>：以硬盘为载体的存储在计算机上的信息集合（如文档、图片、程序），是用户输入/输出（I/O）的基本单位，操作系统通过文件系统实现对文件的管理。</li>
+<li><strong>结构（自底向上）</strong>：
+<ul>
+<li>数据项：文件系统最低级数据组织形式，分两类：
+<ul>
+<li>基本数据项：描述对象某属性的一个值，是数据最小逻辑单位。</li>
+<li>组合数据项：由多个基本数据项组成。</li>
+</ul>
+</li>
+<li>记录：一组相关数据项的集合，描述对象某方面属性。</li>
+<li>文件：创建者定义、具文件名的相关元素集合，分两类：
+<ul>
+<li>有结构文件：由若干相似记录组成（如学生记录）。</li>
+<li>无结构文件：视为字符流（如二进制文件、字符文件）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>属性（元数据）</strong>：操作系统保存的文件附加信息，包括：
+<ul>
+<li>名称：唯一标识，易读形式存储。</li>
+<li>类型：供不同文件系统识别。</li>
+<li>创建者/所有者：对应用户ID。</li>
+<li>位置：指向文件所在设备及设备上地址的指针。</li>
+<li>大小：当前大小（字节/字/块）及最大允许值。</li>
+<li>保护：访问控制信息（如读写权限）。</li>
+<li>时间：创建时间、最后修改时间、最后存取时间。</li>
+</ul>
+</li>
+<li><strong>分类</strong>：
+<ul>
+<li>按性质和用途：系统文件、用户文件、库文件。</li>
+<li>按数据形式：源文件、目标文件、可执行文件。</li>
+<li>按存取控制属性：可执行文件、只读文件、读/写文件。</li>
+<li>按组织形式和处理方式：普通文件、目录文件、特殊文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>文件控制块（FCB）与索引节点（inode）</strong></p>
+<ul>
+<li>
+<p><strong>文件控制块（FCB）</strong></p>
+<ul>
+<li><strong>定义</strong>：存放文件控制信息的数据结构，实现“按名存取”，与文件一一对应，有序FCB集合构成文件目录（目录文件）。</li>
+<li><strong>结构/组成</strong>：
+<ul>
+<li>基本信息：文件名、文件物理位置、逻辑结构、物理结构。</li>
+<li>存取控制信息：文件主、核准用户、一般用户的存取权限。</li>
+<li>使用信息：文件建立时间、上次修改时间等。</li>
+</ul>
+</li>
+<li><strong>局限性</strong>：文件目录占用大量盘块，检索时需多次调入内存（仅需文件名却加载全部FCB），效率低。</li>
+</ul>
+</li>
+<li>
+<p><strong>索引节点（inode）</strong></p>
+<ul>
+<li><strong>定义</strong>：将文件描述信息与文件名分离形成的数据结构，目录项仅含文件名和inode号/指针，减少目录占用盘块，提升检索效率。</li>
+<li><strong>分类与结构</strong>：
+<ul>
+<li>磁盘索引节点（存于磁盘）：
+<ul>
+<li>文件主标识符、文件类型（普通/目录/特殊）。</li>
+<li>文件存取权限、文件物理地址（如UNIX的13个地址项iaddr(0)~iaddr(12)）。</li>
+<li>文件长度（字节）、链接计数（指向该文件的文件名指针数）。</li>
+<li>文件存取时间（最近存取、修改时间，inode修改时间）。</li>
+</ul>
+</li>
+<li>内存索引节点（文件打开时复制磁盘inode至内存）：
+<ul>
+<li>新增内容：inode号、状态（上锁/修改）、访问计数（进程访问时增减）。</li>
+<li>逻辑设备号（文件所属文件系统）、链接指针（指向空闲链表/散列队列）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>优势</strong>：减少目录检索I/O次数，例如UNIX中目录项占16B（14B文件名+2B inode号），1KB盘块可存64个目录项，平均磁盘启动次数降为原来1/4。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>文件的操作</strong></p>
+<ul>
+<li>
+<p><strong>基本操作</strong></p>
+<ul>
+<li><strong>创建文件</strong>：
+<ol>
+<li>为新文件分配外存空间。</li>
+<li>在目录中创建目录项（记录文件名、外存地址等）。</li>
+</ol>
+</li>
+<li><strong>删除文件</strong>：
+<ol>
+<li>按文件名查找目录，删除对应目录项和FCB。</li>
+<li>回收文件占用的存储空间（磁盘空间、内存缓冲区）。</li>
+</ol>
+</li>
+<li><strong>读文件</strong>：
+<ol>
+<li>按文件名查找目录，获取文件外存地址。</li>
+<li>通过进程级打开文件表中的文件偏移（读指针）执行读操作（每次打开实例各自维护偏移）。</li>
+</ol>
+</li>
+<li><strong>写文件</strong>：
+<ol>
+<li>按文件名查找目录，获取文件外存地址。</li>
+<li>通过进程级打开文件表中的文件偏移（写指针）执行写操作，每次写后更新该偏移。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>打开与关闭操作</strong></p>
+<ul>
+<li>
+<p><strong>打开文件（open）</strong></p>
+<ul>
+<li><strong>定义</strong>：首次操作文件前，将文件目录项从外存复制到内存“打开文件表”，返回表目索引号（文件描述符/句柄），避免重复检索目录。</li>
+<li><strong>打开文件表结构</strong>：
+<ul>
+<li>系统级打开文件表：存储与进程无关信息（如文件磁盘位置、访问日期、大小），含打开计数器（记录打开该文件的进程数）。</li>
+<li>进程级打开文件表：存储进程私有信息（如当前读写指针、访问权限），含指向系统表对应条目的指针。</li>
+</ul>
+</li>
+<li><strong>关键特性</strong>：文件打开后，后续操作（read/write/close）通过文件描述符而非文件名执行。</li>
+</ul>
+</li>
+<li>
+<p><strong>关闭文件（close）</strong></p>
+<ul>
+<li><strong>定义</strong>：文件不再使用时，删除进程级打开文件表对应表项，系统级表项的打开计数器递减；计数器为0时，删除系统级表项。</li>
+</ul>
+</li>
+<li>
+<p><strong>多进程共享打开文件</strong>：多个进程打开同一文件时，系统级打开文件表对该文件“至多一条”表项，仅递增打开计数；各进程分别新增进程级表项，指向同一系统级表项。</p>
+</li>
+<li>
+<p><strong>打开流程（408）</strong></p>
+<ol>
+<li>检索目录：验证文件存在，将磁盘inode复制到内存活动inode表。</li>
+<li>权限验证：比较打开方式与inode中的访问权限。</li>
+<li>分配表项：为进程级与系统级打开文件表建立/复用表项并建立关联，返回文件描述符（fd）。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>文件的逻辑结构</strong></p>
+<ul>
+<li><strong>定义</strong>：从用户角度看到的文件组织形式，与存储介质特性无关，关注数据逻辑组织方式。</li>
+<li><strong>分类</strong>：
+<ul>
+<li>
+<p><strong>无结构文件（流式文件）</strong></p>
+<ul>
+<li><strong>定义</strong>：由字符流构成，长度以字节为单位，通过读写指针访问下一个字节。</li>
+<li><strong>特点</strong>：无结构，记录访问需穷举搜索；大量源程序、可执行文件、库函数采用此结构。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：实现简单，适用于无固定记录格式的场景。</li>
+<li>缺点：对需按记录访问的应用不适用，检索效率低。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>有结构文件（记录式文件）</strong></p>
+<ul>
+<li><strong>定义</strong>：由一个以上记录组成，记录分两类：
+<ul>
+<li>定长记录：所有记录长度相同，数据项位置/长度固定，检索速度快。</li>
+<li>变长记录：记录长度不同（数据项数量/长度不定），检索需顺序查找，速度慢。</li>
+</ul>
+</li>
+<li><strong>具体组织形式</strong>：
+<ul>
+<li><strong>顺序文件</strong>：
+<ul>
+<li><strong>定义</strong>：记录按序排列（定长/变长），分串结构（按存入时间排序，顺序检索）和顺序结构（按关键字排序，定长记录可折半查找）。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：批量操作（读/写大批记录）效率最高，适配磁带等顺序存储设备。</li>
+<li>缺点：单记录查找/修改/增删性能差。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>索引文件</strong>：
+<ul>
+<li><strong>定义</strong>：为变长记录顺序文件建立索引表（每个记录对应索引项，含指针和记录长度），索引表按关键字排序（定长记录顺序文件）。</li>
+<li><strong>核心逻辑</strong>：将变长记录的顺序检索转为索引表的随机检索，提升速度。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：检索速度快，支持随机访问。</li>
+<li>缺点：索引表占用额外存储空间。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>索引顺序文件</strong>：
+<ul>
+<li><strong>定义</strong>：结合顺序文件与索引文件，将变长记录分组，为每组第一个记录建立索引项（含关键字和指针），索引表按关键字排序。</li>
+<li><strong>检索效率</strong>：含N条记录的文件分<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mi>N</mi></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.1133em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9267em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-2.8867em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1133em;"><span></span></span></span></span></span></span></span></span>组，平均查找次数为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mi>N</mi></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.1133em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9267em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-2.8867em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1133em;"><span></span></span></span></span></span></span></span></span>（索引表<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mi>N</mi></msqrt><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\sqrt{N}/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1767em;vertical-align:-0.25em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9267em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-2.8867em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1133em;"><span></span></span></span></span></span><span class="mord">/2</span></span></span></span>次+组内<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mi>N</mi></msqrt><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\sqrt{N}/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1767em;vertical-align:-0.25em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9267em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-2.8867em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1133em;"><span></span></span></span></span></span><span class="mord">/2</span></span></span></span>次），优于顺序文件（N/2次）。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：查找效率高于顺序文件和索引文件（单级索引）。</li>
+<li>缺点：仍需索引表，占用额外空间，支持多级索引（适用于大量记录）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>直接文件/散列文件（Hash File）</strong>：
+<ul>
+<li><strong>定义</strong>：记录键值（或经散列函数转换的键值）直接决定物理地址，存取速度高。</li>
+<li><strong>缺点</strong>：存在冲突（不同关键字散列值相同），需解决冲突问题。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>文件的物理结构</strong></p>
+<ul>
+<li><strong>定义</strong>：文件数据在外存上的存储组织形式（用户不可见），核心是文件分配方式（非空闲块管理），与存储设备特性（如磁盘块大小）相关。</li>
+<li><strong>磁盘块基础</strong>：磁盘存储单元划分为磁盘块，大小通常与内存页面相同，内存与磁盘I/O以块为单位。</li>
+<li><strong>分配方式分类</strong>：
+<ul>
+<li>
+<p><strong>连续分配</strong></p>
+<ul>
+<li><strong>定义</strong>：文件占用磁盘上一组连续块，目录项记录文件第一个块号和块数；若文件从块b开始，占n块，则块号为b, b+1, …, b+n-1，访问第i块直接访问b+i-1。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：支持顺序访问和直接访问，顺序访问速度快（磁头移动距离小）。</li>
+<li>缺点：产生外部碎片（类似内存动态分区）；需事先知道文件长度，不支持动态增长；增删记录需移动相邻记录。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：适用于长度固定、访问频繁的文件（如系统文件）。</li>
+</ul>
+</li>
+<li>
+<p><strong>链接分配</strong></p>
+<ul>
+<li><strong>定义</strong>：离散分配方式，文件块通过指针链接，目录项记录文件首块/尾块指针，无外部碎片，支持动态分配。</li>
+<li><strong>分类</strong>：
+<ul>
+<li><strong>隐式链接</strong>：
+<ul>
+<li><strong>结构</strong>：每个盘块（除尾块）存放下一块指针，用户透明；目录项含首块和尾块指针。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：无外部碎片，支持文件动态增长。</li>
+<li>缺点：仅支持顺序访问（访问第i块需从首块遍历）；指针损坏导致文件数据丢失；指针占用存储空间。</li>
+</ul>
+</li>
+<li><strong>优化</strong>：按“簇”分配（多个盘块为一簇），减少指针数量和查找时间，但增加内部碎片。</li>
+</ul>
+</li>
+<li><strong>显式链接（FAT）</strong>：
+<ul>
+<li><strong>结构</strong>：链接指针存于内存“文件分配表（FAT）”，通常一个卷一张FAT，表项与磁盘块（簇）一一对应（使用保留值表示链尾EOC与空闲等状态）；目录项仅需记录文件首块号。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：顺序访问友好；FAT表常驻内存可显著减少磁盘I/O。</li>
+<li>缺点：随机访问第i块需沿链遍历O(i)，并非真正的O(1)直接寻址；FAT占用内存空间（与磁盘块数量正相关）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>索引分配</strong></p>
+<ul>
+<li><strong>定义</strong>：为每个文件分配一个索引块（记录所有数据块号），目录项记录索引块地址，支持随机访问，无外部碎片。</li>
+<li><strong>分类</strong>：
+<ul>
+<li><strong>单级索引</strong>：
+<ul>
+<li><strong>结构</strong>：一个索引块记录所有数据块号，例如盘块4KB、块号4B，索引块可存1024个块号，支持最大文件4MB（1024×4KB）。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：支持直接访问，无外部碎片。</li>
+<li>缺点：小文件索引块利用率低；大文件需多个索引块，链接访问效率低。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>多级索引</strong>：
+<ul>
+<li><strong>结构</strong>：为索引块建立索引（如二级索引：主索引块记录二级索引块号，二级索引块记录数据块号），类似内存多级页表。</li>
+<li><strong>示例</strong>：盘块4KB、块号4B，二级索引支持最大文件4GB（1024×1024×4KB），三级索引支持4TB。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：支持超大文件，查找速度快。</li>
+<li>缺点：访问数据块需启动磁盘次数随索引级数增加（如三级索引需3次索引块访问+1次数据块访问）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>混合索引（UNIX采用）</strong>：
+<ul>
+<li><strong>结构</strong>：结合直接地址、一级/二级/三级间接地址，适配不同大小文件；UNIX inode含13个地址项（iaddr(0)~iaddr(12)）：
+<ul>
+<li>直接地址（iaddr(0)~iaddr(9)）：10个直接块，支持最大文件40KB（10×4KB）。</li>
+<li>一级间接地址（iaddr(10)）：1个间接块，存1024个数据块号，支持4MB（1024×4KB）。</li>
+<li>二级间接地址（iaddr(11)）：1个主索引块，存1024个一级间接块号，支持4GB（1024²×4KB）。</li>
+<li>三级间接地址（iaddr(12)）：1个主索引块，存1024个二级间接块号，支持4TB（1024³×4KB）。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：兼顾小/中/大/超大文件，访问效率高（小文件直接寻址，大文件多级间接）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>文件保护</strong></p>
+<ul>
+<li><strong>定义</strong>：防止文件共享导致的破坏或未授权修改，控制用户对文件的存取（读/写/执行许可）。</li>
+<li><strong>访问类型</strong>：读（从文件读数据）、写（向文件写数据）、执行（装入内存执行）、添加（文件尾加新信息）、删除（删除文件释放空间）、列表清单（列出文件名和属性）。</li>
+<li><strong>保护机制</strong>：
+<ul>
+<li><strong>口令保护</strong>：
+<ul>
+<li><strong>原理</strong>：创建文件时设置口令，FCB附加口令；访问时需提供口令，匹配方可访问。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：时间/空间开销小。</li>
+<li>缺点：口令存于系统内部，安全性低（无访问类型控制）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>加密保护</strong>：
+<ul>
+<li><strong>原理</strong>：用户加密文件，访问时需密钥解密。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：保密性强。</li>
+<li>缺点：加密/解密耗时；通常不节省空间（可能因填充/元数据略增）；无访问类型控制。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>访问控制</strong>：
+<ul>
+<li><strong>核心逻辑</strong>：基于用户身份控制访问，常用“访问控制列表（ACL）”。</li>
+<li><strong>分类</strong>：
+<ul>
+<li>完整ACL：为每个用户指定访问权限，灵活但长度不确定，空间管理复杂。</li>
+<li>精简ACL（所有者-组-其他）：
+<ul>
+<li>所有者：创建文件的用户，权限最高。</li>
+<li>组：需共享文件的用户组。</li>
+<li>其他：系统内所有其他用户。</li>
+<li>示例：POSIX以“所有者/组/其他×rwx”三类权限表示。删除、列表等能力在目录上体现为r（列名）、x（遍历/进入）、w（修改目录项）。创建时记录所有者/组名，访问时匹配用户类型判断权限。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>优点</strong>：可精确控制访问类型，安全性高。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="目录"><strong>目录</strong></h3>
+<ul>
+<li>
+<p><strong>目录的基本概念</strong></p>
+<ul>
+<li><strong>定义</strong>：FCB的有序集合，一个FCB即一个目录项，目录本身也视为文件（目录文件），用于标识文件及其物理地址，实现“按名存取”。</li>
+<li><strong>管理要求</strong>：
+<ul>
+<li>实现“按名存取”：建立文件名与文件的映射。</li>
+<li>提高检索速度：减少目录检索的磁盘I/O。</li>
+<li>支持文件共享：提供访问控制信息。</li>
+<li>允许文件名重名：多用户按习惯命名（通过树形结构实现）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>目录的操作</strong></p>
+<ul>
+<li><strong>核心操作</strong>：
+<ul>
+<li>搜索：按文件名查找对应目录项。</li>
+<li>创建文件：在目录中新增目录项。</li>
+<li>删除文件：在目录中删除对应目录项。</li>
+<li>创建目录：树形结构中创建用户目录/子目录。</li>
+<li>删除目录：
+<ol>
+<li>非空目录：先删除目录内所有文件及子目录（递归）。</li>
+<li>空目录：直接删除目录项。</li>
+</ol>
+</li>
+<li>移动目录：在不同父目录间移动文件/子目录，更新路径名。</li>
+<li>显示目录：展示目录内文件及属性。</li>
+<li>修改目录：更新目录项中的文件属性（如权限、所有者）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>目录结构</strong></p>
+<ul>
+<li>
+<p><strong>单级目录结构</strong></p>
+<ul>
+<li><strong>定义</strong>：全系统一张目录表，每个文件占一个目录项，创建文件前需检索目录避免重名。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：实现简单，支持“按名存取”。</li>
+<li>缺点：查找速度慢（线性检索）；不支持重名（多用户不适用）；不便于文件共享。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>两级目录结构</strong></p>
+<ul>
+<li><strong>定义</strong>：分主文件目录（MFD）和用户文件目录（UFD）：
+<ul>
+<li>MFD：记录用户名及对应UFD的存储位置。</li>
+<li>UFD：记录用户所有文件的FCB。</li>
+</ul>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：提高检索速度（仅检索用户UFD）；支持多用户重名；可实现文件访问限制。</li>
+<li>缺点：缺乏灵活性，不能对文件分类（无多级目录）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>树形目录结构（UNIX/Linux/Windows采用）</strong></p>
+<ul>
+<li><strong>定义</strong>：两级目录推广而来，目录呈树状，文件路径名分两种：
+<ul>
+<li>绝对路径：从根目录出发，如“/dev/hda”。</li>
+<li>相对路径：从当前工作目录出发，如当前目录为“/bin”时，“./ls”为相对路径（“.”表示当前目录）。</li>
+</ul>
+</li>
+<li><strong>关键机制</strong>：
+<ul>
+<li>当前目录（工作目录）：进程访问文件默认基于当前目录，减少根目录检索开销，可通过系统调用（如cd）修改。</li>
+</ul>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：层次清晰，便于文件分类；支持精细的访问控制；检索速度快（相对路径）。</li>
+<li>缺点：深层目录检索需逐级访问中间节点，增加磁盘I/O。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>无环图目录结构</strong></p>
+<ul>
+<li><strong>定义</strong>：树形结构基础上增加指向同一节点的有向边，形成无环图，支持目录/文件共享。</li>
+<li><strong>共享机制</strong>：为共享节点设置共享计数器，新增共享链时计数器+1，删除时-1；计数器为0时才删除节点，避免指针悬空。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：方便文件共享。</li>
+<li>缺点：系统管理复杂（需维护共享计数器，检测环）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>目录实现</strong></p>
+<ul>
+<li>
+<p><strong>线性列表</strong></p>
+<ul>
+<li><strong>定义</strong>：目录项按线性表存储（文件名+数据块指针），创建文件时检索表避免重名，删除时标记空闲或调整表长度。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：实现简单。</li>
+<li>缺点：查找耗时（线性检索，若有序可折半查找，但维护成本高）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>哈希表</strong></p>
+<ul>
+<li><strong>定义</strong>：通过哈希函数将文件名映射为线性表指针，快速定位目录项，需解决冲突（如链地址法）。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：查找、插入、删除速度快。</li>
+<li>缺点：冲突处理复杂；哈希函数设计影响性能；不适用于所有目录结构。</li>
+</ul>
+</li>
+<li><strong>优化</strong>：将常用目录项缓存至内存，减少磁盘I/O。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>文件共享</strong></p>
+<ul>
+<li>
+<p><strong>基于索引节点的共享（硬链接）</strong></p>
+<ul>
+<li><strong>定义</strong>：文件描述信息存于inode，目录项仅含文件名和inode指针；inode含链接计数（count），记录指向该inode的目录项数。</li>
+<li><strong>核心逻辑</strong>：
+<ol>
+<li>用户A创建文件：count=1，A为所有者。</li>
+<li>用户B共享文件：B目录新增目录项，指向该inode，count=2。</li>
+<li>用户A删除文件：仅删除A的目录项，count=1，B仍可访问；count=0时删除inode和文件数据。</li>
+</ol>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：查找速度快（直接指向inode）；无额外空间开销（除目录项）。</li>
+<li>缺点：不能跨文件系统共享（inode号仅在本文件系统唯一）；删除时需维护链接计数，避免指针悬空。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>利用符号链的共享（软链接）</strong></p>
+<ul>
+<li><strong>定义</strong>：创建LINK类型文件L，L中记录被链接文件F的路径名（如“/Wang/F”），类似Windows快捷方式。</li>
+<li><strong>核心逻辑</strong>：
+<ol>
+<li>用户B访问L时，系统识别LINK类型，按路径名查找F。</li>
+<li>文件主A删除F后，B访问L时会失败（形成“悬空链接”dangling symlink），需删除或修复L。</li>
+</ol>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：支持跨文件系统共享；删除共享文件无悬空指针。</li>
+<li>缺点：访问时需按路径名逐级查找，增加磁盘I/O；符号链文件占用inode和磁盘空间；可能出现悬空链接。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="文件系统"><strong>文件系统</strong></h3>
+<ul>
+<li>
+<p><strong>文件系统结构</strong></p>
+<ul>
+<li><strong>层次结构（自下而上）</strong>：
+<ol>
+<li><strong>I/O控制层</strong>：
+<ul>
+<li>组成：设备驱动程序、中断处理程序。</li>
+<li>功能：在内存与磁盘间传输信息，将高层命令翻译为硬件指令（如控制磁头位置）。</li>
+</ul>
+</li>
+<li><strong>基本文件系统</strong>：
+<ul>
+<li>功能：向设备驱动程序发送通用命令（读/写磁盘物理块），管理内存缓冲区（缓存文件系统/目录/数据块），优化I/O性能。</li>
+</ul>
+</li>
+<li><strong>文件组织模块</strong>：
+<ul>
+<li>功能：将文件逻辑块地址转换为物理块地址；管理空闲空间（跟踪未分配块，按需分配）。</li>
+</ul>
+</li>
+<li><strong>逻辑文件系统</strong>：
+<ul>
+<li>功能：管理文件元数据（目录结构、FCB），实现“按名存取”；负责文件保护（访问控制）。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>文件系统布局</strong></p>
+<ul>
+<li>
+<p><strong>磁盘中的结构</strong>：</p>
+<ul>
+<li><strong>主引导记录（MBR）</strong>：位于磁盘0号扇区，含主引导程序和分区表；BIOS启动时执行MBR，确定活动分区并读入其引导块。</li>
+<li><strong>引导块</strong>：活动分区首块，含启动该分区操作系统的程序；每个分区均有引导块（即使无操作系统）。</li>
+<li><strong>超级块（Super Block）</strong>：含文件系统关键信息（分区总块数、块大小、空闲块数量/指针、空闲FCB数量/指针），启动时读入内存。</li>
+<li><strong>空闲空间管理区</strong>：记录空闲块（位示图/链表）。</li>
+<li><strong>inode区</strong>：存储所有文件的磁盘inode。</li>
+<li><strong>根目录</strong>：文件系统目录树的根部，存放根目录项。</li>
+<li><strong>文件和目录区</strong>：存储所有目录文件和普通文件的数据。</li>
+</ul>
+</li>
+<li>
+<p><strong>内存中的结构</strong>（安装文件系统时加载，卸载时丢弃）：</p>
+<ul>
+<li>安装表（mount table）：记录已安装文件系统分区信息。</li>
+<li>目录缓存：缓存最近访问的目录项，减少磁盘I/O。</li>
+<li>系统级打开文件表：含每个打开文件的FCB副本、打开计数器等。</li>
+<li>进程级打开文件表：含文件描述符、指向系统表的指针、进程私有信息（如读写指针）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>外存空闲空间管理</strong></p>
+<ul>
+<li>
+<p><strong>空闲表法</strong></p>
+<ul>
+<li><strong>定义</strong>：为所有空闲区建立空闲表，每个表项含空闲区序号、首块号、块数；按首块号递增排序，分配/回收类似内存动态分区。</li>
+<li><strong>分配算法</strong>：首次适应、最佳适应等。</li>
+<li><strong>回收逻辑</strong>：合并回收区与相邻空闲区（前区/后区）。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：分配速度快，减少I/O频率，适用于小文件连续分配。</li>
+<li>缺点：空闲表随磁盘容量增大而变大，检索效率低；易产生外部碎片。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>空闲链表法</strong></p>
+<ul>
+<li><strong>分类</strong>：
+<ol>
+<li><strong>空闲盘块链</strong>：</li>
+</ol>
+<ul>
+<li><strong>定义</strong>：以盘块为单位链接所有空闲块，每个盘块存放下一块指针；分配时从链首取块，回收时插入链尾。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：分配/回收单个块简单。</li>
+<li>缺点：分配多块需多次遍历，效率低；链表长（占用空间大）。</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><strong>空闲盘区链</strong>：</li>
+</ol>
+<ul>
+<li><strong>定义</strong>：以空闲区为单位链接，每个区含指针和块数；分配类似内存动态分区（首次适应），回收时合并相邻区。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：分配/回收多块效率高，链表短。</li>
+<li>缺点：分配/回收逻辑复杂。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>位示图法</strong></p>
+<ul>
+<li><strong>定义</strong>：用1位表示1个盘块状态（0=空闲，1=已分配），形成<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m×n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>位的位示图。</li>
+<li><strong>核心计算</strong>：
+<ul>
+<li>盘块号转位示图位置（行i、列j，n为每行位数）：
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mo stretchy="false">(</mo><mi>b</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mtext>DIV</mtext><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i=(b-1) \text{DIV} n + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord text"><span class="mord">DIV</span></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>=</mo><mo stretchy="false">(</mo><mi>b</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mtext>MOD</mtext><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">j=(b-1) \text{MOD} n + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord text"><span class="mord">MOD</span></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></li>
+</ul>
+</li>
+<li>位示图位置转盘块号：
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>=</mo><mi>n</mi><mo stretchy="false">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">b = n(i-1) + j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>分配步骤</strong>：
+<ol>
+<li>扫描位示图，找值为0的位。</li>
+<li>转换为盘块号，分配给文件。</li>
+<li>置对应位为1。</li>
+</ol>
+</li>
+<li><strong>回收步骤</strong>：
+<ol>
+<li>转换回收盘块号为位示图位置。</li>
+<li>置对应位为0。</li>
+</ol>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：易找相邻空闲块；位示图小（可存于内存），减少磁盘I/O。</li>
+<li>缺点：位示图大小随磁盘容量增大而增大，适用于小型计算机。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>成组链接法（UNIX采用）</strong></p>
+<ul>
+<li><strong>定义</strong>：将空闲盘块分组（如100块/组），每组首块记录下一组的块数和块号；第一组信息存于内存“空闲盘块号栈”，各组首块链接成链。</li>
+<li><strong>分配逻辑</strong>：
+<ol>
+<li>从栈顶取块，栈指针下移，块数减1。</li>
+<li>若取栈底块，先将该块记录的下组信息读入栈，再分配该块。</li>
+</ol>
+</li>
+<li><strong>回收逻辑</strong>：
+<ol>
+<li>回收块号压入栈顶，栈指针上移，块数加1。</li>
+<li>栈满（100块）时，将栈中块号存入新回收块，新块作为新栈底，栈块数置1。</li>
+</ol>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：结合空闲表和链表优势，避免表/链过长，适用于大型文件系统。</li>
+<li>缺点：实现逻辑复杂，需维护栈和组间链接。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>虚拟文件系统（VFS）</strong></p>
+<ul>
+<li><strong>定义</strong>：屏蔽不同文件系统差异，提供统一文件操作接口（如open/read/write），仅存于内存（系统启动时建立，关闭时消亡）。</li>
+<li><strong>核心思想</strong>：抽象通用文件系统模型，定义标准接口；新文件系统实现接口即可安装使用。</li>
+<li><strong>四大对象类型</strong>：
+<ol>
+<li><strong>超级块对象</strong>：表示已安装文件系统，对应磁盘超级块，含inode分配/销毁、读/写等操作函数。</li>
+<li><strong>索引节点对象</strong>：表示单个文件，仅文件访问时创建，含创建硬链接、新目录等操作函数。</li>
+<li><strong>目录项对象</strong>：表示单个目录项（路径组成部分），磁盘无对应结构，遍历路径时解析生成，含指向父/子目录和inode的指针。</li>
+<li><strong>文件对象</strong>：表示进程打开的文件，类似“进程-程序”关系，含文件指针、访问权限、指向inode的指针，及文件操作函数。</li>
+</ol>
+</li>
+<li><strong>工作流程（如write系统调用）</strong>：
+<ol>
+<li>用户空间调用write()，陷入内核。</li>
+<li>VFS调用sys_write()，找到目标文件系统的写方法。</li>
+<li>目标文件系统执行写操作，与物理介质交互。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>文件系统挂载（Mounting）</strong></p>
+<ul>
+<li><strong>定义</strong>：文件系统使用前需挂载，即将设备（如磁盘分区）关联到某个目录（安装点），通过该目录访问设备文件。</li>
+<li><strong>不同系统实现</strong>：
+<ol>
+<li><strong>Windows</strong>：</li>
+</ol>
+<ul>
+<li>用驱动器号标识设备/卷（如C:/、D:/），卷含目录树；启动时自动发现设备并挂载文件系统；新版支持挂载到任意目录。</li>
+</ul>
+<ol start="2">
+<li><strong>UNIX</strong>：</li>
+</ol>
+<ul>
+<li>根文件系统（/）启动时直接挂载，其他文件系统需挂载到根目录下的安装点。</li>
+<li>示例命令：<code>mount -text2 /dev/fd0 /flp</code>（将/dev/fd0的ext2文件系统挂载到/flp）。</li>
+<li>卸载命令：<code>umount /flp</code>。</li>
+<li><strong>关键规则</strong>：
+<ul>
+<li>UNIX/Linux：同一挂载点同一时刻仅能挂载一个文件系统；同一设备通常只挂载一次（可通过 bind mount 将同一目录树映射到多处）【超纲】。</li>
+<li>Windows：同一卷可以有多个挂载点（驱动器号或NTFS目录挂载）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="本章疑难点"><strong>本章疑难点</strong></h3>
+<ul>
+<li><strong>文件物理分配方式比较</strong>
+<table>
+<thead>
+<tr>
+<th>分配方式</th>
+<th>支持访问类型</th>
+<th>碎片类型</th>
+<th>动态增长</th>
+<th>检索效率（访问第n块）</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>连续分配</td>
+<td>顺序/直接</td>
+<td>外部碎片</td>
+<td>不支持</td>
+<td>1次磁盘访问（直接计算）</td>
+<td>固定长度、访问频繁文件</td>
+</tr>
+<tr>
+<td>隐式链接</td>
+<td>仅顺序</td>
+<td>无</td>
+<td>支持</td>
+<td>n次磁盘访问（遍历指针）</td>
+<td>顺序访问文件（如日志）</td>
+</tr>
+<tr>
+<td>显式链接（FAT）</td>
+<td>顺序/随机（链式）</td>
+<td>无</td>
+<td>支持</td>
+<td>链遍历O(n)（FAT在内存多为内存访问）</td>
+<td>中小文件，跨平台兼容</td>
+</tr>
+<tr>
+<td>索引分配</td>
+<td>顺序/直接</td>
+<td>无</td>
+<td>支持</td>
+<td>1（直接）~k+1（k级索引）次</td>
+<td>大/超大文件，随机访问</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>-</p>
+<hr>
+<h3 id="附加理解（超纲）">附加理解（超纲）</h3>
+<ul>
+<li>Extent与延迟分配：现代文件系统（如ext4/xfs/NTFS）以“起始块+长度”的extent记录替代逐块编号，降低元数据与碎片；延迟分配将实际分配推迟到落盘时，以便选择更连续的区域。</li>
+<li>日志与COW一致性：日志模式（metadata-only/ordered/writeback）在崩溃恢复时重放事务；COW文件系统（Btrfs/ZFS/APFS）通过写时复制与校验提供强一致与快照/克隆能力。</li>
+<li>持久化语义：<code>fsync/fdatasync/O_SYNC</code> 控制数据/元数据持久化边界；为严肃持久化需结合barrier/缓存刷写策略。</li>
+<li>缓存路径：页缓存（page cache）负责文件数据缓存与预读/回写；目录项缓存（dentry）与inode缓存显著减少路径解析与元数据I/O。</li>
+<li>稀疏文件与打洞：逻辑上为零的“洞（hole）”不占物理块；<code>fallocate</code> 支持预分配与打洞回收中间空间；容量统计需区分逻辑大小与占用大小。</li>
+<li>目录索引：ext4的HTree、NTFS的B+树等为大目录提供亚对数/对数级查找与插入性能。</li>
+<li>权限细节：<code>umask</code>、<code>setuid/setgid/sticky</code>、POSIX ACL 与扩展属性（xattr）；目录sticky位防止非所有者删除他人物品。</li>
+<li>配额（Quota）：按用户/组限制块与inode用量，含软/硬限额与宽限期。</li>
+<li>文件锁：<code>flock</code>（建议性）与<code>fcntl</code>记录锁；网络文件系统上语义差异需关注。</li>
+<li>挂载选项：<code>noexec/nodev/nosuid/ro/relatime</code> 等影响安全与性能；Linux支持 bind mount 与命名空间隔离。</li>
+</ul>
+<hr>
+<h3 id="408核心考点清单（必背）">408核心考点清单（必背）</h3>
+<ul>
+<li>概念分辨：FCB/目录项/inode/打开文件表的作用与位置；读写偏移隶属于“进程级打开文件表”。</li>
+<li>逻辑结构：顺序文件、索引文件、索引顺序文件与直接/散列文件的定义与优缺点；索引顺序文件平均查找次数为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mi>N</mi></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.1133em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9267em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-2.8867em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1133em;"><span></span></span></span></span></span></span></span></span>。</li>
+<li>物理分配三类：
+<ul>
+<li>连续分配：顺序/直接访问快、外部碎片、难以动态增长。</li>
+<li>链接分配（隐式/显式FAT）：顺序好；FAT随机访问为链式 O(n)，FAT表常驻内存可降低I/O但不改复杂度。</li>
+<li>索引分配（单级/多级/混合）：随机访问好、无外部碎片；多级索引容量与块大小/指针大小的乘方关系需会算。</li>
+</ul>
+</li>
+<li>UNIX混合索引范式：直接块10、一级/二级/三级间接对应的最大文件规模计算要会（以4KB块、4B指针为例）。</li>
+<li>打开-读写-关闭流程：系统级/进程级打开文件表的区分、打开计数与文件描述符的关系。</li>
+<li>链接与共享：硬链接（同inode、不可跨文件系统、通常不可用于目录）vs 软链接（路径名、可跨FS、可能悬空）。</li>
+<li>目录结构：单级、两级、树形、无环图的定义及优缺点；当前目录与相对路径概念。</li>
+<li>空闲空间管理：空闲表、空闲链（块链/区链）、位示图、成组链接法的思想与适用场景。</li>
+<li>位示图公式：
+<ul>
+<li>块号 b 对应位置 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(i,j)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span></span></span></span>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mo stretchy="false">(</mo><mi>b</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mtext> </mtext><mrow><mi mathvariant="normal">D</mi><mi mathvariant="normal">I</mi><mi mathvariant="normal">V</mi></mrow><mtext> </mtext><mi>n</mi><mo>+</mo><mn>1</mn><mo separator="true">,</mo><mtext> </mtext><mi>j</mi><mo>=</mo><mo stretchy="false">(</mo><mi>b</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mtext> </mtext><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">O</mi><mi mathvariant="normal">D</mi></mrow><mtext> </mtext><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i=(b-1)\,\mathrm{DIV}\,n+1,\ j=(b-1)\,\mathrm{MOD}\,n+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathrm" style="margin-right:0.01389em;">DIV</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathrm">MOD</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>；</li>
+<li>位置 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(i,j)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span></span></span></span> 对应块号：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>=</mo><mi>n</mi><mo stretchy="false">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">b=n(i-1)+j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span>。</li>
+</ul>
+</li>
+<li>保护与权限：POSIX 权限“所有者/组/其他×rwx”；目录 r/x/w 的语义（r列名、x遍历、w改目录项）。</li>
+<li>文件系统布局：MBR/引导块/超级块/inode区/根目录/文件数据区的基本作用。</li>
+<li>挂载基础：挂载点概念、卸载条件的基本理解。</li>
+</ul>
+<h3 id="易混与易错速记（408）">易混与易错速记（408）</h3>
+<ul>
+<li>“读/写指针”不在目录项或inode，属于“每个打开实例”的进程级表项。</li>
+<li>FAT不是索引分配；随机访问不是O(1)直接寻址，而是链式遍历。</li>
+<li>删除权限取决于“目录的w+x”，不是文件本身的w；列目录需要目录r，进入需要目录x。</li>
+<li>符号链接删除目标后会“悬空”，硬链接不会因删除其他目录项而失效（直到link count为0）。</li>
+<li>连续分配适合已知长度的热点文件；动态增长会导致移动或无法扩展。</li>
+<li>索引顺序文件：先查索引再在组内顺序查找，平均 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mi>N</mi></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.1133em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9267em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-2.8867em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1133em;"><span></span></span></span></span></span></span></span></span> 次。</li>
+</ul>
+<blockquote>
+<p>备注：诸如 <code>fsync/fdatasync/O_SYNC</code>、COW一致性、目录索引（HTree/B+树）、稀疏文件/打洞、配额/文件锁、挂载选项细节等属于“超纲理解”，在“附加理解（超纲）”中集中列出。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://lazy11.top">Lazy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lazy11.top/2025/09/19/%E8%80%83%E7%A0%94/408/OS/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">https://lazy11.top/2025/09/19/%E8%80%83%E7%A0%94/408/OS/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/lazy-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/09/19/%E8%80%83%E7%A0%94/408/OS/IO%E7%AE%A1%E7%90%86/" title="IO管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">IO管理</div></div><div class="info-2"><div class="info-item-1">操作系统：输入/输出（I/O）管理 一、I/O管理基础   1....</div></div></div></a><a class="pagination-related" href="/2025/09/18/%E8%80%83%E7%A0%94/408/OS/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="内存管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">内存管理</div></div><div class="info-2"><div class="info-item-1">操作系统：内存管理 内存管理基础   内存管理的基本原理和要求  定义：操作系统对内存空间进行合理划分和有效的动态分配，是操作系统设计中最重要、最复杂的内容之一，用于支持多道程序并发执行，解决内存容量有限与进程内存需求的矛盾。 主要功能：  内存空间的分配与回收：记录内存空闲空间和分配情况，回收已结束进程的内存。   地址转换：将进程的逻辑地址转换为物理地址，需硬件（如内存管理单元(Memory Management Unit,...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Lazy</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lazyy11"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/lazyy11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:lazy11@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is Lazy's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">操作系统：文件管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E5%AF%BC%E8%A7%88%EF%BC%88408%EF%BC%89"><span class="toc-number">1.0.1.</span> <span class="toc-text">学习导览（408）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80"><span class="toc-number">1.0.2.</span> <span class="toc-text">文件系统基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.0.3.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.0.4.</span> <span class="toc-text">文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E7%96%91%E9%9A%BE%E7%82%B9"><span class="toc-number">1.0.5.</span> <span class="toc-text">本章疑难点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%84%E5%8A%A0%E7%90%86%E8%A7%A3%EF%BC%88%E8%B6%85%E7%BA%B2%EF%BC%89"><span class="toc-number">1.0.6.</span> <span class="toc-text">附加理解（超纲）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#408%E6%A0%B8%E5%BF%83%E8%80%83%E7%82%B9%E6%B8%85%E5%8D%95%EF%BC%88%E5%BF%85%E8%83%8C%EF%BC%89"><span class="toc-number">1.0.7.</span> <span class="toc-text">408核心考点清单（必背）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%93%E6%B7%B7%E4%B8%8E%E6%98%93%E9%94%99%E9%80%9F%E8%AE%B0%EF%BC%88408%EF%BC%89"><span class="toc-number">1.0.8.</span> <span class="toc-text">易混与易错速记（408）</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/19/%E8%80%83%E7%A0%94/408/OS/IO%E7%AE%A1%E7%90%86/" title="IO管理">IO管理</a><time datetime="2025-09-19T13:32:32.000Z" title="Created 2025-09-19 21:32:32">2025-09-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/19/%E8%80%83%E7%A0%94/408/OS/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" title="文件管理">文件管理</a><time datetime="2025-09-19T08:13:51.000Z" title="Created 2025-09-19 16:13:51">2025-09-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/%E8%80%83%E7%A0%94/408/OS/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="内存管理">内存管理</a><time datetime="2025-09-18T07:33:25.000Z" title="Created 2025-09-18 15:33:25">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/16/%E8%80%83%E7%A0%94/408/OS/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" title="进程与线程">进程与线程</a><time datetime="2025-09-16T07:25:08.000Z" title="Created 2025-09-16 15:25:08">2025-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/%E8%80%83%E7%A0%94/408/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" title="操作系统概述">操作系统概述</a><time datetime="2025-09-15T08:34:52.000Z" title="Created 2025-09-15 16:34:52">2025-09-15</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Lazy</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (true) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://waline.lazy11.top/',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章..." type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
