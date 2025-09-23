@@ -1,0 +1,1019 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>物理层 | Lazy's Blog</title><meta name="author" content="Lazy,lazy11@foxmail.com"><meta name="copyright" content="Lazy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="计算机网络：物理层 一、通信基础   1. 基本概念   数据、信号与码元  定义：  数据：传送信息的实体（如文字、图像），分模拟数据（取值连续）和数字数据（取值离散）。 信号：数据的电气&#x2F;电磁表现，分模拟信号（连续变化）和数字信号（离散电平）。 码元（Symbol）：固定时长的信号波形，代表1个k进制数，时长称为码元宽度（信号周期）；1码元可携带多比特信息（如2进制码元带1bit，4进制码元带">
+<meta property="og:type" content="article">
+<meta property="og:title" content="物理层">
+<meta property="og:url" content="https://lazy11.top/2025/09/23/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%89%A9%E7%90%86%E5%B1%82/index.html">
+<meta property="og:site_name" content="Lazy&#39;s Blog">
+<meta property="og:description" content="计算机网络：物理层 一、通信基础   1. 基本概念   数据、信号与码元  定义：  数据：传送信息的实体（如文字、图像），分模拟数据（取值连续）和数字数据（取值离散）。 信号：数据的电气&#x2F;电磁表现，分模拟信号（连续变化）和数字信号（离散电平）。 码元（Symbol）：固定时长的信号波形，代表1个k进制数，时长称为码元宽度（信号周期）；1码元可携带多比特信息（如2进制码元带1bit，4进制码元带">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lazy11.top/img/lazy-icon.png">
+<meta property="article:published_time" content="2025-09-23T06:05:33.000Z">
+<meta property="article:modified_time" content="2025-09-23T09:52:42.292Z">
+<meta property="article:author" content="Lazy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lazy11.top/img/lazy-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lazy11.top/2025/09/23/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%89%A9%E7%90%86%E5%B1%82/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '物理层',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">38</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">21</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "/img/lazy-icon.png" data-lazy-src="/img/index.png" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">物理层</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">物理层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-09-23T06:05:33.000Z" title="Created 2025-09-23 14:05:33">2025-09-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-09-23T09:52:42.292Z" title="Updated 2025-09-23 17:52:42">2025-09-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span class="waline-pageview-count" data-path="/2025/09/23/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%89%A9%E7%90%86%E5%B1%82/"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1>计算机网络：物理层</h1>
+<h3 id="一、通信基础"><strong>一、通信基础</strong></h3>
+<ul>
+<li>
+<p><strong>1. 基本概念</strong></p>
+<ul>
+<li>
+<p><strong>数据、信号与码元</strong></p>
+<ul>
+<li><strong>定义</strong>：
+<ul>
+<li>数据：传送信息的实体（如文字、图像），分模拟数据（取值连续）和数字数据（取值离散）。</li>
+<li>信号：数据的电气/电磁表现，分模拟信号（连续变化）和数字信号（离散电平）。</li>
+<li>码元（Symbol）：固定时长的信号波形，代表1个k进制数，时长称为码元宽度（信号周期）；1码元可携带多比特信息（如2进制码元带1bit，4进制码元带2bit）。</li>
+</ul>
+</li>
+<li><strong>核心关系</strong>：码元携带的比特数 = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mi>k</mi></mrow><annotation encoding="application/x-tex">log_2k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>（k为码元的离散电平数量）。</li>
+<li><strong>数字信号 vs 模拟信号（考纲内）</strong>：
+<ul>
+<li>取值特性：数字信号取值离散（多为矩形/多电平波形），模拟信号取值连续（多为正弦/连续波形）。</li>
+<li>抗噪与再生：数字信号可经中继器再生（判决后重构波形），抗噪性强；模拟信号经放大器会连同噪声一起放大，远距更易失真。</li>
+<li>传输形态：数字信号可基带直接传输；模拟信号常为带通信号（经载波调制），适合无线与远距离。</li>
+<li>示例：
+<ul>
+<li>数字信号：以太网双绞线上的NRZ/曼彻斯特/MLT-3等基带方波/多电平波形。</li>
+<li>模拟信号：广播AM/FM的射频正弦波；Wi‑Fi/蜂窝物理层在空口上传输的是模拟带通信号（用QAM/OFDM等数字调制承载比特）；传统话音在电话环路上为模拟。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>信源、信道与信宿</strong></p>
+<ul>
+<li><strong>定义</strong>：
+<ul>
+<li>信源：产生/发送数据的源头（如计算机）。</li>
+<li>信宿：接收数据的终点（如终端）。</li>
+<li>信道：信号传输介质，是通信系统的核心通路。</li>
+</ul>
+</li>
+<li><strong>结构/组成</strong>：单向通信系统模型 = 信源 → 变换器 → 信道（+噪声源）→ 反变换器 → 信宿；双向通信含发送/接收2个信道。</li>
+<li><strong>信道分类</strong>：
+<ul>
+<li>按传输信号：模拟信道（传模拟信号）、数字信道（传数字信号）。</li>
+<li>按传输介质：有线信道（双绞线、光纤等）、无线信道（无线电波等）。</li>
+</ul>
+</li>
+<li><strong>传输相关概念</strong>：
+<ul>
+<li>基带信号：信源发出的未调制原始电信号；直接传输基带信号称为<strong>基带传输</strong>（适用于局域网）。</li>
+<li>宽带信号：基带信号调制后的频分复用模拟信号；传输称为<strong>宽带传输</strong>（适用于远距离）。</li>
+<li>传输方式：
+<ul>
+<li>串行传输：逐比特按序传输（适用于长距离，如计算机网络）。</li>
+<li>并行传输：多比特同时通过多信道传输（适用于近距离，如CPU与主存）。</li>
+</ul>
+</li>
+<li>交互方式：
+<ul>
+<li>单向通信（单工）：仅一个方向传输（如电视广播），需1个信道。</li>
+<li>半双工通信：双方可收发，但不能同时（如对讲机），需2个信道。</li>
+<li>全双工通信：双方可同时收发（如电话），需2个信道。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>速率、波特与带宽</strong></p>
+<ul>
+<li><strong>定义</strong>：
+<ul>
+<li>速率：单位时间传输的数据量，分两类：
+<ul>
+<li>码元传输速率（波特率）：每秒传输的码元数，单位Baud；与进制无关。</li>
+<li>信息传输速率（比特率）：每秒传输的比特数，单位b/s。</li>
+</ul>
+</li>
+<li>带宽：
+<ul>
+<li>模拟信号系统：信道能传输的频率范围（最高频-最低频），单位Hz。</li>
+<li>计算机网络：信道能传输数据的最高速率，单位b/s。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>核心关系</strong>：比特率 = 波特率 × <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mi>V</mi></mrow><annotation encoding="application/x-tex">log_2V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span>（V为码元的离散电平数量）；波特率 = 比特率 ÷ 每码元携带的比特数。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>2. 信道的极限容量</strong></p>
+<ul>
+<li>
+<p><strong>奈奎斯特定理（Nyquist’s Theorem，奈氏准则）</strong></p>
+<ul>
+<li><strong>适用场景</strong>：理想低通信道（无噪声、带宽有限），解决码间串扰问题（高频分量衰减导致码元界限模糊）。</li>
+<li><strong>核心公式</strong>：
+<ul>
+<li><strong>极限码元传输速率</strong> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>W</mi></mrow><annotation encoding="application/x-tex">2W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span> Baud（W为信道频率带宽，单位Hz）。</li>
+<li><strong>极限数据传输速率</strong> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>W</mi><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mi>V</mi></mrow><annotation encoding="application/x-tex">2W log_2V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span> b/s（V为码元离散电平数量）。</li>
+</ul>
+</li>
+<li><strong>关键结论</strong>：
+<ul>
+<li>码元传输速率有上限，超上限会出现严重码间串扰。</li>
+<li>信道带宽越大，传输码元的能力越强。</li>
+<li>仅限制码元速率，不限制信息速率（可通过多元制调制提高每码元携带的比特数）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>香农定理（Shannon’s Theorem）</strong></p>
+<ul>
+<li><strong>适用场景</strong>：带宽受限且有高斯噪声干扰的实际信道。</li>
+<li><strong>核心公式</strong>：信道极限数据传输速率 = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">W log_2(1+S/N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span> b/s；其中：
+<ul>
+<li>W：信道频率带宽（Hz）。</li>
+<li>S：信号平均功率，N：噪声平均功率，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi></mrow><annotation encoding="application/x-tex">S/N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>为信噪比（无单位）。</li>
+</ul>
+</li>
+<li><strong>信噪比换算</strong>：分贝（dB）记法 = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>10</mn></msub><mo stretchy="false">(</mo><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">10 log_{10}(S/N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">10</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>；计算时需将dB转换为无单位<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi></mrow><annotation encoding="application/x-tex">S/N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>（如30dB对应<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo>=</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">S/N=1000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1000</span></span></span></span>）。</li>
+<li><strong>关键结论</strong>：
+<ul>
+<li>带宽或信噪比越大，信息极限传输速率越高。</li>
+<li>固定带宽和信噪比时，信息速率上限确定。</li>
+<li>速率低于上限时，存在无差错传输方法；实际速率远低于理论值。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>奈氏准则与香农定理的区别</strong></p>
+<ul>
+<li>奈氏准则：仅考虑带宽对码元速率的限制，不考虑噪声。</li>
+<li>香农定理：同时考虑带宽和信噪比，限制信息传输速率；表明每码元携带的比特数有限。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>3. 编码与调制</strong></p>
+<ul>
+<li>
+<p><strong>定义</strong>：</p>
+<ul>
+<li>编码：将数据转换为数字信号的过程（用于数字传输）。</li>
+<li>调制：将数据转换为模拟信号的过程（用于模拟传输）。</li>
+<li><strong>编码 vs 调制的区别（考纲内）</strong>：
+<ul>
+<li>目标域：编码发生在基带/数字域（输出数字信号）；调制发生在带通/模拟域（输出模拟载波）。</li>
+<li>适用信道：编码用于数字基带链路（如以太网双绞线/光纤基带）；调制用于带通信道（如电话网铜线的高频段、无线空口、有线电视同轴）。</li>
+<li>输入/输出：编码输入数据位流→输出数字波形；调制输入数据（数字或模拟）→输出模拟带通信号。</li>
+<li>示例：
+<ul>
+<li>编码：10BASE-T的曼彻斯特，100BASE-TX的MLT-3+4B/5B（输出仍为基带电信号）。</li>
+<li>调制：ADSL/VDSL、4G/5G、Wi‑Fi采用QAM/OFDM等（输出为空口/铜线上传输的模拟载波信号）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>分类及细节</strong>：</p>
+<ul>
+<li>
+<p><strong>数字数据编码为数字信号（基带传输）</strong></p>
+<ul>
+<li>核心要求：有效区分0和1，部分需提供同步机制。</li>
+<li>常见编码方式：
+<ul>
+<li><strong>归零编码（Return-to-Zero，RZ）</strong>：
+<ul>
+<li>规则：高电平表1、低电平表0（或相反），每个码元中间跳变到零电平。</li>
+<li>特点：提供自同步（跳变调整时钟）；但归零占用带宽，传输效率低。</li>
+</ul>
+</li>
+<li><strong>非归零编码（Non-Return-to-Zero，NRZ）</strong>：
+<ul>
+<li>规则：无归零，一个时钟全传数据（高电平1、低电平0或相反）。</li>
+<li>特点：编码效率较高；但不自同步，需额外同步机制（如帧定界/码间填充/时钟恢复），否则长零/长一会导致时钟恢复困难。</li>
+</ul>
+</li>
+<li><strong>反向非归零编码（Non-Return-to-Zero Inverted，NRZI）</strong>：
+<ul>
+<li>规则：常见约定为“0致跳变、1不变”（亦有实现相反约定）。</li>
+<li>特点：改善时钟恢复（长1序列仍可产生边沿）；通常与位填充/帧定界配合使用；USB2.0采用“0致跳变、1不变”。</li>
+</ul>
+</li>
+<li><strong>曼彻斯特编码（Manchester Encoding）</strong>：
+<ul>
+<li>规则：每个码元中间必跳变，跳变既作时钟（同步），又作数据（如下跳表1、上跳表0，或相反）。</li>
+<li>特点：自带同步；经典10 Mb/s<strong>以太网</strong>采用，带宽需求约为比特率的两倍。</li>
+</ul>
+</li>
+<li><strong>差分曼彻斯特编码（Differential Manchester Encoding）</strong>：
+<ul>
+<li>规则：每个码元中间必跳变（仅作时钟）；数据由码元开始处是否跳变决定（无跳变表1，有跳变表0）。</li>
+<li>特点：抗干扰能力强且自同步，但带宽效率低于NRZ/NRZI；历史上用于Token Ring，并非主流高速以太网物理层方案。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>模拟数据编码为数字信号</strong></p>
+<ul>
+<li>核心技术：脉冲编码调制（Pulse Code Modulation, PCM），常用于音频信号。</li>
+<li>算法步骤：
+<ol>
+<li>采样：周期性扫描模拟信号，将连续信号转为离散信号；采样频率 ≥ 模拟信号最大频率的2倍（奈奎斯特采样定理）。</li>
+<li>量化：将采样电平按分级标度转换为离散数值并取整（连续→离散）。</li>
+<li>编码：将量化后的整数转换为二进制编码。</li>
+</ol>
+</li>
+<li>名词澄清：PCM 名含“调制”，但并非把信号搬移到载波频段；其本质是模拟→数字的 A/D 与编码过程，输出比特流。所谓“解调”是针对已调载波（如 ASK/FSK/PSK/QAM）恢复基带；若需得到数字比特，还需随后判决/解码。</li>
+<li>示例（编码）：
+<ul>
+<li>录音：麦克风模拟话音 → 声卡A/D+PCM（如8 kHz采样、8/16 bit量化；话音常用A律/μ律压扩）→ WAV/VoIP比特流。</li>
+<li>电话网：PSTN/E1 话路：8 kHz × 8 bit = 64 kb/s/路；30/31路复用成 2.048 Mb/s 数字支路。</li>
+<li>图像采集：摄像头模拟电平 → 采样量化 → 数字像素流（随后JPEG/H.264为源编码/压缩，属于更高层编码）。</li>
+</ul>
+</li>
+<li>对比例子（解调）：
+<ul>
+<li>收音机：接收AM/FM载波 → 解调得到模拟音频（是基带模拟，不是比特）。</li>
+<li>Wi‑Fi/4G：空口QAM/OFDM载波 → 解调/同步/均衡 → 符号判决 → 比特 → MAC帧（先解调出基带，再判决得到比特）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>数字数据调制为模拟信号（需调制解调器）</strong></p>
+<ul>
+<li>核心思路：改变载波的振幅、频率、相位来表示0和1。</li>
+<li>常见调制方式：
+<ul>
+<li><strong>幅移键控（Amplitude Shift Keying，ASK）</strong>：
+<ul>
+<li>规则：改变载波振幅（如有载波表1、无载波表0）。</li>
+<li>特点：易实现；抗干扰能力差。</li>
+</ul>
+</li>
+<li><strong>频移键控（Frequency Shift Keying，FSK）</strong>：
+<ul>
+<li>规则：改变载波频率（如频率<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">f_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>表1、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">f_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>表0）。</li>
+<li>特点：易实现；抗干扰能力强，应用广。</li>
+</ul>
+</li>
+<li><strong>相移键控（Phase Shift Keying，PSK）</strong>：
+<ul>
+<li>规则：改变载波相位（如相位0表1、π表0，绝对调相）。</li>
+<li>扩展：差分相移键控（Differential PSK，DPSK），通过当前与前一码元的相位差表示数据（如相位不变表1、变表0）。</li>
+</ul>
+</li>
+<li><strong>正交幅度调制（Quadrature Amplitude Modulation，QAM）</strong>：
+<ul>
+<li>规则：结合ASK（振幅）和PSK（相位），频率相同，叠加信号。</li>
+<li>核心公式：比特率<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub><mo>=</mo><msub><mi>R</mi><mi>s</mi></msub><mtext> </mtext><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mo stretchy="false">(</mo><mi>m</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R_b = R_s\,\log_2(mn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">mn</span><span class="mclose">)</span></span></span></span>（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">R_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>为符号率/波特率，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span>为相位数，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>为每相位的振幅数）；与物理带宽<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>(Hz)区分。</li>
+<li>特点：高频带利用率；适用于高速数据传输。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>模拟数据调制为模拟信号</strong></p>
+<ul>
+<li>目的：提高传输频率以实现有效性，可结合频分复用（Frequency Division Multiplexing，FDM）充分利用带宽。</li>
+<li>应用：电话机与本地局交换机的模拟信号传输。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>4. 交换技术</strong></p>
+<ul>
+<li>
+<p><strong>电路交换</strong></p>
+<ul>
+<li><strong>定义</strong>：通信前建立专用物理通路，通信中独占通路，通信后释放通路（如电话网络）。</li>
+<li><strong>算法步骤</strong>：</li>
+</ul>
+<ol>
+<li>建立连接：主叫向交换机发连接请求，交换机逐级转接至被叫，建立专用通路。</li>
+<li>数据传输：数据沿专用通路连续传输，无存储转发时延，但仍有发送时延与传播时延（处理时延通常可忽略）。</li>
+<li>释放连接：通信结束后，双方释放通路资源。</li>
+</ol>
+<ul>
+<li><strong>优点</strong>：通信延迟小、无冲突、适用于实时传输（如语音）。</li>
+<li><strong>缺点</strong>：资源利用率低（通路独占）、不适用于突发数据传输、建立连接耗时。</li>
+</ul>
+</li>
+<li>
+<p><strong>报文交换</strong></p>
+<ul>
+<li><strong>定义</strong>：将数据封装为“报文”（含完整目的地址），无需建立专用通路，报文在交换机中存储后转发（如早期电子邮件）。</li>
+<li><strong>特点</strong>：
+<ul>
+<li>交换机存储报文，按目的地址转发至下一跳。</li>
+<li>报文大小无固定限制，需交换机有较大缓存。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：资源利用率高（共享通路）、无需建立连接。</li>
+<li><strong>缺点</strong>：存储转发延迟大（报文需完整接收后转发）、不适用于实时传输、大报文易导致缓存溢出。</li>
+</ul>
+</li>
+<li>
+<p><strong>分组交换</strong></p>
+<ul>
+<li><strong>定义</strong>：将报文分割为固定大小的“分组”（含目的地址和分组序号），分组独立在交换机中存储转发（如互联网）。</li>
+<li><strong>分类</strong>：
+<ul>
+<li>数据报：分组独立选路，可能失序、丢失，需接收方重组（如IP网络）。</li>
+<li>虚电路：通信前建立逻辑通路（虚电路号），分组按虚电路号传输，有序、无失序（如X.25、ATM）。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：
+<ul>
+<li>延迟小（分组小，转发快）、资源利用率高、适用于突发数据传输。</li>
+<li>数据报：灵活、故障时可重选路；虚电路：有序、传输效率高。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>数据报：分组可能失序、丢失，需接收方处理；虚电路：需建立连接，故障时虚电路失效。</li>
+<li>存在分组头部开销。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、传输介质"><strong>二、传输介质</strong></h3>
+<ul>
+<li>
+<p><strong>1. 导向传输介质（电磁波沿固体介质传播）</strong></p>
+<ul>
+<li>
+<p><strong>双绞线（Twisted Pair）</strong></p>
+<ul>
+<li><strong>结构/组成</strong>：两根绝缘铜导线按规则绞合；外层可加金属屏蔽层（屏蔽双绞线，Shielded Twisted Pair，STP）或无（非屏蔽双绞线，Unshielded Twisted Pair，UTP）。</li>
+<li><strong>性质/特点</strong>：
+<ul>
+<li>绞合目的：减少相邻导线的电磁干扰。</li>
+<li>价格便宜，模拟/数字传输均可。</li>
+<li>通信距离：以太网UTP典型单段≤100 m（Cat5e/6/6A）；更长距离需中继/交换或改用光纤。传统电话环路可达数公里，但速率有限且需放大/再生。</li>
+</ul>
+</li>
+<li><strong>应用场景</strong>：局域网（如以太网）、传统电话网。</li>
+</ul>
+</li>
+<li>
+<p><strong>同轴电缆（Coaxial Cable）</strong></p>
+<ul>
+<li><strong>结构/组成</strong>：内导体（硬铜线）→ 绝缘层 → 外导体屏蔽层（密织网状）→ 绝缘保护套。</li>
+<li><strong>分类及应用</strong>：
+<ul>
+<li>50Ω同轴电缆：传基带数字信号，早期局域网应用。</li>
+<li>75Ω同轴电缆：传宽带信号，有线电视系统应用。</li>
+</ul>
+</li>
+<li><strong>性质/特点</strong>：抗干扰性强（屏蔽层作用）、带宽高；但成本高于双绞线，目前局域网已少用。</li>
+</ul>
+</li>
+<li>
+<p><strong>光纤（Optical Fiber）</strong></p>
+<ul>
+<li><strong>结构/组成</strong>：纤芯（高折射率，8~100μm）→ 包层（低折射率）→ 保护套。</li>
+<li><strong>传输原理</strong>：光的全反射（光线从纤芯射向包层，入射角＞临界角时反射回纤芯，沿纤芯传输）。</li>
+<li><strong>分类及区别</strong>：
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>纤芯直径</th>
+<th>光源</th>
+<th>传输距离</th>
+<th>成本</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>多模光纤</td>
+<td>粗（数十μm）</td>
+<td>发光二极管（LED）</td>
+<td>短（数百米）</td>
+<td>低</td>
+<td>多束光线传输，损耗高</td>
+</tr>
+<tr>
+<td>单模光纤</td>
+<td>细（几μm）</td>
+<td>半导体激光器</td>
+<td>长（数千米至数十千米）</td>
+<td>高</td>
+<td>单束光线直线传输，损耗低</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><strong>性质/特点</strong>：
+<ul>
+<li>优点：带宽潜力极大（可见光频率约10^14 Hz量级）、传输损耗小、抗电磁干扰/雷电、无串音、保密性好、体积小重量轻。</li>
+<li>缺点：成本高、安装维护复杂。</li>
+</ul>
+</li>
+<li><strong>应用场景</strong>：远距离高速传输（如骨干网、城域网）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>2. 非导向传输介质（电磁波在自由空间传播，无线传输）</strong></p>
+<ul>
+<li>
+<p><strong>无线电波（Radio Waves）</strong></p>
+<ul>
+<li><strong>性质/特点</strong>：穿透能力强、传输距离远、信号全向散播。</li>
+<li><strong>优点</strong>：接收设备无需对准发射方向，简化连接。</li>
+<li><strong>应用场景</strong>：无线手机通信、无线局域网（WLAN）。</li>
+</ul>
+</li>
+<li>
+<p><strong>微波（Microwaves）</strong></p>
+<ul>
+<li><strong>性质/特点</strong>：频率高（2~40GHz）、带宽大、信号沿直线传播（需视线通路）。</li>
+<li><strong>传输方式</strong>：地面微波（需中继站接力，传输距离有限）、卫星微波（地球同步卫星中继，覆盖广）。</li>
+<li><strong>应用场景</strong>：卫星通信（全球通信）、地面微波链路（骨干网补充）。</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：通信容量大、距离远、覆盖广。</li>
+<li>缺点：保密性差、卫星通信单程≈250 ms（RTT≈500–600+ ms）、受气候影响。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>红外线（Infrared）</strong></p>
+<ul>
+<li><strong>性质/特点</strong>：视线传播、定向性强、不能穿透障碍物。</li>
+<li><strong>应用场景</strong>：短距离通信（如红外遥控、近距离设备互联）。</li>
+</ul>
+</li>
+<li>
+<p><strong>激光（Laser）</strong></p>
+<ul>
+<li><strong>性质/特点</strong>：视线传播、定向性极强、带宽高、抗干扰性强。</li>
+<li><strong>应用场景</strong>：短距离高速通信（如建筑物间链路）。</li>
+<li><strong>缺点</strong>：易受天气影响（如雨、雾）、需精确对准。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>3. 物理层接口特性</strong></p>
+<ul>
+<li><strong>定义</strong>：物理层通过接口特性屏蔽传输介质差异，使数据链路层无需关注硬件细节。</li>
+<li><strong>四大特性</strong>：
+<ul>
+<li><strong>机械特性</strong>：指明接口接线器的形状、尺寸、引脚数量及排列、固定/锁定装置（如RJ45接头的引脚排列）。</li>
+<li><strong>电气特性</strong>：指明接口电缆各线的电压范围、判决阈值、传输速率与距离限制（如RS-232：+3 ~ +15V判0，-3 ~ -15V判1，阈值约±3V；典型线长≤15 m）。</li>
+<li><strong>功能特性</strong>：指明某线电平的意义（如+11V表1）、每条线的功能（数据线、控制线、时钟线）。</li>
+<li><strong>过程特性（规程特性）</strong>：指明不同功能的事件发生顺序（如数据发送前先发控制信号）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、物理层设备"><strong>三、物理层设备</strong></h3>
+<ul>
+<li>
+<p><strong>1. 中继器（Repeater）</strong></p>
+<ul>
+<li><strong>定义</strong>：工作在物理层，放大、整形并转发数字信号，消除信号衰减和失真，扩大网络传输距离的设备。</li>
+<li><strong>核心功能</strong>：
+<ul>
+<li><strong>信号再生（非简单放大，含放大+整形）</strong>；</li>
+<li><strong>仅作用于信号电气部分</strong>，不处理数据内容（如错误数据）。</li>
+</ul>
+</li>
+<li><strong>性质/特点</strong>：
+<ul>
+<li>连接的网段属于同一局域网，不分割冲突域和广播域。</li>
+<li><strong>有数量限制</strong>：受网络标准延迟限制（如以太网“5-4-3规则”：4个中继器串联5段介质，仅3段可挂计算机）。</li>
+<li>不能连接速率/协议不同的网段（无存储转发功能）。</li>
+</ul>
+</li>
+<li><strong>与放大器的区别</strong>：放大器放大模拟信号（同时放大噪声），中继器再生数字信号（减少失真）。</li>
+</ul>
+</li>
+<li>
+<p><strong>2. 集线器（Hub）</strong></p>
+<ul>
+<li><strong>定义</strong>：工作在物理层，本质是多端口中继器；接收某端口信号后，整形放大并转发至所有其他工作端口。</li>
+<li><strong>核心功能</strong>：
+<ul>
+<li>信号再生与广播转发：无寻址功能，数据从输入端口以外的所有端口广播出去。</li>
+<li>扩展网络覆盖范围：集中连接多台设备（如计算机）。</li>
+</ul>
+</li>
+<li><strong>性质/特点</strong>：
+<ul>
+<li><strong>共享带宽</strong>：所有端口属于同一冲突域，任意时刻仅一个端口可输入有效数据（如10Mb/s Hub连接8台计算机，每台平均带宽≤1.25Mb/s）。</li>
+<li>半双工工作：不能同时收发数据。</li>
+<li>逻辑拓扑：物理上是星形结构，逻辑上是总线结构（广播方式）。</li>
+<li>不分割冲突域和广播域：多设备同时发送会导致冲突，降低效率。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：冲突频繁、带宽利用率低；目前已被交换机（数据链路层设备）取代。</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、本章关键总结与疑难点"><strong>四、本章关键总结与疑难点</strong></h3>
+<ul>
+<li>
+<p><strong>1. 传输介质与物理层的区别</strong></p>
+<ul>
+<li><strong>传输介质</strong>：属于“0层”，仅传输信号，不识别信号含义（不知道0/1）。</li>
+<li><strong>物理层</strong>：OSI第一层，规定电气特性（如电平表0/1），能识别比特流；屏蔽传输介质差异，为数据链路层提供统一接口。</li>
+</ul>
+</li>
+<li>
+<p><strong>2. 基带传输、频带传输、宽带传输的区别</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>定义</th>
+<th>信号类型</th>
+<th>传输介质</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基带传输</td>
+<td>直接传输未调制的基带信号</td>
+<td>数字信号</td>
+<td>双绞线、光纤</td>
+<td>局域网（短距离）</td>
+</tr>
+<tr>
+<td>频带传输</td>
+<td>传输基带信号调制后的模拟信号</td>
+<td>模拟信号</td>
+<td>同轴电缆、无线</td>
+<td>广域网（长距离）</td>
+</tr>
+<tr>
+<td>宽带传输</td>
+<td>频分复用多个子信道，同时传输多信号</td>
+<td>模拟信号</td>
+<td>同轴电缆、无线</td>
+<td>多信号并发传输</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>补充要点（考纲内）：
+<ul>
+<li>基带传输：直接发送数字基带，无载波调制；实现简单，抗噪声能力依赖线路编码与再生；常用于以太网双绞线/局域光纤。</li>
+<li>频带传输（带通）：需调制到载波频段，便于远距与无线传输；可与FDM叠加；适用于公共信道承载。</li>
+<li>宽带传输：强调“多个并行子信道的频分复用”，每个子信道可承载独立信号（如CATV、有线调制解调系统）。</li>
+<li>易错点：
+<ul>
+<li>“带宽”在通信里既指频率范围(Hz)也指数据速率(b/s)；需结合上下文区分。</li>
+<li>基带不等于“低速”，高速以太网同样是基带传输（通过多电平PAM、编码/均衡实现）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>3. 奈氏准则与香农定理的核心差异</strong></p>
+<ul>
+<li><strong>关注重点</strong>：奈氏管“码元速率上限”（无噪声），香农管“信息速率上限”（有噪声）。</li>
+<li><strong>提升速率方式</strong>：奈氏可通过增加码元电平数量（多元制调制）提升信息速率；香农需增加带宽或信噪比。</li>
+<li><strong>实际应用</strong>：需同时满足两者限制（取速率最小值）；如二进制信号在有噪声信道，需同时计算奈氏速率（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>W</mi></mrow><annotation encoding="application/x-tex">2W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>）和香农速率（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">W log_2(1+S/N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>），取较小值。</li>
+<li>补充要点（考纲内）：
+<ul>
+<li>上限类型区别：
+<ul>
+<li>奈氏：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>R</mi><mi>s</mi><mi>max</mi><mo>⁡</mo></msubsup><mo>=</mo><mn>2</mn><mi>W</mi></mrow><annotation encoding="application/x-tex">R_s^{\max}=2W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9303em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.453em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">m</span><span class="mtight">a</span><span class="mtight">x</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>（Baud），不含噪声；信息速率<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub><mo>=</mo><msub><mi>R</mi><mi>s</mi></msub><mtext> </mtext><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>V</mi></mrow><annotation encoding="application/x-tex">R_b=R_s\,\log_2 V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9386em;vertical-align:-0.2441em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span>，对二进制<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">V=2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span>时<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>R</mi><mi>b</mi><mi>max</mi><mo>⁡</mo></msubsup><mo>=</mo><mn>2</mn><mi>W</mi></mrow><annotation encoding="application/x-tex">R_b^{\max}=2W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9664em;vertical-align:-0.2831em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4169em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">m</span><span class="mtight">a</span><span class="mtight">x</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2831em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>。</li>
+<li>香农：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>R</mi><mi>b</mi><mi>max</mi><mo>⁡</mo></msubsup><mo>=</mo><mi>W</mi><mtext> </mtext><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R_b^{\max}=W\,\log_2(1+S/N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9664em;vertical-align:-0.2831em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4169em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">m</span><span class="mtight">a</span><span class="mtight">x</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2831em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>（b/s），含噪声上限；不直接给符号率，但限制可达的每码元比特数与总比特率。</li>
+</ul>
+</li>
+<li>是否存在“min{奈氏, 香农}”考题：有，且常见于408计算题。
+<ul>
+<li>做法：给定<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>与<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">N</mi><mi mathvariant="normal">R</mi></mrow><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathrm{SNR}_{\mathrm{dB}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">SNR</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">dB</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>（先换算<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi></mrow><annotation encoding="application/x-tex">S/N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>），若指明进制<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span>，先算<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>R</mi><mi>b</mi><mrow><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>=</mo><mn>2</mn><mi>W</mi><mtext> </mtext><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>V</mi></mrow><annotation encoding="application/x-tex">R_b^{(N)}=2W\,\log_2 V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3461em;vertical-align:-0.3013em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.3987em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3013em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9386em;vertical-align:-0.2441em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span>与<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>R</mi><mi>b</mi><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>=</mo><mi>W</mi><mtext> </mtext><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R_b^{(S)}=W\,\log_2(1+S/N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3461em;vertical-align:-0.3013em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.3987em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3013em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>，取<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>min</mi><mo>⁡</mo><mo stretchy="false">{</mo><msubsup><mi>R</mi><mi>b</mi><mrow><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow></msubsup><mo separator="true">,</mo><msubsup><mi>R</mi><mi>b</mi><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></msubsup><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\min\{R_b^{(N)},R_b^{(S)}\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3461em;vertical-align:-0.3013em;"></span><span class="mop">min</span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.3987em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3013em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.3987em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3013em;"><span></span></span></span></span></span></span><span class="mclose">}</span></span></span></span>。</li>
+<li>若未指明<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span>，题意多默认二进制或给出现代调制阶数（如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span></span></span></span>-QAM/<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span></span></span></span>-PAM）。</li>
+</ul>
+</li>
+<li>快速步骤：
+<ol>
+<li>dB→线性：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mrow><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi></mrow><mi mathvariant="normal">/</mi><mn>10</mn></mrow></msup></mrow><annotation encoding="application/x-tex">S/N=10^{\mathrm{dB}/10}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.888em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">dB</span></span><span class="mord mtight">/10</span></span></span></span></span></span></span></span></span></span></span></span>；</li>
+<li>奈氏：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>R</mi><mi>b</mi><mrow><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>=</mo><mn>2</mn><mi>W</mi><mtext> </mtext><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>V</mi></mrow><annotation encoding="application/x-tex">R_b^{(N)}=2W\,\log_2 V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3461em;vertical-align:-0.3013em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.3987em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3013em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9386em;vertical-align:-0.2441em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span>（二进制取<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>W</mi></mrow><annotation encoding="application/x-tex">2W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>）；</li>
+<li>香农：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>R</mi><mi>b</mi><mrow><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>=</mo><mi>W</mi><mtext> </mtext><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R_b^{(S)}=W\,\log_2(1+S/N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3461em;vertical-align:-0.3013em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.3987em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3013em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>；</li>
+<li>取较小者；必要时再反推<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>s</mi></msub><mo>=</mo><msub><mi>R</mi><mi>b</mi></msub><mi mathvariant="normal">/</mi><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>V</mi></mrow><annotation encoding="application/x-tex">R_s=R_b/\log_2 V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span>。</li>
+</ol>
+</li>
+<li>易错点：
+<ul>
+<li>把<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>(Hz)误作<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">R_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>(Baud)；</li>
+<li>忘记将dB换算为无单位<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi></mrow><annotation encoding="application/x-tex">S/N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>；</li>
+<li>奈氏用于“无噪声低通”上限，不代表实际可无限提升<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span>（受SNR与实现限制）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>4. 信噪比采用分贝（dB）表示的原因</strong></p>
+<ul>
+<li><strong>数值简化</strong>：信噪比范围极大（如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">S/N=10^9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span>），dB表示可将大数转为小数（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">10^9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span>对应90dB），避免计数错误。</li>
+<li><strong>计算方便</strong>：dB为对数尺度，多个设备的噪声叠加可通过加法计算（而非乘法）。</li>
+<li><strong>公式</strong>：分贝信噪比 = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>10</mn></msub><mo stretchy="false">(</mo><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">10 log_{10}(S/N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">10</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>；计算香农速率时需转换为无单位<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi></mrow><annotation encoding="application/x-tex">S/N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>（如30dB → <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mrow><mn>30</mn><mi mathvariant="normal">/</mi><mn>10</mn></mrow></msup><mo>=</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">S/N=10^{30/10}=1000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.888em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">30/10</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1000</span></span></span></span>）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、统一符号与记号（考纲内）"><strong>五、统一符号与记号（考纲内）</strong></h3>
+<ul>
+<li><strong>符号</strong>：
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>：物理带宽（Hz，频率范围）。</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">R_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>：符号率/波特率（Baud，码元/秒）。</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">R_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>：比特率（b/s）。</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span></span></span></span>：调制阶数（如M-QAM、M-PAM）。</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi></mrow><annotation encoding="application/x-tex">S/N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>：无单位信噪比；<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext>SNR</mtext><mtext>dB</mtext></msub><mo>=</mo><mn>10</mn><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>10</mn></msub><mo stretchy="false">(</mo><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{SNR}_{\text{dB}}=10\log_{10}(S/N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord text"><span class="mord">SNR</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">dB</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">10</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>。</li>
+<li>关系：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub><mo>=</mo><msub><mi>R</mi><mi>s</mi></msub><mtext> </mtext><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>M</mi></mrow><annotation encoding="application/x-tex">R_b = R_s\,\log_2 M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9386em;vertical-align:-0.2441em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span></span></span></span>；奈氏：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>s</mi></msub><mo>≤</mo><mn>2</mn><mi>W</mi></mrow><annotation encoding="application/x-tex">R_s\le 2W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>；香农：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub><mo>≤</mo><mi>W</mi><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R_b\le W\log_2(1+S/N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="六、性能指标（考纲内）"><strong>六、性能指标（考纲内）</strong></h3>
+<ul>
+<li><strong>时延组成</strong>：
+<ul>
+<li>发送时延：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mtext>send</mtext></msub><mo>=</mo><mi>L</mi><mi mathvariant="normal">/</mi><msub><mi>R</mi><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">t_{\text{send}}=L/R_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7651em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">send</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mord">/</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>（L比特，链路速率<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">R_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>）。</li>
+<li>传播时延：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mtext>prop</mtext></msub><mo>=</mo><mi>d</mi><mi mathvariant="normal">/</mi><mi>v</mi></mrow><annotation encoding="application/x-tex">t_{\text{prop}}=d/v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9012em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">prop</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">d</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span>（距离d，介质传播速率v）。</li>
+<li>排队/处理时延：受负载与设备影响，常为期望值。</li>
+</ul>
+</li>
+<li><strong>带宽-时延积</strong>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub><mo>×</mo><mtext>RTT</mtext></mrow><annotation encoding="application/x-tex">R_b\times\text{RTT}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord">RTT</span></span></span></span></span>，表示信道“管内”比特量。</li>
+<li><strong>吞吐量与利用率</strong>：
+<ul>
+<li>吞吐量：单位时间成功传输数据量（随负载/拥塞变化）。</li>
+<li>利用率：有效占用/可用带宽之比。</li>
+<li>注：本节为考纲内常规计算与概念。</li>
+</ul>
+</li>
+</ul>
+<h3 id="七、复用技术（考纲内）"><strong>七、复用技术（考纲内）</strong></h3>
+<ul>
+<li><strong>FDM（频分复用）</strong>：各用户占不同频带，需防护带；模拟与带通信号常用。</li>
+<li><strong>TDM（时分复用）</strong>：等时隙轮转；统计时分（STDM）按需动态分配时隙。</li>
+<li><strong>WDM（波分复用）</strong>：光纤场景的“频分”，以波长划分通道，密集波分DWDM承载大容量干线。</li>
+<li><strong>CDM/CDMA（码分复用/多址，扩展）</strong>：各用户用正交伪随机码同时占用同频同时时隙；提升抗干扰与保密性（此点为扩展）。</li>
+</ul>
+<h3 id="八、常见线路编码对比（考纲内-扩展）"><strong>八、常见线路编码对比（考纲内+扩展）</strong></h3>
+<ul>
+<li><strong>要点维度</strong>：规则；是否自同步；是否有直流分量；频谱/带宽占用；典型应用。</li>
+<li><strong>NRZ-L</strong>：
+<ul>
+<li>规则：电平值代表比特；</li>
+<li>自同步：否（长0/长1风险）；</li>
+<li>直流分量：有；</li>
+<li>带宽：较低；</li>
+<li>应用：早期链路，常配合上层同步机制（考纲内）。</li>
+</ul>
+</li>
+<li><strong>NRZI</strong>：
+<ul>
+<li>规则：0致跳变/1不变（USB2.0），亦有相反约定；</li>
+<li>自同步：部分改善（遇0产生边沿）；</li>
+<li>直流分量：较小于NRZ-L（视数据）；</li>
+<li>带宽：中等；</li>
+<li>应用：USB、部分串行链路（考纲内）。</li>
+</ul>
+</li>
+<li><strong>曼彻斯特</strong>：
+<ul>
+<li>规则：每码元中间必跳变，边沿携带时钟；</li>
+<li>自同步：是；</li>
+<li>直流分量：低；</li>
+<li>带宽：约为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msub><mi>R</mi><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">2R_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>；</li>
+<li>应用：10BASE-T（考纲内）。</li>
+</ul>
+</li>
+<li><strong>差分曼彻斯特</strong>：
+<ul>
+<li>规则：中间必跳变作时钟，起始是否跳变表示数据；</li>
+<li>自同步：是；</li>
+<li>直流分量：低；</li>
+<li>带宽：约为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msub><mi>R</mi><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">2R_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>；</li>
+<li>应用：Token Ring（扩展）。</li>
+</ul>
+</li>
+<li><strong>AMI/HDB3（扩展）</strong>：
+<ul>
+<li>规则：1用正负交替脉冲表示，0为零电平；</li>
+<li>特点：抑制直流分量、便于定时恢复；</li>
+<li>应用：E1/T载波等电信系统。</li>
+</ul>
+</li>
+<li><strong>4B/5B、8B/10B、MLT-3（扩展）</strong>：
+<ul>
+<li>目的：引入足够边沿与控制直流分量；</li>
+<li>应用：Fast/Gigabit Ethernet、PCIe等。</li>
+</ul>
+</li>
+</ul>
+<h3 id="九、易混概念对比（考纲内）"><strong>九、易混概念对比（考纲内）</strong></h3>
+<ul>
+<li><strong>波特率 vs 比特率</strong>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">R_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>为每秒码元，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub><mo>=</mo><msub><mi>R</mi><mi>s</mi></msub><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>M</mi></mrow><annotation encoding="application/x-tex">R_b=R_s\log_2 M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9386em;vertical-align:-0.2441em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span></span></span></span>为每秒比特。</li>
+<li><strong>带宽(Hz) vs 容量(b/s)</strong>：前者是频率范围W，后者是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">R_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>上限（受奈氏/香农约束）。</li>
+<li><strong>基带传输 vs 带通信号</strong>：是否直接传未调制基带；带通需调制、可用FDM/WDM。</li>
+<li><strong>电路交换 vs 报文/分组交换</strong>：是否预建专用通路、是否存储转发、是否有序。</li>
+<li><strong>数据报 vs 虚电路</strong>：前者逐分组独立选路，后者按VC号转发，有序。</li>
+</ul>
+<h3 id="十、典型小例题（考纲内）"><strong>十、典型小例题（考纲内）</strong></h3>
+<ul>
+<li>例1（奈氏+香农联合判定）：
+<ul>
+<li>已知：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">W=3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span></span></span></span> MHz，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext>SNR</mtext><mtext>dB</mtext></msub><mo>=</mo><mn>30</mn></mrow><annotation encoding="application/x-tex">\text{SNR}_{\text{dB}}=30</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord text"><span class="mord">SNR</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">dB</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">30</span></span></span></span> dB，二进制（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">M=2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span>）。</li>
+<li>奈氏上限：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>s</mi></msub><mo>≤</mo><mn>2</mn><mi>W</mi><mo>=</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">R_s\le 2W=6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">6</span></span></span></span> Mbaud，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub><mo>≤</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">R_b\le 6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">6</span></span></span></span> Mbps。</li>
+<li>香农上限：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mrow><mn>30</mn><mi mathvariant="normal">/</mi><mn>10</mn></mrow></msup><mo>=</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">S/N=10^{30/10}=1000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.888em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">30/10</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1000</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub><mo>≤</mo><mi>W</mi><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo stretchy="false">)</mo><mo>=</mo><mn>3</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mo>⋅</mo><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mo stretchy="false">(</mo><mn>1001</mn><mo stretchy="false">)</mo><mo>≈</mo><mn>3</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mo>⋅</mo><mn>9.97</mn><mo>≈</mo><mn>29.9</mn></mrow><annotation encoding="application/x-tex">R_b\le W\log_2(1+S/N)=3\times10^6\cdot\log_2(1001)\approx 3\times10^6\cdot9.97\approx 29.9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1001</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">9.97</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">29.9</span></span></span></span> Mbps。</li>
+<li>结论：取较小者，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>R</mi><mi>b</mi><mi>max</mi><mo>⁡</mo></msubsup><mo>≈</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">R_b^{\max}\approx 6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9664em;vertical-align:-0.2831em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4169em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">m</span><span class="mtight">a</span><span class="mtight">x</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2831em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">6</span></span></span></span> Mbps。</li>
+</ul>
+</li>
+<li>例2（时延与带宽-时延积）：
+<ul>
+<li>已知：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>b</mi></msub><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">R_b=100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">100</span></span></span></span> Mb/s，单程距离<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext> </mtext><mi>d</mi><mo>=</mo><mn>2000</mn></mrow><annotation encoding="application/x-tex">\,d=2000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2000</span></span></span></span> km，光纤<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>≈</mo><mn>2</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">v\approx2\times10^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4831em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span> m/s，分组<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">L=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> MB。</li>
+<li>发送时延：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mrow><mi>s</mi><mi>e</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mi>L</mi><mi mathvariant="normal">/</mi><msub><mi>R</mi><mi>b</mi></msub><mo>=</mo><mn>8</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mi mathvariant="normal">/</mi><mn>1</mn><msup><mn>0</mn><mn>8</mn></msup><mo>=</mo><mn>0.08</mn></mrow><annotation encoding="application/x-tex">t_{send}=L/R_b=8\times10^6/10^8=0.08</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7651em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">se</span><span class="mord mathnormal mtight">n</span><span class="mord mathnormal mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mord">/</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mord">/1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.08</span></span></span></span> s。</li>
+<li>传播时延：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mrow><mi>p</mi><mi>r</mi><mi>o</mi><mi>p</mi></mrow></msub><mo>=</mo><mi>d</mi><mi mathvariant="normal">/</mi><mi>v</mi><mo>=</mo><mn>2</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mi mathvariant="normal">/</mi><mn>2</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>8</mn></msup><mo>=</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">t_{prop}=d/v=2\times10^6/2\times10^8=0.01</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9012em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">ro</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">d</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mord">/2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.01</span></span></span></span> s。</li>
+<li>管内数据量（单向RTT≈0.02 s）：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>BDP</mtext><mo>=</mo><msub><mi>R</mi><mi>b</mi></msub><mo>⋅</mo><mtext>RTT</mtext><mo>=</mo><mn>1</mn><msup><mn>0</mn><mn>8</mn></msup><mo>⋅</mo><mn>0.02</mn><mo>=</mo><mn>2</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">\text{BDP}=R_b\cdot \text{RTT}=10^8\cdot0.02=2\times10^6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord">BDP</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord">RTT</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.02</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span> bit≈0.25 MB。</li>
+<li>结论：发送时延为主，路径中同时“在途”的数据约0.25 MB。</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://lazy11.top">Lazy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lazy11.top/2025/09/23/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%89%A9%E7%90%86%E5%B1%82/">https://lazy11.top/2025/09/23/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%89%A9%E7%90%86%E5%B1%82/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/lazy-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/09/22/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91%E6%A6%82%E8%BF%B0/" title="计网概述"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">计网概述</div></div><div class="info-2"><div class="info-item-1">第1章...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Lazy</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">38</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lazyy11"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/lazyy11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:lazy11@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is Lazy's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">计算机网络：物理层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、通信基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BC%A0%E8%BE%93%E4%BB%8B%E8%B4%A8"><span class="toc-number">1.0.2.</span> <span class="toc-text">二、传输介质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%89%A9%E7%90%86%E5%B1%82%E8%AE%BE%E5%A4%87"><span class="toc-number">1.0.3.</span> <span class="toc-text">三、物理层设备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%9C%AC%E7%AB%A0%E5%85%B3%E9%94%AE%E6%80%BB%E7%BB%93%E4%B8%8E%E7%96%91%E9%9A%BE%E7%82%B9"><span class="toc-number">1.0.4.</span> <span class="toc-text">四、本章关键总结与疑难点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%BB%9F%E4%B8%80%E7%AC%A6%E5%8F%B7%E4%B8%8E%E8%AE%B0%E5%8F%B7%EF%BC%88%E8%80%83%E7%BA%B2%E5%86%85%EF%BC%89"><span class="toc-number">1.0.5.</span> <span class="toc-text">五、统一符号与记号（考纲内）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%EF%BC%88%E8%80%83%E7%BA%B2%E5%86%85%EF%BC%89"><span class="toc-number">1.0.6.</span> <span class="toc-text">六、性能指标（考纲内）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AF%EF%BC%88%E8%80%83%E7%BA%B2%E5%86%85%EF%BC%89"><span class="toc-number">1.0.7.</span> <span class="toc-text">七、复用技术（考纲内）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%B8%B8%E8%A7%81%E7%BA%BF%E8%B7%AF%E7%BC%96%E7%A0%81%E5%AF%B9%E6%AF%94%EF%BC%88%E8%80%83%E7%BA%B2%E5%86%85-%E6%89%A9%E5%B1%95%EF%BC%89"><span class="toc-number">1.0.8.</span> <span class="toc-text">八、常见线路编码对比（考纲内+扩展）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E6%98%93%E6%B7%B7%E6%A6%82%E5%BF%B5%E5%AF%B9%E6%AF%94%EF%BC%88%E8%80%83%E7%BA%B2%E5%86%85%EF%BC%89"><span class="toc-number">1.0.9.</span> <span class="toc-text">九、易混概念对比（考纲内）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E5%85%B8%E5%9E%8B%E5%B0%8F%E4%BE%8B%E9%A2%98%EF%BC%88%E8%80%83%E7%BA%B2%E5%86%85%EF%BC%89"><span class="toc-number">1.0.10.</span> <span class="toc-text">十、典型小例题（考纲内）</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/23/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%89%A9%E7%90%86%E5%B1%82/" title="物理层">物理层</a><time datetime="2025-09-23T06:05:33.000Z" title="Created 2025-09-23 14:05:33">2025-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/22/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91%E6%A6%82%E8%BF%B0/" title="计网概述">计网概述</a><time datetime="2025-09-22T07:06:38.000Z" title="Created 2025-09-22 15:06:38">2025-09-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/19/%E8%80%83%E7%A0%94/408/OS/IO%E7%AE%A1%E7%90%86/" title="IO管理">IO管理</a><time datetime="2025-09-19T13:32:32.000Z" title="Created 2025-09-19 21:32:32">2025-09-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/19/%E8%80%83%E7%A0%94/408/OS/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" title="文件管理">文件管理</a><time datetime="2025-09-19T08:13:51.000Z" title="Created 2025-09-19 16:13:51">2025-09-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/%E8%80%83%E7%A0%94/408/OS/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="内存管理">内存管理</a><time datetime="2025-09-18T07:33:25.000Z" title="Created 2025-09-18 15:33:25">2025-09-18</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Lazy</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (true) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://waline.lazy11.top/',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章..." type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
