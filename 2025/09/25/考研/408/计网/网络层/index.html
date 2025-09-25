@@ -1,0 +1,1383 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>网络层 | Lazy's Blog</title><meta name="author" content="Lazy,lazy11@foxmail.com"><meta name="copyright" content="Lazy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="计算机网络：网络层  标注说明：本文中使用【非超纲】标识为408考试范围内的巩固补充；使用【超纲】标识为扩展阅读，可加深理解但通常不作为408必考内容。  网络层的功能   异构网络互连  定义：将拓扑结构、寻址方案、差错处理方法、路由选择机制等不同的多个计算机网络，通过中继系统连接成更大网络系统的过程。 中继系统分类：  物理层中继系统：转发器、集线器（仅放大信号，不分割冲突域&#x2F;广播域） 数据链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络层">
+<meta property="og:url" content="https://lazy11.top/2025/09/25/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%BD%91%E7%BB%9C%E5%B1%82/index.html">
+<meta property="og:site_name" content="Lazy&#39;s Blog">
+<meta property="og:description" content="计算机网络：网络层  标注说明：本文中使用【非超纲】标识为408考试范围内的巩固补充；使用【超纲】标识为扩展阅读，可加深理解但通常不作为408必考内容。  网络层的功能   异构网络互连  定义：将拓扑结构、寻址方案、差错处理方法、路由选择机制等不同的多个计算机网络，通过中继系统连接成更大网络系统的过程。 中继系统分类：  物理层中继系统：转发器、集线器（仅放大信号，不分割冲突域&#x2F;广播域） 数据链">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lazy11.top/img/lazy-icon.png">
+<meta property="article:published_time" content="2025-09-25T05:20:51.000Z">
+<meta property="article:modified_time" content="2025-09-25T12:20:20.034Z">
+<meta property="article:author" content="Lazy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lazy11.top/img/lazy-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lazy11.top/2025/09/25/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%BD%91%E7%BB%9C%E5%B1%82/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '网络层',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">21</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "/img/lazy-icon.png" data-lazy-src="/img/index.png" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">网络层</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">网络层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-09-25T05:20:51.000Z" title="Created 2025-09-25 13:20:51">2025-09-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-09-25T12:20:20.034Z" title="Updated 2025-09-25 20:20:20">2025-09-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span class="waline-pageview-count" data-path="/2025/09/25/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%BD%91%E7%BB%9C%E5%B1%82/"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1>计算机网络：网络层</h1>
+<blockquote>
+<p>标注说明：本文中使用【非超纲】标识为408考试范围内的巩固补充；使用【超纲】标识为扩展阅读，可加深理解但通常不作为408必考内容。</p>
+</blockquote>
+<h3 id="网络层的功能"><strong>网络层的功能</strong></h3>
+<ul>
+<li>
+<p><strong>异构网络互连</strong></p>
+<ul>
+<li><strong>定义</strong>：将拓扑结构、寻址方案、差错处理方法、路由选择机制等不同的多个计算机网络，通过中继系统连接成更大网络系统的过程。</li>
+<li><strong>中继系统分类</strong>：
+<ul>
+<li>物理层中继系统：转发器、集线器（仅放大信号，不分割冲突域/广播域）</li>
+<li>数据链路层中继系统：网桥、交换机（分割冲突域，不分割广播域）</li>
+<li>网络层中继系统：路由器（核心设备，分割冲突域和广播域，实现网络互连）</li>
+<li>网络层以上中继系统：网关（用于异构协议转换，如IP与非IP网络）</li>
+</ul>
+</li>
+<li><strong>关键特点</strong>：
+<ul>
+<li>网络互连通常指用路由器实现，因物理层/数据链路层中继仅扩大网络，仍为同一网络（从网络层视角）</li>
+<li>TCP/IP体系通过网络层标准化（IP协议）实现异构网络互连，构成虚拟IP网络，隐藏底层异构细节</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>路由与转发</strong></p>
+<ul>
+<li><strong>定义</strong>：路由器的两大核心功能，路由选择确定分组传输路径，分组转发将分组从合适端口送出。</li>
+<li><strong>路由选择</strong>：
+<ul>
+<li>核心操作：根据路由协议（如RIP、OSPF）构造并维护路由表，定期与相邻路由器交换拓扑信息，动态更新路由表。</li>
+<li>目标：确定分组到达目的网络的最优路径（如跳数最少、代价最低）。</li>
+</ul>
+</li>
+<li><strong>分组转发</strong>：
+<ul>
+<li>核心操作：接收分组后，查询转发表，将分组从匹配表项的输出端口转发，涉及队列管理和任务调度。</li>
+</ul>
+</li>
+<li><strong>路由表与转发表关系</strong>：
+<ul>
+<li>路由表由路由算法生成，优化网络拓扑变化计算；转发表从路由表导出，优化查找效率。</li>
+<li>讨论路由原理时，常笼统使用“路由表”指代两者。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>网络层提供的两种服务</strong></p>
+<ul>
+<li>
+<p><strong>虚电路服务</strong></p>
+<ul>
+<li><strong>定义</strong>：面向连接的网络服务，通信前需建立逻辑虚电路（Virtual Circuit, VC），数据沿固定路径传输，通信后释放连接。</li>
+<li><strong>通信阶段</strong>：
+<ol>
+<li>虚电路建立：源主机发送“呼叫请求”分组，经中间节点到目的主机，目的主机回送“呼叫应答”分组确认。</li>
+<li>数据传输：源/目的主机沿已建立的虚电路传输分组，分组首部携带虚电路号（VCID）。</li>
+<li>虚电路释放：源主机发送“释放请求”分组，逐段断开连接。</li>
+</ol>
+</li>
+<li><strong>结构/组成</strong>：
+<ul>
+<li>每个节点维护虚电路表，记录虚电路信息（接收/发送链路VCID、前一/下一节点标识），在建立阶段确定。</li>
+</ul>
+</li>
+<li><strong>性质/特点</strong>：
+<ul>
+<li>需建立连接，连接建立阶段确定路由，后续分组按固定路径传输。</li>
+<li>保证分组正确且有序到达，支持流量控制（接收方忙时通知发送方暂缓）。</li>
+<li>分组首部仅含VCID，开销小于数据报；但节点/链路故障会破坏所有经过的虚电路。</li>
+</ul>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：适合长时间、频繁数据交换，效率高；分组有序、可靠。</li>
+<li>缺点：连接建立/释放耗时，对交互式应用或短分组不友好；故障影响范围大。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>数据报服务</strong></p>
+<ul>
+<li><strong>定义</strong>：无连接的网络服务，通信前无需建立连接，源主机直接发送分组，中间节点为每个分组独立选择路由。</li>
+<li><strong>工作原理</strong>：
+<ol>
+<li>源主机将报文拆分为分组，添加源/目的完整地址后发送到相邻节点。</li>
+<li>中间节点缓存分组，查询转发表（根据网络状态动态变化），为分组选择下一跳。</li>
+<li>分组经不同路径到达目的主机，目的主机重组分组。</li>
+</ol>
+</li>
+<li><strong>性质/特点</strong>：
+<ul>
+<li>无需建立连接，发送方随时发送，接收方随时接收。</li>
+<li>网络尽最大努力交付，不保证可靠性（可能丢包、失序、重复），不保证时延。</li>
+<li>每个分组携带完整源/目的地址，可独立传输；网络冗余路径多，故障适应能力强（某节点/链路故障时，分组可改走其他路径）。</li>
+</ul>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：灵活性高，适应多种应用；资源共享（不独占链路），利用率高；故障恢复能力强。</li>
+<li>缺点：分组可能失序、丢失，需上层（如TCP）保证可靠性；分组首部携带完整地址，开销大于虚电路。</li>
+</ul>
+</li>
+<li><strong>与虚电路服务对比</strong>：
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>数据报服务</th>
+<th>虚电路服务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>连接建立</td>
+<td>不需要</td>
+<td>必须有</td>
+</tr>
+<tr>
+<td>目的地址</td>
+<td>每个分组含完整地址</td>
+<td>仅建立阶段用完整地址，后续用VCID</td>
+</tr>
+<tr>
+<td>路由选择</td>
+<td>每个分组独立选择</td>
+<td>建立阶段确定，后续固定路径</td>
+</tr>
+<tr>
+<td>分组顺序</td>
+<td>不保证有序</td>
+<td>保证有序</td>
+</tr>
+<tr>
+<td>可靠性</td>
+<td>不保证，由用户主机负责</td>
+<td>由网络保证</td>
+</tr>
+<tr>
+<td>故障适应性</td>
+<td>其他分组可改路径，影响小</td>
+<td>经过故障节点的虚电路均失效</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>SDN（Software Defined Network，软件定义网络）基本概念</strong></p>
+<ul>
+<li><strong>定义</strong>：创新网络架构，将网络层划分为集中式控制平面和分布式数据平面，控制平面通过接口对数据平面进行集中管理。</li>
+<li><strong>结构/组成</strong>：
+<ul>
+<li>控制平面：逻辑上的远程控制器（可多服务器组成），掌握网络状态，计算最优路由，下发流表（SDN中替代转发表）。</li>
+<li>数据平面：简化的路由器（无路由选择软件），仅执行“接收分组→查找流表→转发分组”操作。</li>
+<li>核心接口：
+<ul>
+<li>北向接口：提供给上层应用的编程API，开发者无需关注底层硬件。</li>
+<li>南向接口：控制器与交换机的通信接口（如OpenFlow协议），兼容不同硬件。</li>
+<li>东西向接口：控制器集群内部通信接口，增强控制平面可靠性和扩展性。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>性质/特点</strong>：
+<ul>
+<li>控制与转发分离，控制平面集中优化，数据平面高速转发。</li>
+<li>支持灵活可编程，可通过自动化工具编程配置网络。</li>
+<li>降低成本：硬件与软件开发分离，无需依赖专用设备。</li>
+</ul>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：全局控制优化网络性能；灵活适配业务需求；降低网络部署和维护成本。</li>
+<li>缺点：集中控制存在安全风险（控制器崩溃则整个网络受影响）；网络规模扩大时，控制器可能成为性能瓶颈。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>拥塞控制</strong></p>
+<ul>
+<li><strong>定义</strong>：因网络中分组过量，导致网络性能（吞吐量、时延）下降的现象，拥塞控制需获取拥塞信息并调整，避免分组丢失。</li>
+<li><strong>拥塞判断方法</strong>：
+<ul>
+<li>轻度拥塞：网络负载增加，吞吐量增长明显低于正常水平。</li>
+<li>严重拥塞：网络负载增加，吞吐量反而下降。</li>
+</ul>
+</li>
+<li><strong>与流量控制的区别</strong>：
+<ul>
+<li>拥塞控制：全局性过程，涉及所有主机、路由器，解决网络整体过载问题。</li>
+<li>流量控制：点对点过程，仅涉及发送方和接收方，解决接收方来不及接收的问题。</li>
+</ul>
+</li>
+<li><strong>控制方法</strong>：
+<ul>
+<li>开环控制：静态预防方法，设计时考虑拥塞因素，运行中不修改策略（如确定分组丢弃规则、调度策略）。</li>
+<li>闭环控制：动态反馈方法，监测网络状态，检测拥塞后调整运行（如通知源主机降低发送速率）。</li>
+<li>【超纲】排队与AQM简述：调度（FIFO、PQ、WFQ、DRR）与主动队列管理（RED/CoDel）可结合ECN实现更平滑的拥塞反馈。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="IPv4"><strong>IPv4</strong></h3>
+<ul>
+<li>
+<p><strong>IPv4分组</strong></p>
+<ul>
+<li><strong>定义</strong>：IPv4（Internet Protocol version 4）的基本传输单元，由首部和数据两部分组成，实现跨网络数据传输。</li>
+<li><strong>结构/组成</strong>：
+<ul>
+<li>首部：分为固定部分（20B，所有分组必含）和可变部分（可选字段，如错误检测、安全，长度可变）。</li>
+<li>数据部分：上层协议（如TCP、UDP）的数据。</li>
+</ul>
+</li>
+<li><strong>首部核心字段</strong>（按顺序）：
+<ul>
+<li>版本（4位）：IP协议版本，IPv4此字段值为4。</li>
+<li>首部长度（4位）：以4B为单位，最大60B（15×4B），默认20B（值为5）。</li>
+<li>总长度（16位）：首部+数据的总长度，单位B，最大65535B（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>16</mn></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{16}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">16</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>），需小于数据链路层MTU。</li>
+<li>标识（16位）：数据报唯一标识，分片时所有分片复制该标识，用于重组。</li>
+<li>标志（3位）：
+<ul>
+<li>DF（Don’t Fragment）：DF=0时允许分片，DF=1时禁止分片。</li>
+<li>MF（More Fragment）：MF=1表示后续有分片，MF=0表示最后一个分片。</li>
+</ul>
+</li>
+<li>片偏移（13位）：分片在原数据报中的相对位置，以8B为单位，除最后一个分片外，其他分片数据长度为8B整数倍。</li>
+<li>生存时间（TTL，8位）：数据报可经过的最大路由器数，每经过一个路由器减1，TTL=0时丢弃。</li>
+<li>协议（8位）：指示数据部分对应的上层协议，如TCP=6，UDP=17，ICMP=1。</li>
+<li>首部检验和（16位）：仅检验首部（不包括数据），路由器转发时需重新计算。</li>
+<li>源地址/目的地址（各32位）：发送方/接收方的IPv4地址，点分十进制表示。</li>
+<li>【超纲】首部服务相关：
+<ul>
+<li>DSCP（区分服务代码点）：取代早期TOS字段，用于DiffServ分类与转发行为（PHB）。</li>
+<li>ECN（显式拥塞通知）：与队列/AQM联动，在不丢包情况下向端点显式标记拥塞。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>IP数据报分片</strong>：
+<ul>
+<li>触发条件：IP数据报总长度大于链路MTU（最大传输单元，如以太网MTU=1500B）。</li>
+<li>分片规则：
+<ol>
+<li>分片数据部分长度=MTU-IP首部长度（默认20B），需为8B整数倍（除最后一个分片）。</li>
+<li>每个分片复制原数据报的标识，调整标志（MF）和片偏移。</li>
+</ol>
+</li>
+<li>重组位置：仅在目的主机网络层重组，中间路由器不重组。</li>
+<li>【超纲】路径MTU发现（PMTUD）：当DF=1且超出路径某处MTU时，中间路由器丢弃并回送ICMP“需分片但DF置位”，源据此降低报文大小；IPv6仅源端分片，依赖PMTUD。</li>
+<li>【非超纲】分片计算示例：以MTU=1500B、首部20B、数据载荷4000B为例：前两片数据长度1480B（偏移0、185），第三片数据长度1040B（偏移370，MF=0）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>IPv4地址与NAT（Network Address Translation，网络地址转换）</strong></p>
+<ul>
+<li><strong>IPv4地址</strong>：
+<ul>
+<li><strong>定义</strong>：给互联网主机/路由器接口分配的32位全球唯一标识符，用于网络层寻址，点分十进制记法（如192.168.1.1）。</li>
+<li><strong>分类地址结构</strong>：
+<ul>
+<li>A类地址（1.0.0.0~126.255.255.255）：网络号8位，主机号24位，默认子网掩码255.0.0.0。</li>
+<li>B类地址（128.0.0.0~191.255.255.255）：网络号16位，主机号16位，默认子网掩码255.255.0.0。</li>
+<li>C类地址（192.0.0.0~223.255.255.255）：网络号24位，主机号8位，默认子网掩码255.255.255.0。</li>
+<li>D类地址（224.0.0.0~239.255.255.255）：多播地址，无网络号/主机号划分。</li>
+<li>E类地址（240.0.0.0~255.255.255.255）：保留地址，用于实验。</li>
+</ul>
+</li>
+<li><strong>特殊地址</strong>：
+<ul>
+<li>网络地址：主机号全0，标识网络本身（如192.168.1.0）。</li>
+<li>广播地址：主机号全1，用于本网络广播（如192.168.1.255）。</li>
+<li>环回地址（127.x.x.x）：本地软件环回测试，不发送到网络。</li>
+<li>0.0.0.0：表示本网络上的本主机（如DHCP客户端初始地址）。</li>
+<li>255.255.255.255：受限广播地址，仅在本网络广播，路由器不转发。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>NAT</strong>：
+<ul>
+<li><strong>定义</strong>：将专用网络（Intranet）的私有IP地址转换为公用网络（Internet）的全球IP地址，隐藏内部网络结构，节省IP地址。</li>
+<li><strong>私有IP地址块</strong>（仅用于LAN，路由器不转发）：
+<ul>
+<li>10.0.0.0/8（10.0.0.0~10.255.255.255）：1个A类网络。</li>
+<li>172.16.0.0/12（172.16.0.0~172.31.255.255）：16个连续B类网络。</li>
+<li>192.168.0.0/16（192.168.0.0~192.168.255.255）：256个连续C类网络。</li>
+</ul>
+</li>
+<li><strong>工作原理</strong>：
+<ol>
+<li>NAT路由器（连接专用网与公网）维护NAT转换表，记录{本地IP:端口}→{全球IP:端口}的映射。</li>
+<li>专用网主机发送分组时，NAT路由器替换源IP为全球IP，源端口为新端口，更新转换表。</li>
+<li>公网响应分组到达时，NAT路由器通过转换表替换目的IP/端口为本地IP/端口，转发给内部主机。</li>
+</ol>
+</li>
+<li><strong>特点</strong>：普通路由器不修改IP地址，NAT路由器需修改IP和传输层端口；支持多台内部主机共享一个全球IP。</li>
+<li>【非超纲】分类：静态NAT（固定一一映射）、动态NAT（从地址池临时分配）、NAPT/PAT（多内网主机通过端口映射共享一个公网IP）。</li>
+<li>【超纲】影响：破坏端到端可达性；对某些嵌入地址/端口的协议（FTP、SIP、IPsec ESP）需ALG或穿越方案。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>子网划分与子网掩码</strong></p>
+<ul>
+<li><strong>子网划分</strong>：
+<ul>
+<li><strong>定义</strong>：从IPv4地址的主机号借用若干位作为子网号，将两级地址（网络号+主机号）变为三级地址（网络号+子网号+主机号），属于单位内部操作，对外仍表现为一个网络。</li>
+<li><strong>核心思路</strong>：
+<ul>
+<li>借位规则：从主机号高位借位，子网号位数决定子网数量（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>，n为借位数），剩余主机号位数决定每个子网最大主机数（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>m</mi></msup><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2^m-2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7477em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span>，m为剩余位数，减2因全0/全1主机号不分配）。</li>
+<li>示例：C类网络208.115.21.0借2位作子网号，分4个子网（208.115.21.0/26、64/26、128/26、192/26），每个子网最大主机数62（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>6</mn></msup><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2^6-2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span>）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>子网掩码</strong>：
+<ul>
+<li><strong>定义</strong>：32位二进制串，用于标识IP地址中网络号+子网号的位置（1对应网络/子网号，0对应主机号），与IP地址逐位“与”（AND）可得到子网的网络地址。</li>
+<li><strong>默认子网掩码</strong>（未划分子网时使用）：
+<ul>
+<li>A类：255.0.0.0（网络号8位）。</li>
+<li>B类：255.255.0.0（网络号16位）。</li>
+<li>C类：255.255.255.0（网络号24位）。</li>
+</ul>
+</li>
+<li><strong>应用场景</strong>：
+<ul>
+<li>主机判断目的主机是否在本子网：目的IP与子网掩码“与”结果，若与本子网网络地址一致则直接交付，否则发送到默认网关。</li>
+<li>路由器转发分组：将分组目的IP与路由表中子网掩码“与”，匹配目的网络后转发。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>CIDR（Classless Inter-Domain Routing，无分类域间路由选择）</strong></p>
+<ul>
+<li><strong>定义</strong>：消除传统A/B/C类地址划分，使用可变长度的网络前缀（代替网络号+子网号），以“IP地址/网络前缀位数”（斜线记法）表示，如128.14.32.5/20。</li>
+<li><strong>核心特点</strong>：
+<ul>
+<li>网络前缀位数可变，掩码为前缀位数个连续1+剩余0（如/20掩码为255.255.240.0）。</li>
+<li>CIDR地址块：网络前缀相同的连续IP地址集合，已知任意地址可计算最小（主机号全0）、最大（主机号全1）地址和地址数（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>N</mi></msup></mrow><annotation encoding="application/x-tex">2^N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8413em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span></span></span></span></span></span></span></span>，N为主机号位数）。</li>
+<li>示例：128.14.32.5/20，最小地址128.14.32.0，最大地址128.14.47.255，地址数4096（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>12</mn></msup></mrow><annotation encoding="application/x-tex">2^{12}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">12</span></span></span></span></span></span></span></span></span></span></span></span>）。</li>
+</ul>
+</li>
+<li><strong>路由聚合</strong>：
+<ul>
+<li><strong>定义</strong>：将多个小CIDR地址块聚合为一个大地址块，减少路由表项数量，提高转发效率。</li>
+<li><strong>聚合规则</strong>：找出多个地址块网络前缀的最长公共前缀，作为聚合后的网络前缀。</li>
+<li>示例：网络1（206.1.0.0/17）和网络2（206.1.128.0/17），前16位相同，聚合为206.1.0.0/16。</li>
+</ul>
+</li>
+<li><strong>最长前缀匹配</strong>：
+<ul>
+<li><strong>定义</strong>：查找路由表时，若存在多个匹配前缀，选择网络前缀最长的路由（前缀越长，地址块越小，路由越具体）。</li>
+<li><strong>实现</strong>：路由表按前缀长度降序排列，优先匹配长前缀。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>ARP（Address Resolution Protocol，地址解析协议）</strong></p>
+<ul>
+<li><strong>定义</strong>：网络层协议，用于将同一局域网内的IPv4地址解析为数据链路层的MAC地址（硬件地址），因数据链路层仅识别MAC地址。</li>
+<li><strong>工作原理</strong>：
+<ol>
+<li>主机维护ARP高速缓存，存储本局域网上主机/路由器的IP→MAC映射，表项有生存时间（如20min），超时删除。</li>
+<li>源主机向目的主机发送IP分组时，先查ARP缓存：</li>
+</ol>
+<ul>
+<li>若有映射：直接将MAC地址写入MAC帧首部，发送帧。</li>
+<li>若无映射：发送ARP请求分组（封装在MAC帧中，目的MAC为FF-FF-FF-FF-FF-FF，广播发送），请求目的主机的IP→MAC映射。</li>
+<li>目的主机收到ARP请求后，发送ARP响应分组（单播发送），携带自身IP→MAC映射。</li>
+<li>源主机更新ARP缓存，后续按MAC地址发送分组。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：仅用于同一局域网内的地址映射；跨局域网通信时，源主机需解析本子网网关（路由器）的MAC地址，将分组发送给网关，由网关转发。</li>
+</ul>
+</li>
+<li>
+<p><strong>DHCP（Dynamic Host Configuration Protocol，动态主机配置协议）</strong></p>
+<ul>
+<li><strong>定义</strong>：应用层协议（基于UDP），为网络主机动态分配IPv4地址及其他配置信息（子网掩码、默认网关、DNS服务器地址），实现即插即用。</li>
+<li><strong>工作过程</strong>（客户/服务器模型）：
+<ol>
+<li>DHCP发现（Discover）：客户端启动后无IP，广播发送“DHCP发现”报文，源IP=0.0.0.0，目的IP=255.255.255.255。</li>
+<li>DHCP提供（Offer）：DHCP服务器收到请求后，通常广播“DHCP提供”报文，携带分配的IP、子网掩码、租期等，源IP=服务器IP，目的IP=255.255.255.255；在满足RFC 2131条件时也可单播【非超纲】。</li>
+<li>DHCP请求（Request）：客户端选择一个服务器的提供，广播“DHCP请求”报文确认，源IP=0.0.0.0，目的IP=255.255.255.255。</li>
+<li>DHCP确认（Acknowledge）：服务器通常广播“DHCP确认”报文，正式分配IP，客户端获取配置并使用；也可能单播【非超纲】。</li>
+</ol>
+</li>
+<li><strong>关键机制</strong>：
+<ul>
+<li>租期：IP地址的临时使用期限，客户端可提前释放（发送“DHCP释放”报文）或到期前续租。</li>
+<li>广播通信：因客户端初始无IP，且不知服务器IP，需通过广播交互。</li>
+<li>端口：服务器UDP 67，客户端UDP 68【非超纲】。</li>
+<li>续租时序：T1/T2计时器（通常T1≈0.5租期，T2≈0.875租期）【超纲】。</li>
+<li>中继：DHCP Relay可跨网段转发客户端广播请求（使用giaddr/Option 82）【超纲】。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>ICMP（Internet Control Message Protocol，网际控制报文协议）</strong></p>
+<ul>
+<li><strong>定义</strong>：网络层协议，封装在IP分组中传输，用于主机/路由器报告差错、异常情况或提供查询服务，不保障可靠性。</li>
+<li><strong>报文类型</strong>：
+<ul>
+<li>
+<ol>
+<li>ICMP差错报告报文：</li>
+</ol>
+<ul>
+<li>终点不可达：路由器/主机无法交付分组时发送（如目的网络不可达、端口不可达）。</li>
+<li>源点抑制（已弃用）：路由器/主机因拥塞丢弃分组时，通知源主机降低发送速率。</li>
+<li>时间超过：TTL减为0时丢弃分组，或目的主机未按时重组分片时发送。</li>
+<li>参数问题：IP首部字段错误时丢弃分组并发送。</li>
+<li>改变路由（重定向）：通知主机后续分组应发送到更优网关。</li>
+<li>不发送差错报告的情况：对ICMP差错报文、后续分片、多播地址、广播地址（如255.255.255.255或定向广播）、特殊地址（127.x.x.x、0.0.0.0）的分组不发送【非超纲】。</li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li>ICMP询问报文：</li>
+</ol>
+<ul>
+<li>回送请求/回答：测试目的主机可达性（如PING命令使用），源主机发送请求，目的主机回送回答。</li>
+<li>时间戳请求/回答：计算往返时延，源主机发送带时间戳的请求，目的主机回送接收/发送时间戳。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>典型应用</strong>：
+<ul>
+<li>PING（应用层工具）：使用ICMP回送请求/回答报文，测试主机间连通性。</li>
+<li>Traceroute/Tracert（网络层工具）：使用ICMP时间超过报文，跟踪分组经过的路由（每跳设置TTL=1、2…，触发路由器发送时间超过报文）。</li>
+<li>Traceroute实现差异：Linux常发送UDP到高端口，终点回ICMP端口不可达；Windows Tracert多用ICMP Echo【超纲】。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>IPv4分组转发过程</strong></p>
+<ul>
+<li><strong>核心原则</strong>：基于目的主机所在网络转发，仅需知道下一跳路由器地址，而非完整路径。</li>
+<li><strong>转发算法</strong>：
+<ol>
+<li>提取IP分组首部的目的IP地址D。</li>
+<li>查找特定主机路由（目的地址为D/32）：若存在，按该路由下一跳转发；否则执行步骤3。</li>
+<li>按路由表前缀长度降序，逐行匹配：</li>
+</ol>
+<ul>
+<li>将该行子网掩码与D逐位“与”，若结果等于该行网络前缀，按“下一跳”或“直接交付”处理（目的网络在本子网则直接交付，否则发送到下一跳）。</li>
+</ul>
+<ol start="4">
+<li>若无匹配路由：</li>
+</ol>
+<ul>
+<li>若有默认路由（0.0.0.0/0），转发到默认路由下一跳；否则报告转发错误。</li>
+</ul>
+</li>
+<li><strong>关键细节</strong>：
+<ul>
+<li>直接交付：目的主机在本子网，通过ARP解析目的MAC地址，封装帧后发送。</li>
+<li>间接交付：目的主机在其他网络，通过ARP解析下一跳路由器MAC地址，封装帧后发送到下一跳。</li>
+<li>MAC地址变化：分组经过不同网络时，MAC帧的源/目的MAC地址会更新（IP地址不变）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="IPv6"><strong>IPv6</strong></h3>
+<ul>
+<li>
+<p><strong>IPv6的主要特点</strong></p>
+<ul>
+<li><strong>定义</strong>：IPv6（Internet Protocol version 6）是IPv4的升级版，核心解决IPv4地址耗尽问题，同时优化协议功能。</li>
+<li><strong>核心特点</strong>：
+<ol>
+<li>更大地址空间：地址长度128位，地址空间为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>128</mn></msup></mrow><annotation encoding="application/x-tex">2^{128}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">128</span></span></span></span></span></span></span></span></span></span></span></span>，是IPv4（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>32</mn></msup></mrow><annotation encoding="application/x-tex">2^{32}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">32</span></span></span></span></span></span></span></span></span></span></span></span>）的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>96</mn></msup></mrow><annotation encoding="application/x-tex">2^{96}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">96</span></span></span></span></span></span></span></span></span></span></span></span>倍，彻底解决地址不足。</li>
+<li>扩展地址层次：支持更多层次的地址划分（如全球路由前缀、子网标识符、接口标识符），适应大规模网络。</li>
+<li>灵活首部格式：</li>
+</ol>
+<ul>
+<li>基本首部固定40B，简化路由器处理；扩展首部（如分片、安全）按需添加，仅由源/目的主机处理，路由器不解析。</li>
+<li>取消IPv4中冗余字段（如首部长度、总长度、标识、标志、片偏移、检验和），提高转发效率。</li>
+</ul>
+<ol start="4">
+<li>即插即用（自动配置）：支持SLAAC无状态自动配置与DHCPv6，网络可按需选择或组合使用【非超纲】；主机也可基于接口标识符自动生成地址。</li>
+<li>端到端分片：仅源主机可分片，中间路由器不分片（若分组超过MTU，路由器丢弃并发送ICMPv6差错报文）。</li>
+<li>增强安全性：内置身份鉴别（IPsec协议）和数据保密功能，作为扩展首部实现。</li>
+<li>支持资源预分配：适配实时音视频等对带宽、时延有要求的应用，保障服务质量（QoS）。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>IPv6数据报的基本首部</strong></p>
+<ul>
+<li><strong>定义</strong>：IPv6数据报的固定首部，长度40B，包含核心控制字段，不包含可变选项（选项通过扩展首部实现）。</li>
+<li><strong>结构/组成</strong>（按位顺序）：
+<ol>
+<li>版本（4位）：标识IPv6，字段值为6。</li>
+<li>通信量类（8位）：区分数据报的优先级或服务类型，用于QoS保障。</li>
+<li>流标号（20位）：标识“流”（从源到目的的一系列数据报，如实时视频流），路由器保证流的服务质量。</li>
+<li>有效载荷长度（16位）：基本首部以外的字节数（含扩展首部和数据），最大65535B。</li>
+</ol>
+<ul>
+<li>备注：通过Hop-by-Hop扩展首部中的Jumbo Payload选项可支持&gt;65535B的“巨型数据报”【超纲】。</li>
+</ul>
+<ol start="4">
+<li>下一个首部（8位）：指示后续字段类型，若为扩展首部则标识扩展首部类型，若无扩展首部则标识上层协议（如TCP=6，UDP=17）。</li>
+<li>跳数限制（8位）：类似IPv4的TTL，源主机设置初始值，路由器转发时减1，为0时丢弃分组。</li>
+<li>源地址（128位）：发送方的IPv6地址，全球唯一。</li>
+<li>目的地址（128位）：接收方的IPv6地址，支持单播、多播、任播类型。</li>
+</ol>
+</li>
+<li><strong>与IPv4首部的区别</strong>：
+<ul>
+<li>取消字段：首部长度、总长度、标识、标志、片偏移、协议、检验和（TCP/UDP已实现差错检验）。</li>
+<li>新增字段：流标号、通信量类（替代服务类型）、跳数限制（替代TTL）、下一个首部（替代协议）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>IPv6地址</strong></p>
+<ul>
+<li><strong>定义</strong>：128位标识符，用于标识IPv6网络中的接口，支持单播、多播、任播三种类型，采用冒号十六进制记法。</li>
+<li><strong>地址记法</strong>：
+<ul>
+<li>冒号十六进制：将128位分为8组，每组4位十六进制数，组间用冒号分隔（如2001:0DB8:0000:0000:0001:0000:0000:0001）。</li>
+<li>零压缩：连续为0的组可简化为“::”（仅一次），如上述地址可简化为2001:0DB8::0001:0:0:0:1；每组前导0可省略，如0DB8→DB8。</li>
+</ul>
+</li>
+<li><strong>地址类型</strong>：
+<ol>
+<li>单播地址：点对点通信，标识单个接口，如全球单播地址、本地链路单播地址。</li>
+</ol>
+<ul>
+<li>全球单播地址：结构为48位全球路由前缀+16位子网标识符+64位接口标识符（如2001:DB8::/32）。</li>
+<li>本地链路单播地址：仅在本地链路（如局域网）使用，前缀为FE80::/10，不可路由到公网。</li>
+</ul>
+<ol start="2">
+<li>多播地址：一点对多点通信，标识一组接口，前缀为FF00::/8（如FF02::1表示所有节点）。</li>
+<li>任播地址：一点对最近点通信，标识一组接口，数据报仅交付给组中最近的接口（如子网路由器任播地址）。</li>
+</ol>
+</li>
+<li><strong>特殊地址</strong>：
+<ul>
+<li>未指明地址（::/128）：仅作源地址，标识未配置地址的主机。</li>
+<li>环回地址（::1/128）：本地环回测试，类似IPv4的127.0.0.1。</li>
+<li>【超纲】邻居发现（NDP）与无广播：IPv6不使用ARP与广播；通过ICMPv6的NS/NA、RS/RA实现地址解析与无状态自动配置；Solicited-Node多播（ff02::1:ffXX:XXXX）用于精准局域多播。</li>
+<li>【超纲】自动配置与RA标志：RA中的M/O标志决定是否需要DHCPv6（M=1通常表示使用DHCPv6地址配置，O=1表示使用DHCPv6提供其他选项）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>从IPv4向IPv6过渡</strong></p>
+<ul>
+<li><strong>定义</strong>：因IPv4与IPv6不兼容，需通过过渡技术实现两者共存，逐步迁移到IPv6网络。</li>
+<li><strong>过渡策略</strong>：
+<ol>
+<li>双协议栈：</li>
+</ol>
+<ul>
+<li><strong>定义</strong>：主机/路由器同时运行IPv4和IPv6协议栈，配置IPv4和IPv6地址，根据目的地址类型选择协议。</li>
+<li><strong>工作方式</strong>：
+<ul>
+<li>主机通过DNS查询目的主机地址类型：若为IPv4地址，使用IPv4通信；若为IPv6地址，使用IPv6通信。</li>
+<li>适用于IPv4和IPv6网络共存的场景，如企业内部同时支持两种协议。</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>隧道技术：</li>
+</ol>
+<ul>
+<li><strong>定义</strong>：将IPv6数据报封装在IPv4数据报的数据部分，穿越IPv4网络（隧道），到达IPv6网络后解封装。</li>
+<li><strong>工作方式</strong>：
+<ul>
+<li>隧道入口（IPv6/IPv4双栈节点）：接收IPv6数据报，封装为IPv4数据报（源/目的IP为隧道两端IPv4地址）。</li>
+<li>隧道出口（IPv6/IPv4双栈节点）：接收IPv4数据报，解封装得到IPv6数据报，转发到IPv6网络。</li>
+</ul>
+</li>
+<li>适用于IPv6网络通过IPv4骨干网互连的场景，如跨地域的IPv6企业网。</li>
+</ul>
+</li>
+<li>【超纲】过渡技术扩展：NAT64/DNS64用于IPv6-only网络访问IPv4服务；6to4、Teredo、ISATAP是不同场景的IPv6穿越方案。</li>
+</ul>
+</li>
+</ul>
+<h3 id="路由算法与路由协议"><strong>路由算法与路由协议</strong></h3>
+<ul>
+<li>
+<p><strong>静态路由与动态路由</strong></p>
+<ul>
+<li><strong>静态路由</strong>：
+<ul>
+<li><strong>定义</strong>：由网络管理员手工配置路由表项，路由信息固定，不随网络状态变化调整。</li>
+<li><strong>性质/特点</strong>：
+<ul>
+<li>实现简单，无需协议交互，网络开销小。</li>
+<li>不适应网络拓扑或流量变化，故障后需手工修改路由。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：小型、拓扑稳定的网络（如家庭网络、小型企业网）。</li>
+</ul>
+</li>
+<li><strong>动态路由</strong>：
+<ul>
+<li><strong>定义</strong>：路由器通过路由协议（如RIP、OSPF）自动交换网络拓扑信息，动态生成和更新路由表，适应网络状态变化。</li>
+<li><strong>性质/特点</strong>：
+<ul>
+<li>自动适应网络变化（如链路故障、流量拥塞），无需人工干预。</li>
+<li>需协议交互，实现复杂，网络开销较大（如交换路由信息）。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：大型、拓扑动态变化的网络（如互联网、大型企业网）。</li>
+</ul>
+</li>
+<li><strong>核心区别</strong>：静态路由依赖人工配置，动态路由依赖协议自动维护；静态路由适合简单网络，动态路由适合复杂网络。</li>
+</ul>
+</li>
+<li>
+<p><strong>距离-向量路由算法</strong></p>
+<ul>
+<li><strong>定义</strong>：基于Bellman-Ford算法的动态路由算法，每个节点维护“距离向量”（到网络中所有节点的最短距离），通过与相邻节点交换距离向量更新路由。</li>
+<li><strong>核心公式</strong>：设<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>x</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">d_x(y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span>为节点x到节点y的最短距离，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c(x,v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">c</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span>为x到邻居v的链路代价，则<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>x</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>min</mi><mo>⁡</mo><mo stretchy="false">{</mo><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>d</mi><mi>v</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">d_x(y) = \min\{c(x,v) + d_v(y)\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">min</span><span class="mopen">{</span><span class="mord mathnormal">c</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)}</span></span></span></span>（v为x的所有邻居）。</li>
+<li><strong>工作原理</strong>：
+<ol>
+<li>初始化：每个节点仅知道到直接邻居的距离（如x到v的距离为c(x,v)，到非邻居节点的距离为无穷大）。</li>
+<li>交换距离向量：每个节点定期（如30秒）向所有邻居发送自己的距离向量。</li>
+<li>更新距离向量：节点收到邻居的距离向量后，用Bellman-Ford公式计算到各节点的新距离，若距离变化则更新自身距离向量，并向邻居广播。</li>
+<li>收敛：重复步骤2-3，直到所有节点的距离向量稳定（无变化）。</li>
+</ol>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：实现简单，仅需与邻居交互，适用于小型网络。</li>
+<li>缺点：
+<ul>
+<li>慢收敛：“坏消息”（如链路故障）传播慢，可能导致路由环路（如A→B→A）。</li>
+<li>路由环路解决：采用最大跳数限制（如RIP中16为不可达）、水平分割、毒性逆转等机制。</li>
+<li>开销大：距离向量大小与网络节点数成正比，大型网络中更新报文量大。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>链路状态路由算法</strong></p>
+<ul>
+<li><strong>定义</strong>：基于Dijkstra算法的动态路由算法，每个节点获取全网拓扑（链路状态：相邻节点、链路代价），独立计算到所有节点的最短路径。</li>
+<li><strong>工作原理</strong>：
+<ol>
+<li>发现邻居：节点通过Hello报文发现相邻节点，建立邻居关系，测量链路代价（如时延、带宽）。</li>
+<li>洪泛链路状态：节点将自身链路状态（含节点标识、邻居标识、链路代价）封装为链路状态报文（LSP），通过洪泛法发送到全网（每个节点收到后转发给除入站外的所有邻居）。</li>
+<li>构建拓扑数据库：每个节点接收全网LSP，构建统一的全网拓扑数据库（记录所有节点和链路）。</li>
+<li>计算最短路径：节点以自身为源点，使用Dijkstra算法计算到所有节点的最短路径，生成路由表。</li>
+<li>更新：当链路状态变化（如链路故障、代价变化）时，节点重新洪泛LSP，更新拓扑数据库和路由表。</li>
+</ol>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：
+<ul>
+<li>快速收敛：链路状态变化立即洪泛，所有节点同步更新，可有效避免长期环路；收敛期间可能短暂环路【非超纲】。</li>
+<li>适应大型网络：LSP大小与节点邻居数成正比，与网络总节点数无关，开销小。</li>
+<li>路由最优：基于Dijkstra算法，计算的是最短路径。</li>
+</ul>
+</li>
+<li>缺点：实现复杂，需维护拓扑数据库和执行Dijkstra算法，对节点计算能力要求高。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>层次路由（自治系统与域内/域间路由）</strong></p>
+<ul>
+<li><strong>自治系统（Autonomous System, AS）</strong>：
+<ul>
+<li><strong>定义</strong>：由单一技术管理下的一组路由器集合，使用统一的内部路由协议（IGP）和路由策略，对外表现为单一的路由选择实体，用自治系统号（ASN）标识（如AS12345）。</li>
+<li><strong>核心作用</strong>：将互联网划分为多个AS，降低路由协议复杂度，避免单个AS的拓扑变化影响全网。</li>
+</ul>
+</li>
+<li><strong>域内路由（Intra-AS Routing）</strong>：
+<ul>
+<li><strong>定义</strong>：AS内部的路由选择，由内部网关协议（IGP）实现，目标是找到AS内从源到目的的最优路径。</li>
+<li><strong>常用协议</strong>：RIP（距离向量）、OSPF（链路状态）。</li>
+<li><strong>特点</strong>：仅关注AS内拓扑，不涉及其他AS，路由策略由AS自主决定。</li>
+</ul>
+</li>
+<li><strong>域间路由（Inter-AS Routing）</strong>：
+<ul>
+<li><strong>定义</strong>：不同AS之间的路由选择，由外部网关协议（EGP）实现，目标是找到从源AS到目的AS的“较好”路径（非绝对最优，需考虑策略、政治、经济因素）。</li>
+<li><strong>常用协议</strong>：BGP-4（边界网关协议版本4）。</li>
+<li><strong>特点</strong>：需交换AS级路由信息（如到达某网络需经过的AS序列），路由选择需兼顾路径长度和策略约束。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>RIP（Routing Information Protocol，路由信息协议）</strong></p>
+<ul>
+<li><strong>定义</strong>：内部网关协议，基于距离-向量算法，以“跳数”（经过的路由器数）为距离度量，适用于小型AS。</li>
+<li><strong>核心规定</strong>：
+<ol>
+<li>距离度量：跳数，直接连接的网络距离为1，每经过一个路由器跳数加1，最大跳数16（表示网络不可达）。</li>
+<li>路由表项：&lt;目的网络N，距离d，下一跳路由器X&gt;，记录到目的网络的最短跳数和下一跳。</li>
+<li>信息交换：</li>
+</ol>
+<ul>
+<li>仅与直接相邻路由器交换信息。</li>
+<li>交换内容：完整的路由表（自身知道的所有目的网络及距离）。</li>
+<li>交换频率：每30秒定期交换，网络拓扑变化时立即触发更新。</li>
+</ul>
+</li>
+<li><strong>路由更新算法</strong>：
+<ol>
+<li>接收相邻路由器X的路由报文，修改报文：下一跳改为X，所有距离加1。</li>
+<li>对每个目的网络N：</li>
+</ol>
+<ul>
+<li>若路由表中无N：添加表项（N，d，X）。</li>
+<li>若路由表中有N且下一跳为X：用新距离替换旧距离（无论大小）。</li>
+<li>若路由表中有N且下一跳不为X：若新距离&lt;旧距离，更新为新距离和X；否则不更新。</li>
+</ul>
+<ol start="3">
+<li>超时处理：若180秒未收到某邻居的更新，将该邻居的所有路由距离设为16（不可达）。</li>
+</ol>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：实现简单，开销小，收敛快（“好消息”传播快）。</li>
+<li>缺点：
+<ul>
+<li>规模限制：最大跳数16，仅适用于小型网络。</li>
+<li>慢收敛：“坏消息”传播慢，易产生路由环路（如A→B→C，C故障后，B需多次更新才知C不可达）。</li>
+<li>开销大：定期交换完整路由表，大型网络中报文量大。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>【非超纲】补充：RIPv1为类ful（不携带掩码），RIPv2携带掩码支持CIDR；环路抑制机制包含水平分割、毒性逆转、触发更新与抑制定时器。</li>
+</ul>
+</li>
+<li>
+<p><strong>OSPF（Open Shortest Path First，开放最短路径优先）</strong></p>
+<ul>
+<li><strong>定义</strong>：内部网关协议，基于链路状态算法，“开放”指协议公开，“最短路径优先”指用Dijkstra算法计算最短路径，适用于中大型AS。</li>
+<li><strong>核心特点</strong>：
+<ol>
+<li>信息交换：</li>
+</ol>
+<ul>
+<li>洪泛法向AS内所有路由器发送信息（而非仅邻居）。</li>
+<li>交换内容：链路状态（自身相邻节点、链路代价），而非完整路由表。</li>
+<li>触发更新：仅链路状态变化时发送更新，定期（30分钟）刷新链路状态。</li>
+</ul>
+<ol start="2">
+<li>区域划分：</li>
+</ol>
+<ul>
+<li>将AS划分为多个区域（如主干区域0.0.0.0、普通区域），减少洪泛范围，降低开销。</li>
+<li>区域边界路由器（ABR）：连接不同区域，转发区域间路由信息。</li>
+<li>主干区域：连接所有普通区域，负责区域间数据传输。</li>
+</ul>
+<ol start="3">
+<li>协议层次：网络层协议，直接封装在IP数据报中（协议字段=89），不依赖TCP/UDP。</li>
+</ol>
+</li>
+<li><strong>分组类型</strong>：
+<ol>
+<li>Hello分组：发现和维护邻居关系，每10秒发送，40秒未收到则判定邻居不可达。</li>
+<li>数据库描述分组（DBD）：向邻居发送自身拓扑数据库的摘要（链路状态首部）。</li>
+<li>链路状态请求分组（LSR）：向邻居请求缺失的链路状态详细信息。</li>
+<li>链路状态更新分组（LSU）：洪泛链路状态信息，核心分组，包含完整LSP。</li>
+<li>链路状态确认分组（LSAck）：确认收到LSU，保证可靠性。</li>
+</ol>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：
+<ul>
+<li>快速收敛：链路状态变化立即洪泛，能有效避免距离向量那样的长期环路；收敛期间可能出现短暂环路【非超纲】。</li>
+<li>适应大型网络：区域划分减少开销，支持可变长子网和CIDR。</li>
+<li>路由最优：基于Dijkstra算法，按链路代价（可配置为时延、带宽等）计算最短路径。</li>
+</ul>
+</li>
+<li>缺点：实现复杂，对路由器计算能力和内存要求高（需存储拓扑数据库和执行Dijkstra算法）。</li>
+</ul>
+</li>
+<li>【超纲】补充：代价Cost常按参考带宽/接口带宽定义；广播网络选举DR/BDR；常见LSA类型1/2/3/4/5/7与区域（骨干、Stub、NSSA）。</li>
+</ul>
+</li>
+<li>
+<p><strong>BGP（Border Gateway Protocol，边界网关协议）</strong></p>
+<ul>
+<li><strong>定义</strong>：外部网关协议，基于路径向量算法，用于不同AS之间交换路由信息，目标是找到“较好”的路由（非绝对最优，需考虑AS策略），当前广泛使用BGP-4。</li>
+<li><strong>核心特点</strong>：
+<ol>
+<li>协议层次：应用层协议，基于TCP（端口179），保证路由信息的可靠传输。</li>
+<li>BGP会话：</li>
+</ol>
+<ul>
+<li>外部BGP（eBGP）会话：跨AS的BGP会话，连接不同AS的边界路由器。</li>
+<li>内部BGP（iBGP）会话：同AS内的BGP会话，连接AS内的BGP发言人（通常是边界路由器）。</li>
+</ul>
+<ol start="3">
+<li>路由信息：</li>
+</ol>
+<ul>
+<li>交换内容：BGP路由=&lt;CIDR前缀，BGP属性&gt;，核心属性包括AS-PATH（经过的AS序列）、NEXT-HOP（下一跳路由器IP）。</li>
+<li>首次交换：完整路由表；后续交换：仅变化的路由（增量更新）。</li>
+</ul>
+</li>
+<li><strong>路由选择原则</strong>（示意）：
+<ol>
+<li>本地偏好（Local_Pref）高者优先。</li>
+<li>AS-PATH短者优先。</li>
+<li>其后可能考虑Origin、MED、优先eBGP于iBGP、到NEXT_HOP的IGP代价更小等，最后以更小的Router-ID等平局规则收敛【超纲】。</li>
+</ol>
+</li>
+<li><strong>分组类型</strong>：
+<ol>
+<li>Open分组：TCP连接建立后发送，协商协议版本、BGP标识符等，建立BGP连接。</li>
+<li>Update分组：核心分组，通告新路由或撤销旧路由。</li>
+<li>Keepalive分组：每60秒发送，维持BGP连接（TCP连接无数据传输时），仅19B，开销小。</li>
+<li>Notification分组：检测到差错（如协议版本不兼容、路由属性错误）时发送，随后关闭BGP连接。</li>
+</ol>
+</li>
+<li><strong>优缺点</strong>：
+<ul>
+<li>优点：
+<ul>
+<li>适应大型互联网：支持AS级路由，可处理大规模路由信息。</li>
+<li>策略灵活：可通过本地偏好、AS-PATH等属性实现路由策略（如优先选择某条AS路径）。</li>
+<li>可靠传输：基于TCP，保证路由信息不丢失。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>不保证最优路由：仅选择“较好”路由，可能不是最短路径。</li>
+<li>实现复杂：需处理AS策略、BGP属性和会话管理。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="IP多播"><strong>IP多播</strong></h3>
+<ul>
+<li>
+<p><strong>多播的概念</strong></p>
+<ul>
+<li><strong>定义</strong>：又称组播，是一种“一对多”的通信模式，源主机发送单个分组，该分组通过网络复制，交付给一组目的主机（多播组），避免重复发送，节省网络带宽。</li>
+<li><strong>核心特点</strong>：
+<ul>
+<li>多播组：用IP多播地址标识，主机可动态加入/离开多播组（无需提前注册）。</li>
+<li>复制时机：分组仅在网络路径分岔时复制（如路由器的多个输出端口指向多播组成员），源主机仅发送一次。</li>
+<li>与单播/广播的区别：
+<ul>
+<li>单播：一对一，源需向每个目的发送独立分组，带宽消耗大。</li>
+<li>广播：一对所有，分组交付给网络中所有主机，可能导致广播风暴。</li>
+<li>多播：一对多，仅交付给多播组成员，带宽效率高。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：实时音视频直播（如电视会议、在线课堂）、软件更新推送、数据分发（如股票行情）。</li>
+</ul>
+</li>
+<li>
+<p><strong>IP多播地址</strong></p>
+<ul>
+<li><strong>定义</strong>：IPv4中为D类地址，用于标识多播组，仅作为IP分组的目的地址，不能作为源地址。</li>
+<li><strong>地址范围</strong>：224.0.0.0~239.255.255.255，按用途分为：
+<ul>
+<li>局部多播地址（224.0.0.0~224.0.0.255）：用于本地链路多播（如IGMP协议、路由器发现），路由器不转发。</li>
+<li>管理权限多播地址（224.0.1.0~238.255.255.255）：全球范围或特定组织使用，需申请。</li>
+<li>临时多播地址（239.0.0.0~239.255.255.255）：私有多播地址，仅在特定范围内使用。</li>
+</ul>
+</li>
+<li><strong>关键特性</strong>：
+<ul>
+<li>多播组动态性：主机可随时加入/离开多播组，多播路由器需实时维护组成员信息。</li>
+<li>尽最大努力交付：多播分组不保证可靠到达，可能丢失、失序，需上层协议（如RTP）保障可靠性。</li>
+<li>不产生ICMP差错报文：路由器对多播分组不发送ICMP终点不可达、源点抑制等报文。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>局域网硬件多播</strong></p>
+<ul>
+<li><strong>定义</strong>：局域网（如以太网）支持硬件多播，通过将IP多播地址映射为MAC多播地址，实现多播分组的链路层交付。</li>
+<li><strong>MAC多播地址范围</strong>：01-00-5E-00-00-00~01-00-5E-7F-FF-FF，共<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>23</mn></msup></mrow><annotation encoding="application/x-tex">2^{23}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">23</span></span></span></span></span></span></span></span></span></span></span></span>个地址，由IANA分配。</li>
+<li><strong>IP多播地址与MAC多播地址的映射规则（修正）【非超纲】</strong>：
+<ol>
+<li>IP多播地址（D类）取其低23位映射到MAC地址的低23位。</li>
+<li>MAC多播地址前三个字节固定为01-00-5E（OUI），且第4字节最高位固定为0（范围00~7F）。</li>
+<li>示例：IP多播地址224.128.64.32（二进制11100000.10000000.01000000.00100000），低23位为000000.01000000.00100000，映射为MAC 01-00-5E-00-40-20。</li>
+</ol>
+</li>
+<li><strong>映射特点</strong>：多对一映射，即多个IP多播地址可能映射到同一个MAC多播地址（因IP多播地址后28位中前5位未参与映射），接收主机需在IP层过滤非本多播组的分组。</li>
+</ul>
+</li>
+<li>
+<p><strong>IGMP与多播路由协议</strong></p>
+<ul>
+<li><strong>IGMP（Internet Group Management Protocol，网际组管理协议）</strong>：
+<ul>
+<li><strong>定义</strong>：网络层协议，封装在IP分组中（协议字段=2），用于多播路由器获取局域网内的多播组成员信息（哪些主机属于哪个多播组）。</li>
+<li><strong>工作阶段</strong>：
+<ol>
+<li>成员加入：主机加入新多播组时，向该多播组的IP多播地址发送IGMP加入报文，本地多播路由器收到后记录该多播组在本局域网有成员。</li>
+<li>成员维护：多播路由器定期（如125秒）向局域网发送IGMP查询报文（目的IP=224.0.0.1，所有主机），询问各多播组是否有成员。</li>
+</ol>
+<ul>
+<li>若某多播组有主机响应（发送IGMP报告报文），路由器继续维护该多播组；否则，路由器认为该多播组无成员，停止转发该多播组的分组。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：仅管理局域网内的多播组成员，不涉及互联网范围的多播路由。</li>
+</ul>
+</li>
+<li><strong>多播路由协议</strong>：
+<ul>
+<li><strong>定义</strong>：用于多播路由器之间交换多播路由信息，构建多播转发树（从源主机到所有多播组成员的无环路径），确保分组仅在分岔点复制，避免环路和重复传输。</li>
+<li><strong>核心目标</strong>：找到“最小代价”的多播转发树（如总链路代价最小、跳数最少）。</li>
+<li><strong>常用协议</strong>：
+<ul>
+<li>域内多播路由协议：如PIM（Protocol Independent Multicast，协议无关多播）、DVMRP（Distance Vector Multicast Routing Protocol）【超纲】。</li>
+<li>域间多播路由协议：如MBGP（Multicast BGP，多播边界网关协议）【超纲】。</li>
+</ul>
+</li>
+<li>【超纲】补充：IGMPv2支持Leave机制，IGMPv3支持源过滤（SSM）；PIM-DM适合密集组，PIM-SM适合稀疏组（RP/共享树到源树切换）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="移动IP"><strong>移动IP</strong></h3>
+<ul>
+<li>
+<p><strong>移动IP的概念</strong></p>
+<ul>
+<li><strong>定义</strong>：网络层技术，允许移动节点（Mobile Node, MN）以固定的IPv4地址（归属地址）跨越不同网络漫游，同时保持TCP/UDP连接不中断，实现“移动中通信”。</li>
+<li><strong>与DHCP的区别</strong>：DHCP为移动节点分配新IP地址，导致原有连接中断；移动IP保持IP地址不变，确保连接持续。</li>
+<li><strong>功能实体</strong>：
+<ol>
+<li>移动节点（MN）：具有固定归属地址的移动设备（如笔记本、手机），可在不同网络间移动。</li>
+<li>归属代理（Home Agent, HA）：连接在移动节点归属网络（MN原始接入的网络）的路由器，负责维护MN的位置信息，转发发往MN的分组。</li>
+<li>外地代理（Foreign Agent, FA）：连接在移动节点被访网络（MN当前接入的网络）的路由器，为MN分配临时转交地址，转发HA发来的分组给MN。</li>
+</ol>
+</li>
+<li><strong>关键地址</strong>：
+<ul>
+<li>归属地址（Home Address, HoA）：MN的固定IP地址，与归属网络关联，不变。</li>
+<li>转交地址（Care-of Address, CoA）：MN在被访网络的临时IP地址，由FA分配，随MN移动而变化（如MN切换被访网络，CoA更新）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>移动IP通信过程</strong></p>
+<ul>
+<li><strong>核心流程</strong>（以通信者B与移动节点A通信为例）：
+<ol>
+<li>归属网络通信：MN在归属网络时，按传统IPv4方式通信，B发送的分组直接交付给A。</li>
+<li>漫游与注册：</li>
+</ol>
+<ul>
+<li>MN漫游到被访网络，向FA发送注册请求，FA为MN分配CoA，并将CoA发送给HA（外地代理注册）。</li>
+<li>HA更新MN的位置信息（HoA→CoA映射），向FA发送注册确认。</li>
+</ul>
+<ol start="3">
+<li>分组隧道转发（B→A）：</li>
+</ol>
+<ul>
+<li>B不知道A的位置，向A的HoA发送分组，该分组被HA截获（归属网络的分组均由HA处理）。</li>
+<li>HA将分组封装在新IP分组中（外层IP源=HA IP，目的=CoA），通过“隧道”发送给FA（隧道技术：将原始分组作为数据部分，外层IP用于穿越互联网）。</li>
+<li>FA接收分组后，解封装得到原始分组，转发给MN。</li>
+</ul>
+<ol start="4">
+<li>分组直接发送（A→B）：</li>
+</ol>
+<ul>
+<li>MN向B发送分组时，源IP=HoA（保持不变），目的IP=B的IP，直接通过FA转发到互联网，无需经过HA。</li>
+</ul>
+<ol start="5">
+<li>位置更新与注销：</li>
+</ol>
+<ul>
+<li>MN切换到新被访网络时，向新FA注册新CoA，新FA通知HA更新映射，旧CoA失效。</li>
+<li>MN返回归属网络时，向HA发送注销请求，HA删除HoA→CoA映射，MN恢复归属网络通信。</li>
+</ul>
+</li>
+<li><strong>关键技术</strong>：
+<ul>
+<li>隧道技术：实现HA到FA的分组传输，隐藏MN的移动性，使B无需知道A的当前位置。</li>
+<li>注册协议：MN、FA、HA之间的通信协议，用于更新CoA和位置映射，保证分组正确转发。</li>
+</ul>
+</li>
+<li>【超纲】补充：三角路由问题（通信者→HA→FA→MN路径绕行）可通过路由优化（CN缓存CoA）缓解；CoA可由FA分配（FA-CoA）或由MN自配置（Co-located CoA）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络层设备"><strong>网络层设备</strong></h3>
+<ul>
+<li>
+<p><strong>冲突域与广播域</strong></p>
+<ul>
+<li><strong>冲突域</strong>：
+<ul>
+<li><strong>定义</strong>：网络中可能产生信号冲突的设备集合，即同一冲突域内的设备同时发送数据时，会发生信号碰撞，导致数据传输错误。</li>
+<li><strong>设备划分规则</strong>：
+<ul>
+<li>物理层设备（集线器、中继器）：不分割冲突域，所有连接的设备属于同一冲突域（共享带宽）。</li>
+<li>数据链路层设备（网桥、交换机）：分割冲突域，每个端口对应一个冲突域（交换机端口为全双工，无冲突）。</li>
+<li>网络层设备（路由器）：分割冲突域，每个接口对应一个冲突域。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>广播域</strong>：
+<ul>
+<li><strong>定义</strong>：网络中接收同一广播分组的设备集合，即某设备发送广播分组（目的IP=255.255.255.255或子网广播地址），所有同一广播域的设备均可接收。</li>
+<li><strong>设备划分规则</strong>：
+<ul>
+<li>物理层/数据链路层设备（集线器、中继器、网桥、交换机）：不分割广播域，所有连接的设备属于同一广播域（广播分组在设备所有端口转发）。</li>
+<li>网络层设备（路由器）：分割广播域，每个接口对应一个广播域（路由器不转发广播分组）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>核心区别</strong>：冲突域关注信号碰撞，广播域关注广播分组传播；路由器是唯一同时分割冲突域和广播域的设备。</li>
+</ul>
+</li>
+<li>
+<p><strong>路由器的组成和功能</strong></p>
+<ul>
+<li><strong>路由器的组成</strong>（从功能模块划分）：
+<ol>
+<li>路由选择部分（控制平面）：</li>
+</ol>
+<ul>
+<li>路由选择处理机：核心组件，运行路由协议（如RIP、OSPF、BGP），计算和维护路由表。</li>
+<li>路由表：记录目的网络、子网掩码、下一跳、输出接口，由路由算法生成。</li>
+<li>路由协议：用于与相邻路由器交换拓扑信息，更新路由表（如RIP交换路由表，OSPF洪泛链路状态）。</li>
+</ul>
+<ol start="2">
+<li>分组转发部分（数据平面）：</li>
+</ol>
+<ul>
+<li>输入端口：接收物理层比特流，数据链路层提取帧，网络层处理IP分组（如校验首部、提取目的IP），暂存于缓冲队列。</li>
+<li>交换结构：又称交换组织，根据转发表将输入端口的分组转发到合适的输出端口（如总线型、交叉矩阵型）。</li>
+<li>输出端口：从交换结构接收分组，数据链路层封装帧，物理层发送比特流，暂存于缓冲队列（处理输出排队）。</li>
+</ul>
+</li>
+<li><strong>路由器的核心功能</strong>：
+<ol>
+<li>异构网络互连：连接不同类型的网络（如以太网、广域网），实现IP分组在异构网络间的转发（处理不同数据链路层协议）。</li>
+<li>分组转发：根据转发表转发IP分组，支持直接交付（目的主机在本子网）和间接交付（目的主机在其他网络）。</li>
+<li>路由选择：通过路由协议动态生成和更新路由表，选择最优路径（如跳数最少、代价最低）。</li>
+<li>隔离广播域：不转发广播分组，避免广播风暴，提高网络稳定性。</li>
+<li>拥塞控制：监测网络拥塞，合理丢弃分组（如尾部丢弃），并发送ICMP源点抑制报文（旧标准）。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>路由表与分组转发</strong></p>
+<ul>
+<li><strong>路由表</strong>：
+<ul>
+<li><strong>定义</strong>：路由器中存储的路由信息表，由路由选择处理机根据路由算法生成，用于指导分组转发，表项格式通常为&lt;目的网络IP、子网掩码、下一跳IP、输出接口&gt;。</li>
+<li><strong>核心表项类型</strong>：
+<ul>
+<li>直连路由：目的网络与路由器接口直接相连，下一跳为“直接”，输出接口为该接口。</li>
+<li>静态路由：管理员手工配置的路由表项，适用于简单网络。</li>
+<li>动态路由：通过路由协议（如RIP、OSPF）自动生成的路由表项，适应网络变化。</li>
+<li>默认路由：0.0.0.0/0（下一跳为默认网关）【非超纲】。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Q-A">Q&amp;A</h3>
+<ul>
+<li>
+<p><strong>虚电路到底是什么</strong></p>
+</li>
+<li>
+<p><strong>网络号全为0和主机号全为0表示的区别</strong></p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://lazy11.top">Lazy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lazy11.top/2025/09/25/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%BD%91%E7%BB%9C%E5%B1%82/">https://lazy11.top/2025/09/25/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%BD%91%E7%BB%9C%E5%B1%82/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/lazy-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/09/25/%E8%80%83%E7%A0%94/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E4%BB%A3/%E7%BA%BF%E4%BB%A3%E4%B8%B2%E8%81%94/" title="线代串联"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">线代串联</div></div><div class="info-2"><div class="info-item-1">线性代数串联 专题：行满秩与列满秩矩阵在线性方程组中的分析 一、基础定义（行满秩 vs 列满秩） 设矩阵 A∈Rm×nA \in \mathbb{R}^{m \times n}A∈Rm×n（mmm 行 nnn 列，输入维度 nnn，输出维度 mmm）：  行满秩矩阵：rank(A)=m\text{rank}(A) = mrank(A)=m（m≤nm \leq nm≤n，否则秩最大为 n&lt;mn &lt; mn&lt;m，无法行满秩）。 本质：AAA 的行向量组线性无关，是 Rn\mathbb{R}^nRn 中线性无关的“约束条件”。 列满秩矩阵：rank(A)=n\text{rank}(A) = nrank(A)=n（n≤mn \leq mn≤m，否则秩最大为 m&lt;nm &lt; nm&lt;n，无法列满秩）。 本质：AAA 的列向量组线性无关，是 Rm\mathbb{R}^mRm 中线性无关的“基向量”。  二、行满秩矩阵（rank(A)=m\text{rank}(A) = mrank(A)=m）在线性方程组中的分析 核心特点：非齐次方程组对任意...</div></div></div></a><a class="pagination-related" href="/2025/09/24/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" title="数据链路层"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">数据链路层</div></div><div class="info-2"><div class="info-item-1">数据链路层 数据链路层的功能   链路管理  定义：负责数据链路连接的建立、维持和释放，主要用于面向连接的服务。 核心任务：  建立连接：确认对方就绪状态，交换信息初始化帧序号。 维持连接：确保传输过程中链路稳定。 释放连接：传输完毕后终止链路。   适用场景：点对点链路接入与链路配置（如PPP）；PPP提供成帧与检错，可靠性通常由上层（如TCP）保证。    封装成帧与透明传输  封装成帧：  定义：在网络层递交的分组前后添加首部和尾部，构成数据链路层的协议数据单元（帧）。 结构：帧 = 首部 + 数据（网络层分组） +...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Lazy</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lazyy11"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/lazyy11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:lazy11@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is Lazy's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">计算机网络：网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-number">1.0.1.</span> <span class="toc-text">网络层的功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv4"><span class="toc-number">1.0.2.</span> <span class="toc-text">IPv4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6"><span class="toc-number">1.0.3.</span> <span class="toc-text">IPv6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%E4%B8%8E%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.0.4.</span> <span class="toc-text">路由算法与路由协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E5%A4%9A%E6%92%AD"><span class="toc-number">1.0.5.</span> <span class="toc-text">IP多播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8IP"><span class="toc-number">1.0.6.</span> <span class="toc-text">移动IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E8%AE%BE%E5%A4%87"><span class="toc-number">1.0.7.</span> <span class="toc-text">网络层设备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-A"><span class="toc-number">1.0.8.</span> <span class="toc-text">Q&amp;A</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/25/%E8%80%83%E7%A0%94/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E4%BB%A3/%E7%BA%BF%E4%BB%A3%E4%B8%B2%E8%81%94/" title="线代串联">线代串联</a><time datetime="2025-09-25T05:24:26.000Z" title="Created 2025-09-25 13:24:26">2025-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/25/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%BD%91%E7%BB%9C%E5%B1%82/" title="网络层">网络层</a><time datetime="2025-09-25T05:20:51.000Z" title="Created 2025-09-25 13:20:51">2025-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/24/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" title="数据链路层">数据链路层</a><time datetime="2025-09-24T06:53:11.000Z" title="Created 2025-09-24 14:53:11">2025-09-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/23/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%89%A9%E7%90%86%E5%B1%82/" title="物理层">物理层</a><time datetime="2025-09-23T06:05:33.000Z" title="Created 2025-09-23 14:05:33">2025-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/22/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91%E6%A6%82%E8%BF%B0/" title="计网概述">计网概述</a><time datetime="2025-09-22T07:06:38.000Z" title="Created 2025-09-22 15:06:38">2025-09-22</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Lazy</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (true) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://waline.lazy11.top/',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章..." type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
