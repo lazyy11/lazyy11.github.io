@@ -1,0 +1,911 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>应用层 | Lazy's Blog</title><meta name="author" content="Lazy,lazy11@foxmail.com"><meta name="copyright" content="Lazy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="计算机网络：应用层 网络应用模型   客户&#x2F;服务器模型（Client&#x2F;Server, C&#x2F;S模型）  定义：一种网络应用架构，存在一个始终开启的“服务器”主机，为多个“客户机”主机提供服务，客户机主动发起请求，服务器被动响应请求。 工作流程：  服务器处于接收请求的等待状态。 客户机发出服务请求，并等待接收结果。 服务器收到请求后，分析请求、处理请求，将结果发送给客户机。   结构&#x2F;组成：  服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="应用层">
+<meta property="og:url" content="https://lazy11.top/2025/09/26/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E5%BA%94%E7%94%A8%E5%B1%82/index.html">
+<meta property="og:site_name" content="Lazy&#39;s Blog">
+<meta property="og:description" content="计算机网络：应用层 网络应用模型   客户&#x2F;服务器模型（Client&#x2F;Server, C&#x2F;S模型）  定义：一种网络应用架构，存在一个始终开启的“服务器”主机，为多个“客户机”主机提供服务，客户机主动发起请求，服务器被动响应请求。 工作流程：  服务器处于接收请求的等待状态。 客户机发出服务请求，并等待接收结果。 服务器收到请求后，分析请求、处理请求，将结果发送给客户机。   结构&#x2F;组成：  服务">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lazy11.top/img/lazy-icon.png">
+<meta property="article:published_time" content="2025-09-26T09:21:23.000Z">
+<meta property="article:modified_time" content="2025-09-29T09:17:31.936Z">
+<meta property="article:author" content="Lazy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lazy11.top/img/lazy-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lazy11.top/2025/09/26/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E5%BA%94%E7%94%A8%E5%B1%82/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '应用层',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">22</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "/img/lazy-icon.png" data-lazy-src="/img/index.png" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">应用层</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">应用层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-09-26T09:21:23.000Z" title="Created 2025-09-26 17:21:23">2025-09-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-09-29T09:17:31.936Z" title="Updated 2025-09-29 17:17:31">2025-09-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span class="waline-pageview-count" data-path="/2025/09/26/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E5%BA%94%E7%94%A8%E5%B1%82/"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1>计算机网络：应用层</h1>
+<h3 id="网络应用模型"><strong>网络应用模型</strong></h3>
+<ul>
+<li>
+<p><strong>客户/服务器模型（Client/Server, C/S模型）</strong></p>
+<ul>
+<li><strong>定义</strong>：一种网络应用架构，存在一个始终开启的“服务器”主机，为多个“客户机”主机提供服务，客户机主动发起请求，服务器被动响应请求。</li>
+<li><strong>工作流程</strong>：
+<ol>
+<li>服务器处于接收请求的等待状态。</li>
+<li>客户机发出服务请求，并等待接收结果。</li>
+<li>服务器收到请求后，分析请求、处理请求，将结果发送给客户机。</li>
+</ol>
+</li>
+<li><strong>结构/组成</strong>：
+<ul>
+<li>服务器：运行专门服务程序，需提前开启，被动等待请求，无需知道客户机地址。</li>
+<li>客户机：运行客户程序，需知道服务器地址（如IP/域名），主动发起请求。</li>
+</ul>
+</li>
+<li><strong>性质/特点</strong>：
+<ul>
+<li>网络中计算机地位不平等：服务器可通过权限限制管理客户机，网络管理集中方便。</li>
+<li>客户机之间不直接通信：例如Web应用中，两个浏览器无法直接交互。</li>
+<li>可扩展性不佳：受服务器硬件性能和网络带宽限制，支持的客户机数量有限。</li>
+</ul>
+</li>
+<li><strong>典型应用场景</strong>：Web服务、文件传输（FTP）、远程登录、电子邮件等。</li>
+<li><strong>优点</strong>：管理集中，服务稳定性高，便于权限控制。</li>
+<li><strong>缺点</strong>：服务器易成为系统瓶颈，面对大量请求时性能下降明显。</li>
+</ul>
+</li>
+<li>
+<p><strong>P2P模型（Peer-to-Peer模型）</strong></p>
+<ul>
+<li><strong>定义</strong>：一种无固定客户机与服务器划分的网络应用架构，任意“对等方（Peer）”既可作为客户机访问其他节点资源，也可作为服务器提供资源，节点权利与义务大体对等。</li>
+<li><strong>核心逻辑</strong>：本质仍隐含C/S逻辑（每个节点兼具两种角色），但无中心服务器，资源分散存储于各节点。</li>
+<li><strong>性质/特点</strong>：
+<ul>
+<li>节点地位对等：无固定服务器，每个节点均参与资源上传与下载。</li>
+<li>资源分布式存储：传输内容不依赖中心服务器，由节点间直接交换。</li>
+</ul>
+</li>
+<li><strong>优点/适用场景</strong>：
+<ul>
+<li>减轻服务器计算压力：任务分配到各节点，提升系统效率与资源利用率。</li>
+<li>可扩展性好：无传统服务器的响应/带宽限制，支持大量节点接入。</li>
+<li>网络健壮性强：单个节点失效不影响其他节点正常通信，适用于文件共享（如P2P下载）。</li>
+</ul>
+</li>
+<li><strong>缺点/局限性</strong>：
+<ul>
+<li>占用节点资源多：节点需同时提供服务，消耗内存、硬盘资源（如P2P下载损伤硬盘）。</li>
+<li>易导致网络拥塞：据统计，P2P程序曾占互联网50%~90%流量，多数ISP（互联网服务提供商）持反对态度。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="域名系统（Domain-Name-System-DNS）"><strong>域名系统（Domain Name System, DNS）</strong></h3>
+<ul>
+<li>
+<p><strong>定义</strong>：因特网的命名系统，用于将人类易记的主机名（<a target="_blank" rel="noopener" href="http://xn--www-eo8e.cskaoyan.com">如www.cskaoyan.com</a>）转换为机器可处理的IP地址，采用客户/服务器（C/S）模型，运行于UDP之上，使用53号端口。</p>
+</li>
+<li>
+<p><strong>核心组成</strong>：从概念上分为层次域名空间、域名服务器、解析器三部分。</p>
+</li>
+<li>
+<p><strong>层次域名空间</strong></p>
+<ul>
+<li><strong>结构</strong>：采用层次树状结构，每个连接到因特网的主机/路由器拥有唯一“域名（Domain Name）”，域可划分子域，形成顶级域、二级域、三级域等层级。</li>
+<li><strong>域名格式</strong>：
+<ul>
+<li>由标号序列组成，标号间用“.”分隔（<a target="_blank" rel="noopener" href="http://xn--www-eo8e.cskaoyan.com">如www.cskaoyan.com</a>）。</li>
+<li>标号规则：
+<ul>
+<li>英文不区分大小写。</li>
+<li>仅允许包含连字符（-），无其他标点符号。</li>
+<li>单个标号最长63字符，完整域名最长255字符。</li>
+<li>级别最低的域名在最左，级别最高的顶级域名在最右。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>顶级域名（Top Level Domain, TLD）分类</strong>：
+<ul>
+<li>国家（地区）顶级域名（nTLD）：如“cn”（中国）、“us”（美国）、“uk”（英国）。</li>
+<li>通用顶级域名（gTLD）：如“com”（公司）、“net”（网络服务机构）、“org”（非营利组织）、“edu”（教育机构）、“gov”（政府部门）。</li>
+<li>基础结构域名（arpa）：用于反向域名解析（IP地址→域名）。</li>
+</ul>
+</li>
+<li><strong>域名管理机制</strong>：各级域名由上一级机构管理，顶级域由ICANN（因特网名称与数字地-址分配机构）管理，国家顶级域下的二级域由各国自行管理（如中国将edu.cn委托给CERNET）。</li>
+</ul>
+</li>
+<li>
+<p><strong>域名服务器</strong></p>
+<ul>
+<li><strong>定义</strong>：运行域名解析程序的服务器，负责管辖“区（Zone，小于等于域）”，保存区内主机的域名-IP映射，且具备访问其他域名服务器的能力。</li>
+<li><strong>分类及作用</strong>：
+<ul>
+<li>根域名服务器：
+<ul>
+<li>定义：最高层次的域名服务器，全球共13个（实际为冗余集群）。</li>
+<li>作用：知晓所有顶级域名服务器的域名与IP，本地域名服务器无法解析时首先求助于它；不直接返回IP，仅告知下一级顶级域名服务器地址。</li>
+</ul>
+</li>
+<li>顶级域名服务器：
+<ul>
+<li>作用：管理所属顶级域下的所有二级域名，收到查询时返回最终IP或下一级权限域名服务器地址。</li>
+</ul>
+</li>
+<li>权限域名服务器（授权域名服务器）：
+<ul>
+<li>作用：每个主机需在此注册，确保能将管辖的主机名转换为IP；一台主机建议配置至少两个以保证可靠性，常同时充当本地域名服务器。</li>
+</ul>
+</li>
+<li>本地域名服务器：
+<ul>
+<li>定义：由ISP、大学、院系等提供，是域名解析的“入口”。</li>
+<li>作用：主机发起DNS查询时，请求首先发送至此；Windows配置“本地连接”时填写的DNS地址即本地域名服务器地址。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>域名解析过程</strong></p>
+<ul>
+<li><strong>定义</strong>：将域名转换为IP地址的过程，客户端通过DNS客户构造请求报文，以<strong>UDP数据报</strong>发送至本地域名服务器。</li>
+<li><strong>查询方式</strong>：
+<ul>
+<li>递归查询：
+<ul>
+<li>定义：若本地域名服务器无法解析，以DNS客户身份代主机继续查询（如向根、顶级域名服务器请求），最终将结果返回主机。</li>
+<li>特点：主机仅发送1次请求，本地域名服务器负责全程查询；因给<strong>根服务器</strong>造成大负载，实际极少使用。</li>
+</ul>
+</li>
+<li>迭代查询：
+<ul>
+<li>定义：本地域名服务器向其他服务器查询时，对方仅返回“IP”或“下一级查询地址”，由本地域名服务器自行后续查询。</li>
+<li>特点：本地域名服务器需多次发送请求（如根→顶级→权限），是实际中本地域名服务器向根查询的默认方式。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>典型解析步骤（以查询y.abc.com为例）</strong>：
+<ol>
+<li>客户机向本地域名服务器发送递归查询请求。</li>
+<li>本地域名服务器无缓存，以客户身份向根域名服务器发送迭代查询。</li>
+<li>根域名服务器返回.com顶级域名服务器（<a target="_blank" rel="noopener" href="http://dns.com">dns.com</a>）的IP。</li>
+<li>本地域名服务器向dns.com发送迭代查询，后者返回abc.com权限域名服务器（<a target="_blank" rel="noopener" href="http://dns.abc.com">dns.abc.com</a>）的IP。</li>
+<li>本地域名服务器向dns.abc.com发送迭代查询，后者返回y.abc.com的IP。</li>
+<li>本地域名服务器缓存结果，并将IP返回给客户机。</li>
+</ol>
+</li>
+<li><strong>高速缓存机制</strong>：
+<ul>
+<li>作用：域名服务器缓存近期查询的域名-IP映射，后续相同查询可直接返回结果，减少因特网DNS报文数量，提升解析效率。</li>
+<li>特性：映射非永久有效，服务器会定期丢弃缓存；主机也会维护本地缓存，仅在缓存未命中时请求域名服务器。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="文件传输协议（File-Transfer-Protocol-FTP）"><strong>文件传输协议（File Transfer Protocol, FTP）</strong></h3>
+<ul>
+<li>
+<p><strong>定义</strong>：因特网上广泛使用的文件传输协议，提供交互式访问，允许客户指明文件的类型和格式，屏蔽异构系统细节，支持不同主机间文件传输、权限管理、匿名共享。</p>
+</li>
+<li>
+<p><strong>核心功能</strong>：</p>
+<ul>
+<li>支持异构主机（硬/软件体系不同）间的文件传输。</li>
+<li>以用户权限管理方式实现对远程FTP服务器文件的管理。</li>
+<li>以匿名FTP方式提供公用文件共享。</li>
+</ul>
+</li>
+<li>
+<p><strong>FTP工作原理</strong></p>
+<ul>
+<li><strong>模型</strong>：采用C/S模型，使用<strong>TCP</strong>提供可靠传输服务，服务器进程由“主进程”和“从属进程”组成。</li>
+<li><strong>服务器进程分工</strong>：
+<ul>
+<li>主进程：打开21号控制端口，等待客户连接；收到连接请求后启动从属进程处理，自身返回等待状态（与从属进程并发执行）。</li>
+<li>从属进程：处理单个客户的请求，完成后终止。</li>
+</ul>
+</li>
+<li><strong>工作步骤</strong>：
+<ol>
+<li>服务器监听21号端口（控制端口），等待客户连接。</li>
+<li>客户机发起连接请求，与服务器建立控制连接。</li>
+<li>服务器启动从属进程，处理客户的文件传输请求。</li>
+<li>完成传输后，从属进程终止，主进程继续等待新请求。</li>
+</ol>
+</li>
+<li><strong>关键特性</strong>：服务器需在会话期间保留用户状态（如用户账户、当前远程目录位置）。</li>
+</ul>
+</li>
+<li>
+<p><strong>控制连接与数据连接</strong></p>
+<ul>
+<li><strong>核心逻辑</strong>：FTP工作时使用两个并行的TCP连接，分离控制信息与数据传输，简化协议实现。</li>
+<li><strong>控制连接</strong>：
+<ul>
+<li>端口：服务器端使用21号端口。</li>
+<li>作用：传输控制信息（如连接请求、传送命令、中止指令），不传输文件；整个会话期间保持打开。</li>
+<li>建立过程：服务器监听21端口，客户机发起连接，建立后用于全程控制交互。</li>
+</ul>
+</li>
+<li><strong>数据连接</strong>：
+<ul>
+<li>端口：服务器端默认使用20号端口（主动模式）。</li>
+<li>作用：连接客户端与服务器端的数据传送进程，实际完成文件/文件列表的传输；<strong>传输完毕后关闭</strong>。</li>
+<li>传输模式：
+<ul>
+<li>主动模式（PORT）（默认模式）：客户端连接服务器21端口，登录后开放随机端口并告知服务器；服务器通过20端口连接客户端随机端口，发送数据。</li>
+<li>被动模式（PASV）：客户端发送PASV命令，服务器开放随机端口并告知客户端；客户端连接该随机端口，接收数据。</li>
+<li>选择权：由客户端决定使用哪种模式。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>带外传送</strong>：因控制连接与数据连接分离，FTP的控制信息属于“带外（Out-of-band）”传送（区别于HTTP的“带内”传送）。</li>
+<li><strong>与NFS（Network File System）的区别</strong>：FTP需来回传输完整文件修改，NFS允许直接读写远程文件片段，更高效。</li>
+</ul>
+</li>
+</ul>
+<h3 id="电子邮件（E-mail）"><strong>电子邮件（E-mail）</strong></h3>
+<ul>
+<li>
+<p><strong>电子邮件系统的组成结构</strong></p>
+<ul>
+<li><strong>核心构件</strong>：由用户代理、邮件服务器、应用层协议（SMTP、POP3等）三部分组成。</li>
+<li><strong>各构件功能</strong>：
+<ul>
+<li>用户代理（User Agent, UA）：
+<ul>
+<li>定义：用户与电子邮件系统的接口，通常为客户端软件（如Outlook、Foxmail）。</li>
+<li>功能：提供撰写、显示、处理邮件的界面，支持发送（调用SMTP）和接收（调用POP3/IMAP）邮件。</li>
+</ul>
+</li>
+<li>邮件服务器：
+<ul>
+<li>功能：发送/接收邮件，报告传送状态（已交付、被拒绝、丢失）；同时充当SMTP客户（发送邮件时）和服务器（接收邮件时）。</li>
+<li>关键作用：暂存邮件至收件人邮箱，等待收件人读取。</li>
+</ul>
+</li>
+<li>协议分类：
+<ul>
+<li>发送协议：SMTP（推模式），用于用户代理→邮件服务器、邮件服务器→邮件服务器的邮件推送。</li>
+<li>读取协议：POP3/IMAP（拉模式），用于用户代理从邮件服务器拉取邮件。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>典型收发流程</strong>：
+<ol>
+<li>发件人通过用户代理撰写邮件，点击“发送”。</li>
+<li>用户代理通过SMTP将邮件传送给发送端邮件服务器。</li>
+<li>发送端服务器将邮件放入缓存队列，等待发送。</li>
+<li>发送端SMTP客户与接收端SMTP服务器建立TCP连接，发送邮件至接收端服务器。</li>
+<li>接收端服务器将邮件存入收件人邮箱。</li>
+<li>收件人通过用户代理，使用POP3/IMAP从接收端服务器取回邮件。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>电子邮件格式与MIME</strong></p>
+<ul>
+<li><strong>电子邮件格式</strong>：
+<ul>
+<li>组成：分为“信封”和“内容”，内容又分“首部”和“主体”；信封信息由系统自动从内容首部提取。</li>
+<li>内容首部：
+<ul>
+<li>必需字段：To（收件人邮箱地址，格式为“用户名@主机域名”，如abc@cskaoyan.com）、From（发件人地址，系统自动填入）。</li>
+<li>可选字段：Subject（邮件主题）。</li>
+<li>分隔符：首部与主体之间用空行分隔。</li>
+</ul>
+</li>
+<li>内容主体：用户自由撰写的邮件正文。</li>
+</ul>
+</li>
+<li><strong>多用途因特网邮件扩展（Multipurpose Internet Mail Extensions, MIME）</strong>
+<ul>
+<li>背景：<strong>SMTP仅支持传输7位ASCII码文本</strong>，无法传输非英语文字（如中文）、二进制文件（如图片、可执行文件），故引入MIME。</li>
+<li>核心作用：不改动/取代SMTP，仅将非ASCII数据转换为ASCII格式，适配SMTP传输；接收端再逆转换恢复原始数据。</li>
+<li>组成内容：
+<ul>
+<li>5个新邮件首部字段（如MIME版本、内容类型、传送编码）。</li>
+<li>标准化多媒体内容格式（文字、图像、语音等）。</li>
+<li>定义传送编码规则，确保数据不被邮件系统修改。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>SMTP与POP3</strong></p>
+<ul>
+<li><strong>SMTP（Simple Mail Transfer Protocol, 简单邮件传输协议）</strong>：
+<ul>
+<li>定义：提供可靠电子邮件传输的应用层协议，采用C/S模型，运行于<strong>TCP</strong>之上，使用25号端口。</li>
+<li>角色划分：发送邮件的进程为SMTP客户，接收邮件的进程为SMTP服务器。</li>
+<li>通信三阶段：
+<ol>
+<li>连接建立：发送端服务器SMTP客户扫描邮件缓存，发现邮件后与接收端服务器SMTP服务器建立TCP连接；接收端返回“220 Service ready”，客户发送HELO命令（附主机名）。</li>
+<li>邮件传送：
+<ul>
+<li>发送MAIL命令（附发件人地址），服务器返回“250 OK”。</li>
+<li>发送1个或多个RCPT命令（附收件人地址），验证收件人有效性。</li>
+<li>发送DATA命令，服务器返回“354 Start mail input”；客户传输邮件内容，以<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&lt;</mo><mi>C</mi><mi>R</mi><mi>L</mi><mi>F</mi><mo>&gt;</mo><mi mathvariant="normal">.</mi><mo>&lt;</mo><mi>C</mi><mi>R</mi><mi>L</mi><mi>F</mi><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&lt;CRLF&gt;.&lt;CRLF&gt;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7224em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">CR</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord">.</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7224em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">CR</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span></span></span></span>结束。</li>
+</ul>
+</li>
+<li>连接释放：客户发送QUIT命令，服务器返回“221 Service closing”，释放TCP连接。</li>
+</ol>
+</li>
+<li>关键特性：不使用中间邮件服务器，TCP连接直接在发送端与接收端服务器之间建立；连接失败时，发送端服务器定期重试。</li>
+</ul>
+</li>
+<li><strong>POP3（Post Office Protocol 3, 邮局协议版本3）</strong>：
+<ul>
+<li>定义：简单的邮件读取协议，采用C/S模型，运行于<strong>TCP</strong>之上，使用110号端口。</li>
+<li>功能：支持用户代理从邮件服务器读取邮件，仅提供基础读取能力。</li>
+<li>工作方式：
+<ul>
+<li>下载并保留：读取后邮件仍保存在服务器，可再次读取。</li>
+<li>下载并删除：读取后邮件从服务器删除。</li>
+</ul>
+</li>
+<li>局限性：功能简单，无文件夹管理、部分读取等高级功能。</li>
+</ul>
+</li>
+<li><strong>IMAP（Internet Message Access Protocol, 因特网报文存取协议）</strong>：
+<ul>
+<li>特点：比POP3复杂，支持创建文件夹、移动邮件、远程查询、部分读取（如仅读首部）。</li>
+<li>优势：维护用户会话状态，适配低带宽场景（如仅下载大邮件的部分内容）。</li>
+</ul>
+</li>
+<li><strong>基于Web的电子邮件</strong>：如Hotmail、Gmail，用户浏览器与邮件服务器间使用HTTP，服务器间仍使用SMTP。</li>
+</ul>
+</li>
+</ul>
+<h3 id="万维网（World-Wide-Web-WWW）"><strong>万维网（World Wide Web, WWW）</strong></h3>
+<ul>
+<li>
+<p><strong>WWW的概念与组成结构</strong></p>
+<ul>
+<li><strong>定义</strong>：分布式、联机式的信息存储空间，通过超链接按需求获取资源，由URL、HTTP、HTML三大标准支撑。</li>
+<li><strong>核心标准</strong>：
+<ul>
+<li>统一资源定位符（Uniform Resource Locator, URL）：
+<ul>
+<li>作用：唯一标识万维网资源的位置与访问方法。</li>
+<li>格式：<code>&lt;协议&gt;://&lt;主机&gt;:&lt;端口&gt;/&lt;路径&gt;</code>（如<a target="_blank" rel="noopener" href="http://www.tsinghua.edu.cn/chn/index.htm%EF%BC%89%EF%BC%9B%E5%8D%8F%E8%AE%AE%EF%BC%88%E5%A6%82http%E3%80%81ftp%EF%BC%89%E3%80%81%E4%B8%BB%E6%9C%BA%EF%BC%88%E5%9F%9F%E5%90%8D/IP%EF%BC%89%E4%B8%BA%E5%BF%85%E9%9C%80%EF%BC%8C%E7%AB%AF%E5%8F%A3%E3%80%81%E8%B7%AF%E5%BE%84%E5%8F%AF%E7%9C%81%E7%95%A5%EF%BC%9B%E4%B8%8D%E5%8C%BA%E5%88%86%E5%A4%A7%E5%B0%8F%E5%86%99%E3%80%82">http://www.tsinghua.edu.cn/chn/index.htm）；协议（如http、ftp）、主机（域名/IP）为必需，端口、路径可省略；不区分大小写。</a></li>
+</ul>
+</li>
+<li>超文本传输协议（HyperText Transfer Protocol, HTTP）：
+<ul>
+<li>作用：定义浏览器与Web服务器的请求/响应格式与规则，基于TCP提供可靠传输；是万维网文件交换的基础。</li>
+</ul>
+</li>
+<li>超文本标记语言（HyperText Markup Language, HTML）：
+<ul>
+<li>作用：描述网页结构与内容格式（文字、图像、视频等），支持超链接跳转。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>工作模型</strong>：采用C/S模型，浏览器为客户程序，存储Web文档的主机为Web服务器。</li>
+<li><strong>典型工作流程</strong>：
+<ol>
+<li>浏览器解析用户输入的URL，发起连接请求。</li>
+<li>Web服务器将URL转换为文件路径，生成响应信息。</li>
+<li>传输响应后，关闭TCP连接，浏览器解析并显示网页。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>超文本传输协议（HTTP）</strong></p>
+<ul>
+<li><strong>定义</strong>：面向事务（Transaction-oriented）的应用层协议，规定浏览器与服务器间的交互规则，支持可靠文件交换。</li>
+<li><strong>操作过程（以访问www.tsinghua.edu.cn为例）</strong>：
+<ol>
+<li>浏览器分析URL（<a target="_blank" rel="noopener" href="http://www.tsinghua.edu.cn/chn/index.htm%EF%BC%89%E3%80%82">http://www.tsinghua.edu.cn/chn/index.htm）。</a></li>
+<li>浏览器向DNS请求解析www.tsinghua.edu.cn的IP地址。</li>
+<li>DNS返回服务器IP，浏览器与该IP建立<strong>TCP</strong>连接（默认端口80）。</li>
+<li>浏览器发送HTTP请求（如GET /chn/index.htm）。</li>
+<li>服务器通过HTTP响应发送index.htm文件。</li>
+<li>释放TCP连接，浏览器解析并显示网页。</li>
+</ol>
+</li>
+<li><strong>核心特点</strong>：
+<ul>
+<li><strong>基于TCP</strong>：依赖TCP保证可靠传输，无需处理重传等细节。</li>
+<li><strong>无连接</strong>：虽使用TCP连接，但通信双方交换HTTP报文前无需建立HTTP连接。</li>
+<li><strong>无状态</strong>：服务器不记忆客户历史请求，简化服务器设计；通过Cookie+数据库跟踪用户状态（如浏览记录、登录状态）。
+<ul>
+<li>Cookie工作原理：服务器为用户生成唯一识别码，存入响应的Set-cookie首部；用户下次请求时携带Cookie首部，服务器通过识别码查询用户状态。</li>
+</ul>
+</li>
+<li>连接方式：
+<ul>
+<li>非持续连接（HTTP/1.0）：
+<ul>
+<li>每个网页元素（如文本、图像）的传输需单独建立TCP连接；</li>
+<li>请求一个元素需2×RTT（1个RTT建立TCP，1个RTT请求/接收），</li>
+<li>服务器负担重；</li>
+<li>浏览器常通过<strong>多并行TCP连接</strong>提速。</li>
+</ul>
+</li>
+<li>持续连接（HTTP/1.1默认）：TCP连接在发送响应后保持打开，支持后续请求复用。
+<ul>
+<li>非流水线方式：客户收到前一个响应后才发送下一个请求，TCP连接存在空闲。</li>
+<li>流水线方式：客户连续发送多个请求，服务器连续响应，仅需1×RTT延迟，效率更高。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>HTTP报文结构</strong>：
+<ul>
+<li>分类：分为请求报文（客户→服务器）和响应报文（服务器→客户），均由“开始行+首部行+实体主体”组成。</li>
+<li>请求报文：
+<ul>
+<li>开始行（请求行）：格式为“方法 URL HTTP版本”（如GET /index.htm HTTP/1.1）。</li>
+<li>常用方法：
+<ul>
+<li>GET：请求读取URL标识的资源。</li>
+<li>HEAD：请求读取URL标识资源的首部（无主体）。</li>
+<li>POST：向服务器提交信息（如表单数据）。</li>
+<li>PUT：在URL下存储文档。</li>
+<li>DELETE：删除URL标识的资源。</li>
+</ul>
+</li>
+<li>首部行：包含
+<ul>
+<li>Host（服务器域名）、</li>
+<li>Connection（连接方式）、
+<ul>
+<li>Keep-Alive</li>
+<li>Close</li>
+</ul>
+</li>
+<li>User-Agent（浏览器信息）等字段。</li>
+</ul>
+</li>
+<li>实体主体：通常为空（GET请求）或包含提交数据（POST请求）。</li>
+</ul>
+</li>
+<li>响应报文：
+<ul>
+<li>开始行（状态行）：格式为“HTTP版本 状态码 短语”（如HTTP/1.1 200 OK）。</li>
+<li>常见状态码：
+<ul>
+<li>202 Accepted：请求已接受。</li>
+<li>400 Bad Request：错误请求。</li>
+<li>404 Not Found：请求资源不存在。</li>
+</ul>
+</li>
+<li>首部行：包含服务器信息、内容类型、Cookie设置等。</li>
+<li>实体主体：通常为请求的网页/文件内容。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="动态主机配置协议（Dynamic-Host-Configuration-Protocol-DHCP）"><strong>动态主机配置协议（Dynamic Host Configuration Protocol, DHCP）</strong></h3>
+<ul>
+<li><strong>定位</strong>：应用层协议（运行在 UDP 之上，服务器端口 67，客户端端口 68），用于在主机加入网络时自动获取网络参数（IP 地址、子网掩码、默认网关、DNS 服务器等）。</li>
+<li><strong>引入动机</strong>：手工配置易出错、难集中管理，且地址需要重复利用（移动 / 临时接入主机）。</li>
+<li><strong>工作思想</strong>：采用“租约（Lease）”机制，地址动态分配，过期归还地址池，提高地址利用率。</li>
+<li><strong>基本报文类型（核心考点）</strong>：
+<ol>
+<li>DHCP Discover（客户端广播寻找服务器）</li>
+<li>DHCP Offer（服务器提供可用地址与参数）</li>
+<li>DHCP Request（客户端选择并请求确认该地址）</li>
+<li>DHCP ACK（服务器确认租约并下发最终参数）<br>
+（整体常记为 DORA 过程）</li>
+</ol>
+</li>
+<li><strong>交互特点</strong>：前 3 个阶段多使用广播（因为客户端尚无 IP / 不知服务器地址），最终确认后客户端使用获配地址正常通信。</li>
+<li><strong>租约续约（可理解，不是重点）</strong>：客户端租期过半尝试直接向原服务器单播 Request 续租，若失败再广播（若涉及 T1/T2 定时器等细节 → 标记：超纲）。</li>
+<li><strong>与 BOOTP 的关系（了解）</strong>：DHCP 向后兼容 BOOTP，增加“租约 + 扩展选项”能力（属于实现背景，超纲）。</li>
+<li><strong>常见考查点速记</strong>：
+<ul>
+<li>属于“即插即用”配置协议，用于获得 IP 与其他网络参数。</li>
+<li>使用 UDP（67/68），不用 TCP 的原因：启动阶段无可靠端到端路径、实现简化。</li>
+<li>采用租约而不是永久分配，以便地址复用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="边界网关协议（Border-Gateway-Protocol-BGP）"><strong>边界网关协议（Border Gateway Protocol, BGP）</strong></h3>
+<ul>
+<li><strong>定位</strong>：自治系统（AS）之间的“域间”路由选择协议（网络层路由控制范畴），本质使用 <strong>TCP 端口 179</strong> 作为其传输层承载。（放在此处为补充延伸，严格按层次它讨论的是“路由选择”，非典型应用层 408 应用协议列表，核心原理在 408 路由章节出现；本段仅概括性总结。）</li>
+<li><strong>产生背景</strong>：因特网规模扩大，需支持跨自治系统的策略控制与可扩展性；传统距离向量 / 链路状态在域间不适用（策略、规模、自治需求）。</li>
+<li><strong>协议类别</strong>：路径向量（Path Vector）协议——在“距离”之外，通告一条路由所经过的 AS 序列，防环并支持策略过滤。</li>
+<li><strong>基本要素（考纲相关概念）</strong>：
+<ul>
+<li>邻居（Peer）/ 会话：相邻 AS 的边界路由器之间建立 TCP 会话（保持心跳/Keepalive）。</li>
+<li>路由信息单位：前缀（IP 前缀 + 属性）。</li>
+<li>关键属性（核心需理解用途）：
+<ul>
+<li>AS-PATH：经由的 AS 列表，用于环路检测与策略（越短通常越优）。</li>
+<li>NEXT-HOP：到达该前缀应采用的下一跳路由器 IP。</li>
+<li>LOCAL-PREF（本地优先级，常在同一 AS 内决策出口）。（深入策略细节可视为超纲）</li>
+<li>MED（多出口判定辅助值）。（较深入，超纲）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>报文类型（了解即可）</strong>：OPEN、UPDATE、KEEPALIVE、NOTIFICATION（报错/断开）。（详尽字段解析属超纲）</li>
+<li><strong>与 OSPF / RIP 区分要点</strong>：
+<ul>
+<li>作用范围：BGP 跨 AS，RIP/OSPF 用于 AS 内。</li>
+<li>关注点：BGP 强调“策略 + 可扩展性”，OSPF 强调“全网拓扑统一视图（链路状态）”，RIP 简单距离向量（最大跳数 15）。</li>
+<li>协议类型：BGP = 路径向量（Path + Policy）。</li>
+</ul>
+</li>
+<li><strong>常见考试粒度</strong>：识别 BGP 的作用（域间路由 / 使用路径向量 / 通告 AS-PATH）、运行在 TCP 之上（端口 179）。更细策略与属性优化（如 Communities, Route Reflector, Confederation）→ 超纲。</li>
+</ul>
+<blockquote>
+<p>注：本节 BGP 扩展部分已用“超纲”标注；复习 408 重点请聚焦“BGP 解决域间路由，使用路径向量 + AS-PATH，基于 TCP 179 端口”。</p>
+</blockquote>
+<h3 id="本章小结及疑难点"><strong>本章小结及疑难点</strong></h3>
+<ul>
+<li>
+<p><strong>客户进程端口号与服务器进程端口号</strong></p>
+<ul>
+<li><strong>核心区别</strong>：
+<ul>
+<li>服务器进程端口号：为应用层协议默认的“熟知端口号”（如HTTP 80、SMTP 25），固定不变，供客户进程识别连接目标。</li>
+<li>客户进程端口号：由客户端系统随机分配的“临时端口号”，无需提前固定；客户发起连接时，告知服务器自己的临时端口号，供服务器返回响应。</li>
+</ul>
+</li>
+<li><strong>连接建立逻辑</strong>：客户通过服务器的熟知端口号发起连接，服务器通过客户的临时端口号返回数据，形成双向通信。</li>
+</ul>
+</li>
+<li>
+<p><strong>因特网（Internet）与万维网（WWW）的区别</strong></p>
+<ul>
+<li><strong>因特网</strong>：
+<ul>
+<li>定义：基于TCP/IP族的全球性互连网络，是物理与逻辑结合的网络基础设施。</li>
+<li>组成：包含万维网、电子邮件、Usenet、新闻组等多种服务。</li>
+</ul>
+</li>
+<li><strong>万维网</strong>：
+<ul>
+<li>定义：构建在因特网上的分布式信息系统，是因特网最主要的服务之一。</li>
+<li>核心：通过URL、HTTP、HTML实现资源访问与超链接跳转，仅覆盖因特网的部分功能。</li>
+</ul>
+</li>
+<li><strong>关系</strong>：万维网是因特网的子集，因特网为万维网提供底层通信支持。</li>
+</ul>
+</li>
+</ul>
+<h3 id="协议对比总览表（408-复习速记）">协议对比总览表（408 复习速记）</h3>
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>主要功能/用途</th>
+<th>协议类别 / 所在层次（教学表达）</th>
+<th>传输层及服务器端口</th>
+<th>关键机制 / 考点速记</th>
+<th>408 备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DNS</td>
+<td>域名 ↔ IP 解析</td>
+<td>应用层（C/S）</td>
+<td>UDP/53（也可 TCP/53 区域传送）</td>
+<td>分层命名；迭代 vs 递归；缓存；资源记录</td>
+<td>必考，掌握查询过程步骤</td>
+</tr>
+<tr>
+<td>FTP</td>
+<td>文件传输（双连接：控制+数据）</td>
+<td>应用层（状态有保持）</td>
+<td>控制：TCP/21；数据：TCP/20（主动）</td>
+<td>主动(PORT)/被动(PASV)；带外控制；需要登录</td>
+<td>常考与 HTTP 对比（带内/带外）</td>
+</tr>
+<tr>
+<td>SMTP</td>
+<td>邮件发送（服务器间/UA→服务器）</td>
+<td>应用层（推）</td>
+<td>TCP/25</td>
+<td>三阶段；MAIL/RCPT/DATA；与 POP3/IMAP 区分</td>
+<td>掌握命令序列与工作流</td>
+</tr>
+<tr>
+<td>POP3</td>
+<td>邮件读取（简单）</td>
+<td>应用层（拉）</td>
+<td>TCP/110</td>
+<td>下载并删除 / 下载并保留；无复杂文件夹</td>
+<td>了解；与 IMAP 区分</td>
+</tr>
+<tr>
+<td>IMAP</td>
+<td>邮件远程管理</td>
+<td>应用层（拉，状态丰富）</td>
+<td>TCP/143</td>
+<td>分层文件夹；部分获取；会话状态</td>
+<td>了解，较少深考</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>Web 超文本传输</td>
+<td>应用层（无状态）</td>
+<td>TCP/80（HTTPS: 443）</td>
+<td>无状态；长/短连接；流水线；方法 GET/POST…</td>
+<td>必考；与 FTP、SMTP 对比</td>
+</tr>
+<tr>
+<td>DHCP</td>
+<td>动态分配主机网络参数</td>
+<td>应用层协议（运行在 UDP 之上）</td>
+<td>UDP/67(服务器), 68(客户端)</td>
+<td>DORA 4 步；租约；广播获取；即插即用</td>
+<td>掌握流程与端口</td>
+</tr>
+<tr>
+<td>BGP</td>
+<td>域间路由（AS 之间）</td>
+<td>路由控制（路径向量）</td>
+<td>TCP/179</td>
+<td>AS-PATH；NEXT-HOP；策略路由</td>
+<td>非典型“应用层”协议；考在路由章节；表内为总览（策略细节超纲）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：表中“类别”一列按教材教学口径；严格分层时 BGP 归于网络层控制平面。标“超纲”细节已在正文标注，不在本表展开。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://lazy11.top">Lazy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lazy11.top/2025/09/26/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E5%BA%94%E7%94%A8%E5%B1%82/">https://lazy11.top/2025/09/26/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E5%BA%94%E7%94%A8%E5%B1%82/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/lazy-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/09/28/plans/blockchain-learning/" title="blockchain-learning"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">blockchain-learning</div></div><div class="info-2"><div class="info-item-1">📅 8-Week Compressed Bitcoin &amp; Blockchain Study Plan   3-step book/tutorial roadmap (foundations → technical → economics) with the 2-course video plan into one compressed 8-week plan. This way, &gt; you’ll cover:  Books/Tutorials → Build intuition + technical + economic foundations. Video Courses → Deepen understanding + get hands-on blockchain dev skills.    Weeks 1–2 → Step 1: Foundations (Conceptual + Gentle Intro) Read:  📖 The Basics of Bitcoins and Blockchains by Antony Lewis 🌐...</div></div></div></a><a class="pagination-related" href="/2025/09/26/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E4%BC%A0%E8%BE%93%E5%B1%82/" title="传输层"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">传输层</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Lazy</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">22</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lazyy11"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/lazyy11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:lazy11@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is Lazy's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">计算机网络：应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.0.1.</span> <span class="toc-text">网络应用模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F%EF%BC%88Domain-Name-System-DNS%EF%BC%89"><span class="toc-number">1.0.2.</span> <span class="toc-text">域名系统（Domain Name System, DNS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%88File-Transfer-Protocol-FTP%EF%BC%89"><span class="toc-number">1.0.3.</span> <span class="toc-text">文件传输协议（File Transfer Protocol, FTP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%EF%BC%88E-mail%EF%BC%89"><span class="toc-number">1.0.4.</span> <span class="toc-text">电子邮件（E-mail）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%87%E7%BB%B4%E7%BD%91%EF%BC%88World-Wide-Web-WWW%EF%BC%89"><span class="toc-number">1.0.5.</span> <span class="toc-text">万维网（World Wide Web, WWW）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE%EF%BC%88Dynamic-Host-Configuration-Protocol-DHCP%EF%BC%89"><span class="toc-number">1.0.6.</span> <span class="toc-text">动态主机配置协议（Dynamic Host Configuration Protocol, DHCP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E7%95%8C%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE%EF%BC%88Border-Gateway-Protocol-BGP%EF%BC%89"><span class="toc-number">1.0.7.</span> <span class="toc-text">边界网关协议（Border Gateway Protocol, BGP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E5%8F%8A%E7%96%91%E9%9A%BE%E7%82%B9"><span class="toc-number">1.0.8.</span> <span class="toc-text">本章小结及疑难点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%AF%B9%E6%AF%94%E6%80%BB%E8%A7%88%E8%A1%A8%EF%BC%88408-%E5%A4%8D%E4%B9%A0%E9%80%9F%E8%AE%B0%EF%BC%89"><span class="toc-number">1.0.9.</span> <span class="toc-text">协议对比总览表（408 复习速记）</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/plans/blockchain-learning/" title="blockchain-learning">blockchain-learning</a><time datetime="2025-09-28T14:36:18.000Z" title="Created 2025-09-28 22:36:18">2025-09-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/26/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E5%BA%94%E7%94%A8%E5%B1%82/" title="应用层">应用层</a><time datetime="2025-09-26T09:21:23.000Z" title="Created 2025-09-26 17:21:23">2025-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/26/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E4%BC%A0%E8%BE%93%E5%B1%82/" title="传输层">传输层</a><time datetime="2025-09-26T07:25:00.000Z" title="Created 2025-09-26 15:25:00">2025-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/25/%E8%80%83%E7%A0%94/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E4%BB%A3/%E7%BA%BF%E4%BB%A3%E4%B8%B2%E8%81%94/" title="线代串联">线代串联</a><time datetime="2025-09-25T05:24:26.000Z" title="Created 2025-09-25 13:24:26">2025-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/25/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E7%BD%91%E7%BB%9C%E5%B1%82/" title="网络层">网络层</a><time datetime="2025-09-25T05:20:51.000Z" title="Created 2025-09-25 13:20:51">2025-09-25</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Lazy</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (true) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://waline.lazy11.top/',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章..." type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
