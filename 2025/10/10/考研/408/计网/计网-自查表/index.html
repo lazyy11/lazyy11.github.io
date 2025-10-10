@@ -1,0 +1,1478 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>计网-自查表 | Lazy's Blog</title><meta name="author" content="Lazy,lazy11@foxmail.com"><meta name="copyright" content="Lazy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第1章 计算机网络体系结构 一、计算机网络概述   [ ] 计算机网络的概念  [ ] 能否用自己的话复述计算机网络的定义？定义中“分散”和“自治”是什么意思？ [ ] internet（互连网）和 Internet（互联网）的根本区别是什么？（提示：从通用&#x2F;专用名词、协议角度回答）    [ ] 计算机网络的组成  [ ] 从组成部分看，网络由哪三要素构成？协议在其中扮演什么角色？ [ ] 从工">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计网-自查表">
+<meta property="og:url" content="https://lazy11.top/2025/10/10/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91-%E8%87%AA%E6%9F%A5%E8%A1%A8/index.html">
+<meta property="og:site_name" content="Lazy&#39;s Blog">
+<meta property="og:description" content="第1章 计算机网络体系结构 一、计算机网络概述   [ ] 计算机网络的概念  [ ] 能否用自己的话复述计算机网络的定义？定义中“分散”和“自治”是什么意思？ [ ] internet（互连网）和 Internet（互联网）的根本区别是什么？（提示：从通用&#x2F;专用名词、协议角度回答）    [ ] 计算机网络的组成  [ ] 从组成部分看，网络由哪三要素构成？协议在其中扮演什么角色？ [ ] 从工">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lazy11.top/img/lazy-icon.png">
+<meta property="article:published_time" content="2025-10-10T12:00:43.000Z">
+<meta property="article:modified_time" content="2025-10-10T12:26:07.551Z">
+<meta property="article:author" content="Lazy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lazy11.top/img/lazy-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lazy11.top/2025/10/10/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91-%E8%87%AA%E6%9F%A5%E8%A1%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '计网-自查表',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "/img/lazy-icon.png" data-lazy-src="/img/index.png" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">计网-自查表</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">计网-自查表</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-10-10T12:00:43.000Z" title="Created 2025-10-10 20:00:43">2025-10-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-10-10T12:26:07.551Z" title="Updated 2025-10-10 20:26:07">2025-10-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span class="waline-pageview-count" data-path="/2025/10/10/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91-%E8%87%AA%E6%9F%A5%E8%A1%A8/"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="第1章-计算机网络体系结构"><strong>第1章 计算机网络体系结构</strong></h3>
+<h4 id="一、计算机网络概述"><strong>一、计算机网络概述</strong></h4>
+<ul>
+<li>
+<p><strong>[ ] 计算机网络的概念</strong></p>
+<ul>
+<li>[ ] 能否用自己的话复述计算机网络的定义？定义中“分散”和“自治”是什么意思？</li>
+<li>[ ] <code>internet</code>（互连网）和 <code>Internet</code>（互联网）的根本区别是什么？（提示：从通用/专用名词、协议角度回答）</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 计算机网络的组成</strong></p>
+<ul>
+<li>[ ] 从<strong>组成部分</strong>看，网络由哪三要素构成？<code>协议</code>在其中扮演什么角色？</li>
+<li>[ ] 从<strong>工作方式</strong>看，互联网的<code>边缘部分</code>和<code>核心部分</code>分别由什么组成？各自的核心功能是什么？</li>
+<li>[ ] 从<strong>功能组成</strong>看，<code>通信子网</code>和<code>资源子网</code>的分工是什么？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 三种数据交换方式（高频考点）</strong></p>
+<ul>
+<li><strong>[ ] 电路交换</strong>
+<ul>
+<li>[ ] 电路交换通信的三个核心步骤是什么？</li>
+<li>[ ] 为什么说电路交换的通信时延小，但线路利用率低？“独占资源”是其关键特性吗？</li>
+<li>[ ] 为什么电路交换不适合计算机之间突发式的通信？</li>
+</ul>
+</li>
+<li><strong>[ ] 报文交换</strong>
+<ul>
+<li>[ ] 报文交换的核心技术是什么？它与电路交换最本质的区别是什么？</li>
+<li>[ ] 相比电路交换，报文交换的优缺点分别是什么？（提示：从连接建立、线路利用率、时延、缓存角度分析）</li>
+<li>[ ] 为什么说报文交换的转发时延高，对交换节点缓存要求也高？</li>
+</ul>
+</li>
+<li><strong>[ ] 分组交换</strong>
+<ul>
+<li>[ ] 分组交换相比报文交换做了什么关键改进？这个改进如何解决了报文交换的主要缺点？</li>
+<li>[ ] 为什么分组交换能实现“流水线”传输，从而提高效率？</li>
+<li>[ ] 分组交换的缺点是什么？（提示：从时延、额外开销角度）</li>
+<li>[ ] 分组交换提供的两种服务模式是什么？它们的核心区别是什么？</li>
+</ul>
+</li>
+<li><strong>[ ] 【综合对比】</strong>
+<ul>
+<li>[ ] 能否画一个表格，从<strong>是否建立连接、资源分配方式、传输单位、时延特性、主要优缺点</strong>五个维度，对比电路交换、报文交换和分组交换？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 计算机网络的分类</strong></p>
+<ul>
+<li>[ ] 按<strong>分布范围</strong>，<code>LAN</code> 和 <code>WAN</code> 的主要区别是什么？现代局域网主要是什么形式？</li>
+<li>[ ] 按<strong>传输技术</strong>，<code>广播式网络</code>和<code>点对点网络</code>在数据接收方式上有何不同？</li>
+<li>[ ] 按<strong>拓扑结构</strong>，<code>星形</code>和<code>总线形</code>网络各自的优缺点是什么？哪个对中央设备/主干线路的依赖性更强？</li>
+<li>[ ] <code>网状网络</code>主要用在哪类网络（LAN/WAN）中？其最突出的优点是什么？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 计算机网络的性能指标（计算题高频考点）</strong></p>
+<ul>
+<li><strong>[ ] 速率 vs 带宽</strong>
+<ul>
+<li>[ ] 在计算机网络中，“带宽”通常指什么？它的单位是什么？</li>
+<li>[ ] 100 Mb/s 的信道，单位是 <code>b</code> 还是 <code>B</code>？换算关系是什么？</li>
+</ul>
+</li>
+<li><strong>[ ] 时延</strong>
+<ul>
+<li>[ ] 总时延由哪四部分组成？</li>
+<li>[ ] <code>发送时延</code>的计算公式是什么？它取决于哪些因素？</li>
+<li>[ ] <code>传播时延</code>的计算公式是什么？它取决于哪些因素？</li>
+<li>[ ] 【<strong>陷阱题</strong>】提高链路带宽，会减小哪部分时延？对另一部分时延有影响吗？</li>
+</ul>
+</li>
+<li><strong>[ ] 时延带宽积</strong>
+<ul>
+<li>[ ] <code>时延带宽积</code>的计算公式是什么？它的物理意义是什么？（可以把它想象成什么？）</li>
+</ul>
+</li>
+<li><strong>[ ] 往返时延 (RTT)</strong>
+<ul>
+<li>[ ] RTT 是如何定义的？它与传播时延是同一个概念吗？</li>
+</ul>
+</li>
+<li><strong>[ ] 信道利用率</strong>
+<ul>
+<li>[ ] 为什么说信道利用率并非越高越好？利用率过高会导致什么问题？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、计算机网络体系结构与参考模型"><strong>二、计算机网络体系结构与参考模型</strong></h4>
+<ul>
+<li>
+<p><strong>[ ] 计算机网络分层结构</strong></p>
+<ul>
+<li>[ ] 为什么要对网络进行分层？（至少说出2个原因）</li>
+<li>[ ] <code>实体</code>、<code>协议</code>、<code>服务</code>、<code>接口(SAP)</code> 这四个术语的定义和关系是什么？哪个是水平的，哪个是垂直的？</li>
+<li>[ ] <code>PDU</code>、<code>SDU</code>、<code>PCI</code> 之间的关系是什么？（用公式表达）</li>
+<li>[ ] 能否默写出物理层、数据链路层、网络层、传输层对应的PDU名称？</li>
+<li>[ ] 什么是数据的<code>封装</code>与<code>解封装</code>？发生在发送方还是接收方？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] ISO/OSI参考模型（理论模型）</strong></p>
+<ul>
+<li>[ ] 能否按自下而上的顺序，默写出OSI七层模型的名称？</li>
+<li><strong>[ ] 物理层 (L1)</strong>
+<ul>
+<li>[ ] 物理层的传输单位是什么？它的核心功能是什么？（“透明传输”的“透明”指什么？）</li>
+</ul>
+</li>
+<li><strong>[ ] 数据链路层 (L2)</strong>
+<ul>
+<li>[ ] 数据链路层的传输单位是什么？它如何将物理层改造成“无差错”的数据链路？</li>
+<li>[ ] <code>流量控制</code>解决的是什么问题？它和网络层的<code>拥塞控制</code>有何区别？</li>
+</ul>
+</li>
+<li><strong>[ ] 网络层 (L3)</strong>
+<ul>
+<li>[ ] 网络层的传输单位是什么？其核心功能是实现<code>主机到主机</code>还是<code>进程到进程</code>的通信？</li>
+<li>[ ] <code>路由选择</code>和<code>拥塞控制</code>是哪一层的功能？</li>
+<li>[ ] 【<strong>易错点</strong>】OSI模型的网络层提供哪两种服务？</li>
+</ul>
+</li>
+<li><strong>[ ] 传输层 (L4)</strong>
+<ul>
+<li>[ ] 传输层的传输单位是什么？其核心功能是什么？（与网络层对比）</li>
+<li>[ ] <code>复用</code>和<code>分用</code>分别指什么？是通过什么机制实现的？</li>
+<li>[ ] 为什么说传输层是<code>端到端</code>的，而数据链路层是<code>点到点</code>的？</li>
+</ul>
+</li>
+<li><strong>[ ] 会话层 (L5) &amp; 表示层 (L6) &amp; 应用层 (L7)</strong>
+<ul>
+<li>[ ] <code>会话层</code>的主要功能是什么？（如同步、检查点）</li>
+<li>[ ] <code>表示层</code>主要处理哪三类问题？</li>
+<li>[ ] <code>应用层</code>的作用是什么？能否举出3个应用层协议？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] TCP/IP模型（事实标准）</strong></p>
+<ul>
+<li>[ ] TCP/IP模型有几层？自下而上分别是什么？</li>
+<li>[ ] <code>网络接口层</code>对应OSI的哪几层？</li>
+<li>[ ] <code>网际层(IP层)</code>的核心协议是什么？它提供的是可靠还是不可靠的服务？是面向连接还是无连接的？</li>
+<li>[ ] <code>传输层</code>提供了哪两个核心协议？它们的主要区别是什么？</li>
+<li>[ ] <code>应用层</code>对应OSI的哪几层？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] OSI模型 vs TCP/IP模型（高频对比）</strong></p>
+<ul>
+<li>[ ] 两个模型在<strong>层数</strong>和<strong>概念定义</strong>（服务、接口、协议）上有何不同？</li>
+<li>[ ] 【<strong>核心考点</strong>】在<strong>网络层</strong>和<strong>传输层</strong>所提供的服务类型上，OSI和TCP/IP模型有何根本性差异？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 综合应用</strong></p>
+<ul>
+<li><strong>[ ] 数据传输过程</strong>
+<ul>
+<li>[ ] 当你在浏览器输入网址并回车后，应用层数据在发送方是如何逐层封装的？（描述每层添加了什么头部信息）</li>
+<li>[ ] 数据帧到达目的主机后，又是如何逐层解封装，最终呈现给用户的？</li>
+</ul>
+</li>
+<li><strong>[ ] 典型设备与层次</strong>
+<ul>
+<li>[ ] <code>集线器(Hub)</code>、<code>交换机(Switch)</code>、<code>路由器(Router)</code> 分别工作在哪一层？</li>
+<li>[ ] 什么是<code>碰撞域</code>和<code>广播域</code>？上述三种设备分别能隔离哪个域？</li>
+</ul>
+</li>
+<li><strong>[ ] 支撑协议</strong>
+<ul>
+<li>[ ] <code>ARP协议</code>的作用是什么？它解决的是<code>IP地址</code>到<code>什么地址</code>的映射？</li>
+<li>[ ] <code>ICMP协议</code>的主要用途是什么？我们常用的哪个网络命令利用了它？</li>
+<li>[ ] <code>TCP</code> 和 <code>UDP</code> 的核心区别是什么？请从连接性、可靠性、首部开销、适用场景四个方面进行对比。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="第2章-物理层"><strong>第2章 物理层</strong></h3>
+<h4 id="一、通信基础"><strong>一、通信基础</strong></h4>
+<h5 id="1-基本概念"><strong>1. 基本概念</strong></h5>
+<ul>
+<li>
+<p><strong>[ ] 数据、信号与码元</strong></p>
+<ul>
+<li>[ ] 你能用自己的话解释数据、信号和码元分别是什么吗？它们三者之间的关系是怎样的？</li>
+<li>[ ] 数字信号和模拟信号的核心区别是什么？请从<strong>取值特性</strong>、<strong>抗干扰能力</strong>和<strong>传输形态</strong>三个维度进行对比。</li>
+<li>[ ] 什么是码元？码元携带的比特数由什么决定？如果一个码元有 16 种离散电平状态，那么它能携带多少比特的信息？请写出计算公式。</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 信源、信道与信宿</strong></p>
+<ul>
+<li>[ ] 一个单向通信系统模型包含哪些基本组成部分？噪声源作用在哪个部分？</li>
+<li>[ ] 什么是<strong>基带传输</strong>？什么是<strong>宽带传输</strong>？它们各自适用于什么场景（长/短距离）？</li>
+<li>[ ] 串行传输和并行传输的主要区别是什么？为什么计算机网络主要采用串行传输？</li>
+<li>[ ] 请对比<strong>单工</strong>、<strong>半双工</strong>和<strong>全双工</strong>通信。它们在信道数量和通信方向上有什么不同？请各举一个生活中的例子。</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 速率、波特与带宽</strong></p>
+<ul>
+<li>[ ] **码元传输速率（波特率）<strong>和</strong>信息传输速率（比特率）**的定义和单位分别是什么？</li>
+<li>[ ] 请写出比特率和波特率之间的换算公式。在什么情况下，比特率会等于波特率？</li>
+<li>[ ] “带宽”在通信领域和计算机网络领域通常指代哪两种不同的含义？它们的单位分别是什么？</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-信道的极限容量"><strong>2. 信道的极限容量</strong></h5>
+<ul>
+<li>
+<p><strong>[ ] 奈奎斯特定理（奈氏准则）</strong></p>
+<ul>
+<li>[ ] 奈氏准则主要为了解决什么问题？它的应用前提（信道条件）是什么？</li>
+<li>[ ] 请分别写出奈氏准则计算<strong>极限码元传输速率</strong>和<strong>极限数据传输速率</strong>的公式。公式中的 W 和 V 分别代表什么？</li>
+<li>[ ] 根据奈氏准则，如果信道带宽 W 已经固定，有什么办法可以继续提高数据的极限传输速率？这种提升方式有理论上限吗？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 香农定理</strong></p>
+<ul>
+<li>[ ] 香农定理适用于什么样的信道环境？它同时考虑了哪两个关键因素？</li>
+<li>[ ] 请写出香农定理的完整公式，并解释公式中每个符号（W, S, N）的含义。</li>
+<li>[ ] 什么是<strong>信噪比</strong>？如果题目给出的信噪比是 30dB，你应该如何将其转换为 S/N 的数值来进行计算？请写出 dB 到 S/N 的转换公式。</li>
+<li>[ ] 根据香农定理，要提高信道的极限传输速率，可以从哪些方面入手？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 奈氏准则与香农定理的区别</strong></p>
+<ul>
+<li>[ ] 请从<strong>考虑因素</strong>（是否考虑噪声）和<strong>限制对象</strong>（限制码元速率还是信息速率）两个角度，对比奈氏准则和香农定理。</li>
+<li>[ ] 在一个有噪声的实际信道中，计算其最大数据传输速率时，为何需要同时考虑奈氏准则和香农定理？最终的速率应该如何确定？</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-编码与调制"><strong>3. 编码与调制</strong></h5>
+<ul>
+<li>
+<p>[ ] <strong>编码</strong>和<strong>调制</strong>的根本区别是什么？请从<strong>目标域</strong>（数字/模拟）和<strong>适用信道</strong>两个方面进行说明。</p>
+</li>
+<li>
+<p><strong>[ ] 数字数据编码为数字信号（基带传输）</strong></p>
+<ul>
+<li>[ ] **归零（RZ）**编码的特点是什么？它如何实现自同步？它的主要缺点是什么？</li>
+<li>[ ] **非归零（NRZ）**编码相比 RZ 编码有什么优点？它最大的问题是什么，尤其是在传输长串的“0”或“1”时？</li>
+<li>[ ] **反向非归零（NRZI）**编码的规则是什么？它在解决 NRZ 的问题上有什么改进？</li>
+<li>[ ] <strong>曼彻斯特编码</strong>的规则是什么？它如何同时实现时钟同步和数据传输？它的编码效率（或带宽占用）是多少？经典以太网（10Mb/s）使用的是哪种编码？</li>
+<li>[ ] <strong>差分曼彻斯特编码</strong>与曼彻斯特编码的核心区别在哪里？（提示：时钟和数据分别由什么决定？）</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 模拟数据编码为数字信号</strong></p>
+<ul>
+<li>[ ] 简述**脉冲编码调制（PCM）**的三个核心步骤是什么？</li>
+<li>[ ] PCM 的第一步“采样”必须遵循什么定理？该定理的具体内容是什么？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 数字数据调制为模拟信号</strong></p>
+<ul>
+<li>[ ] <strong>ASK</strong>、<strong>FSK</strong>、<strong>PSK</strong> 分别是通过改变载波的哪个参数来表示数字信号的？</li>
+<li>[ ] **QAM（正交幅度调制）**是如何实现更高数据传输效率的？它结合了哪两种基本的调制方式？</li>
+</ul>
+</li>
+</ul>
+<h5 id="4-交换技术"><strong>4. 交换技术</strong></h5>
+<ul>
+<li>
+<p><strong>[ ] 电路交换</strong></p>
+<ul>
+<li>[ ] 电路交换的三个阶段是什么？</li>
+<li>[ ] 电路交换的优点（如时延）和缺点（如资源利用率）分别是什么？它最适合传输什么类型的数据？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 报文交换</strong></p>
+<ul>
+<li>[ ] 报文交换的核心思想是什么？它与电路交换最根本的区别是什么？</li>
+<li>[ ] 报文交换的主要优缺点是什么？为什么它不适合实时通信？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 分组交换</strong></p>
+<ul>
+<li>[ ] 分组交换相比报文交换做了什么关键改进？这个改进带来了哪些好处？</li>
+<li>[ ] 请对比分组交换中的<strong>数据报</strong>和<strong>虚电路</strong>两种方式。它们在<strong>连接建立</strong>、<strong>路径选择</strong>、<strong>分组顺序</strong>和<strong>可靠性</strong>方面有何不同？</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、传输介质"><strong>二、传输介质</strong></h4>
+<h5 id="1-导向传输介质"><strong>1. 导向传输介质</strong></h5>
+<ul>
+<li>[ ] <strong>双绞线</strong>：为什么要将导线进行“绞合”？UTP 和 STP 的区别是什么？它在以太网中的典型传输距离限制是多少？</li>
+<li>[ ] <strong>同轴电缆</strong>：其抗干扰能力强的原因是什么？50Ω 和 75Ω 的同轴电缆通常分别用于什么场合？</li>
+<li>[ ] <strong>光纤</strong>：光纤传输数据的基本物理原理是什么？</li>
+<li>[ ] <strong>多模光纤</strong>和<strong>单模光纤</strong>的核心区别是什么？请从<strong>纤芯粗细</strong>、<strong>使用光源</strong>、<strong>传输距离</strong>和<strong>成本</strong>四个维度进行对比。</li>
+<li>[ ] 相比于铜线，光纤有哪些突出的优点？</li>
+</ul>
+<h5 id="2-非导向传输介质"><strong>2. 非导向传输介质</strong></h5>
+<ul>
+<li>[ ] <strong>微波</strong>通信有什么特点？为什么地面微波通信需要中继站？卫星通信的优缺点是什么？（特别关注延迟）</li>
+<li>[ ] <strong>红外线</strong>和<strong>激光</strong>在传输特性上有什么共同点和不同点？</li>
+</ul>
+<h5 id="3-物理层接口特性"><strong>3. 物理层接口特性</strong></h5>
+<ul>
+<li>[ ] 请分别解释物理层接口的<strong>机械特性</strong>、<strong>电气特性</strong>、<strong>功能特性</strong>和<strong>过程特性</strong>，并为每个特性举一个具体的例子（如 RJ45 接头属于哪个特性）。</li>
+</ul>
+<h4 id="三、物理层设备"><strong>三、物理层设备</strong></h4>
+<ul>
+<li>
+<p><strong>[ ] 中继器（Repeater）</strong></p>
+<ul>
+<li>[ ] 中继器的核心功能是什么？它是简单地放大信号，还是对信号进行“再生”？这二者有何区别？</li>
+<li>[ ] 中继器是否能连接两个不同协议或不同速率的网段？为什么？</li>
+<li>[ ] 中继器是否会分割冲突域或广播域？</li>
+<li>[ ] 为什么在以太网中，中继器的使用数量会受到“5-4-3规则”的限制？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 集线器（Hub）</strong></p>
+<ul>
+<li>[ ] 集线器本质上是什么设备？它的工作原理是怎样的？</li>
+<li>[ ] 连接在集线器上的所有设备是如何共享带宽的？为什么说它的效率低？</li>
+<li>[ ] 集线器的物理拓扑和逻辑拓扑分别是什么结构？</li>
+<li>[ ] 集线器是否分割冲突域？是否分割广播域？</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="第3章-数据链路层"><strong>第3章 数据链路层</strong></h3>
+<h4 id="一、数据链路层的功能"><strong>一、数据链路层的功能</strong></h4>
+<ul>
+<li>[ ] 数据链路层在网络协议栈中承上启下，它直接为哪一层提供服务？它又使用了哪一层的服务？</li>
+<li>[ ] <strong>链路管理</strong>：
+<ul>
+<li>[ ] “链路管理”主要包含哪三个阶段？</li>
+<li>[ ] 它是为面向连接的服务还是无连接的服务设计的？</li>
+<li>[ ] 思考：PPP协议会进行链路管理，但它提供的服务是可靠的吗？为什么？通常由哪一层来保证端到端的可靠性？</li>
+</ul>
+</li>
+<li>[ ] <strong>封装成帧与透明传输</strong>：
+<ul>
+<li>[ ] “封装成帧”具体做了什么？是在网络层分组的基础上添加了什么？</li>
+<li>[ ] 什么是MTU（最大传送单元）？它限制的是整个帧的长度，还是帧的数据部分长度？</li>
+<li>[ ] 什么是“透明传输”？它要解决的核心问题是什么？</li>
+<li>[ ] 为了实现透明传输，你知道哪两种具体的填充技术？它们分别解决什么场景下的问题？</li>
+</ul>
+</li>
+<li>[ ] <strong>流量控制</strong>：
+<ul>
+<li>[ ] 数据链路层的流量控制和传输层的流量控制，在控制对象（范围）上有什么本质区别？</li>
+<li>[ ] 在TCP/IP体系中，流量控制功能主要由哪一层负责？</li>
+</ul>
+</li>
+<li>[ ] <strong>差错检测</strong>：
+<ul>
+<li>[ ] 差错分为哪两种类型？CRC（循环冗余检验）主要用于检测哪一类错误？</li>
+<li>[ ] 对于有线链路和无线链路，差错处理策略有何不同？为什么会有这种差异？</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、组帧"><strong>二、组帧</strong></h4>
+<ul>
+<li>[ ] 为什么需要“组帧”？它解决了哪些问题？</li>
+<li>[ ] <strong>字符计数法</strong>：
+<ul>
+<li>[ ] 它的原理是什么？</li>
+<li>[ ] 它存在什么致命的、可能导致“灾难性后果”的缺陷？</li>
+</ul>
+</li>
+<li>[ ] <strong>字节填充法</strong>：
+<ul>
+<li>[ ] 它是如何界定帧的开始和结束的？</li>
+<li>[ ] 它的“填充”规则是什么？如果数据中出现了帧定界符或转义字符本身，该如何处理？</li>
+</ul>
+</li>
+<li>[ ] <strong>零比特填充法</strong>：
+<ul>
+<li>[ ] 它的帧定界符是什么？（必须记住二进制形式）</li>
+<li>[ ] 它的“填充”和“删除”规则是什么？（“逢5个1，就填1个0”）</li>
+<li>[ ] 相比字节填充法，它有什么优点？HDLC协议采用了哪种方法？</li>
+</ul>
+</li>
+<li>[ ] <strong>违规编码法</strong>：
+<ul>
+<li>[ ] 它的基本思想是什么？依赖于哪一层的编码特性？</li>
+<li>[ ] 思考：以太网帧的定界是采用违规编码法吗？如果不是，它实际采用了什么机制？</li>
+</ul>
+</li>
+</ul>
+<h4 id="三、差错控制"><strong>三、差错控制</strong></h4>
+<ul>
+<li>[ ] <strong>检错编码 vs 纠错编码</strong>：
+<ul>
+<li>[ ] 两者最核心的区别是什么？</li>
+</ul>
+</li>
+<li>[ ] <strong>奇偶检验码</strong>：
+<ul>
+<li>[ ] 它能检测出奇数个比特的错误还是偶数个比特的错误？</li>
+<li>[ ] 它能定位错误的位置吗？</li>
+</ul>
+</li>
+<li>[ ] <strong>循环冗余码 (CRC)</strong>：
+<ul>
+<li>[ ] CRC计算的核心步骤是什么？（能口述或默写出“加0 -&gt; 模2除 -&gt; 得余数”的过程）</li>
+<li>[ ] 已知数据M和生成多项式G(x)，你能手动计算出FCS（帧检验序列）吗？</li>
+<li>[ ] 接收方如何判断帧是否出错？</li>
+<li>[ ] CRC的检错能力如何？它能检测出所有单比特错误吗？能检测出所有长度小于等于r的突发错误吗？</li>
+</ul>
+</li>
+<li>[ ] <strong>纠错编码 (海明码)</strong>：
+<ul>
+<li>[ ] 什么是“码距”（海明距离）？</li>
+<li>[ ] 码距、检错位数d、纠错位数c三者之间满足什么关系？</li>
+<li>[ ] 要想检测d位错，码距至少为多少？要想纠正c位错，码距至少为多少？（这是选择题高频考点）</li>
+<li>[ ] 如何确定n位数据需要k位检验位？（背诵公式：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>k</mi></msup><mo>≥</mo><mi>n</mi><mo>+</mo><mi>k</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^k \ge n + k + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9851em;vertical-align:-0.136em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>）</li>
+<li>[ ] 海明码的检验位<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">P_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>被放置在海明码的哪个位置上？</li>
+<li>[ ] 你能根据“分组检验”规则，确定每个检验位具体校验哪些信息位吗？</li>
+<li>[ ] 接收方如何通过检验方程<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mi>k</mi></msub><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><msub><mi>S</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">S_k...S_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">...</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的值来定位并纠正错误？</li>
+</ul>
+</li>
+</ul>
+<h4 id="四、流量控制与可靠传输机制"><strong>四、流量控制与可靠传输机制</strong></h4>
+<ul>
+<li>[ ] <strong>滑动窗口机制</strong>：
+<ul>
+<li>[ ] 滑动窗口机制同时解决了哪两个问题？</li>
+<li>[ ] 发送窗口和接收窗口的含义分别是什么？</li>
+<li>[ ] 为什么说滑动窗口的大小必须满足 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>W</mi><mi>T</mi></msub><mo>+</mo><msub><mi>W</mi><mi>R</mi></msub><mo>≤</mo><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">W_T + W_R \le 2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>？</li>
+</ul>
+</li>
+<li>[ ] <strong>协议对比 (关键考点)</strong>：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">对比项</th>
+<th style="text-align:left">停止-等待协议 (S-W)</th>
+<th style="text-align:left">后退N帧协议 (GBN)</th>
+<th style="text-align:left">选择重传协议 (SR)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>发送窗口 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>W</mi><mi>T</mi></msub></mrow><annotation encoding="application/x-tex">W_T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></strong></td>
+<td style="text-align:left"><code>- [ ]</code> 是多少？</td>
+<td style="text-align:left"><code>- [ ]</code> 是多少？</td>
+<td style="text-align:left"><code>- [ ]</code> 是多少？</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>接收窗口 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>W</mi><mi>R</mi></msub></mrow><annotation encoding="application/x-tex">W_R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></strong></td>
+<td style="text-align:left"><code>- [ ]</code> 是多少？</td>
+<td style="text-align:left"><code>- [ ]</code> 是多少？</td>
+<td style="text-align:left"><code>- [ ]</code> 是多少？</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>窗口大小限制</strong></td>
+<td style="text-align:left"><code>- [ ]</code> N/A</td>
+<td style="text-align:left"><code>- [ ]</code> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>W</mi><mi>T</mi></msub><mo>≤</mo></mrow><annotation encoding="application/x-tex">W_T \le</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span></span></span></span> ?</td>
+<td style="text-align:left"><code>- [ ]</code> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>W</mi><mi>T</mi></msub><mo>=</mo><msub><mi>W</mi><mi>R</mi></msub><mo>≤</mo></mrow><annotation encoding="application/x-tex">W_T=W_R \le</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span></span></span></span> ?</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>确认机制</strong></td>
+<td style="text-align:left"><code>- [ ]</code> 单独确认</td>
+<td style="text-align:left"><code>- [ ]</code> 是哪种确认？</td>
+<td style="text-align:left"><code>- [ ]</code> 是哪种确认？</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>重传策略</strong></td>
+<td style="text-align:left"><code>- [ ]</code> 超时重传当前帧</td>
+<td style="text-align:left"><code>- [ ]</code> 出错时重传什么？</td>
+<td style="text-align:left"><code>- [ ]</code> 出错时重传什么？</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>接收方缓存</strong></td>
+<td style="text-align:left"><code>- [ ]</code> 需要吗？</td>
+<td style="text-align:left"><code>- [ ]</code> 需要吗？</td>
+<td style="text-align:left"><code>- [ ]</code> 需要吗？</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>优缺点</strong></td>
+<td style="text-align:left"><code>- [ ]</code> ?</td>
+<td style="text-align:left"><code>- [ ]</code> ?</td>
+<td style="text-align:left"><code>- [ ]</code> ?</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>适用场景</strong></td>
+<td style="text-align:left"><code>- [ ]</code> ?</td>
+<td style="text-align:left"><code>- [ ]</code> ?</td>
+<td style="text-align:left"><code>- [ ]</code> ?</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>[ ] <strong>信道利用率分析</strong>：
+<ul>
+<li>[ ] 你能写出停止-等待协议的信道利用率计算公式吗？并解释公式中每个参数的含义。</li>
+<li>[ ] 对于连续ARQ协议，在发送窗口能发完之前，ACK就已返回的情况下，信道利用率的公式是什么？</li>
+<li>[ ] 什么时候信道利用率可以达到100%？</li>
+<li>[ ] 如何根据信道利用率和信道带宽计算实际数据传输速率？</li>
+</ul>
+</li>
+</ul>
+<h4 id="五、介质访问控制-MAC"><strong>五、介质访问控制 (MAC)</strong></h4>
+<ul>
+<li>[ ] <strong>信道划分介质访问控制</strong>：
+<ul>
+<li>[ ] FDM、TDM、WDM、CDM的核心思想分别是什么？</li>
+<li>[ ] 什么是同步TDM？它的主要缺点是什么？</li>
+<li>[ ] 什么是统计TDM（STDM）？它如何提高信道利用率？</li>
+<li>[ ] 对于CDMA，为什么多个用户可以同时使用同一频率通信？其依赖的“码片序列”具有什么关键特性？</li>
+</ul>
+</li>
+<li>[ ] <strong>随机访问介质访问控制</strong>：
+<ul>
+<li>[ ] <strong>ALOHA协议</strong>：纯ALOHA和时隙ALOHA的主要区别是什么？谁的吞吐量更高？为什么？</li>
+<li>[ ] <strong>CSMA协议</strong>：1-坚持、非坚持、p-坚持CSMA在监听到信道“忙”和“空闲”时，分别会采取什么行动？</li>
+<li>[ ] <strong>CSMA/CD (关键考点)</strong>：
+<ul>
+<li>[ ] 它的核心思想是什么？（先听后发，边听边发…）</li>
+<li>[ ] 什么是“争用期”？它的长度和什么有关？（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>τ</mi></mrow><annotation encoding="application/x-tex">2\tau</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span></span></span></span>）</li>
+<li>[ ] 为什么最小帧长和争用期、数据传输速率有关？公式是什么？（能默写）</li>
+<li>[ ] 10Mb/s以太网的争用期和最小帧长分别是多少？（经典数值）</li>
+<li>[ ] 帧间最小间隔是多少比特时间？</li>
+<li>[ ] 描述一下“截断二进制指数退避算法”的重传规则。第 i 次冲突后，随机数 r 的选择范围是什么？最大重传次数是多少？</li>
+</ul>
+</li>
+<li>[ ] <strong>CSMA/CA (关键考点)</strong>：
+<ul>
+<li>[ ] 它主要用于哪种网络环境？为什么在这种环境下不能使用CSMA/CD？（隐藏站、信号强度）</li>
+<li>[ ] 它的核心机制是什么？（ACK、IFS、随机退避）</li>
+<li>[ ] SIFS 和 DIFS 谁更短？分别用在什么场合？</li>
+<li>[ ] 什么是“虚拟载波监听”？它是通过交换什么信息（RTS/CTS）和设置什么计时器（NAV）来实现的？</li>
+<li>[ ] RTS/CTS机制主要解决了什么问题？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[ ] <strong>CSMA/CD 与 CSMA/CA 的核心区别对比</strong>：
+<ul>
+<li>[ ] <strong>冲突处理</strong>：一个是“冲突检测”，一个是“冲突避免”，具体行为有何不同？</li>
+<li>[ ] <strong>适用网络</strong>：分别适用于有线还是无线？</li>
+<li>[ ] <strong>可靠性</strong>：谁在链路层提供了（准）可靠传输？通过什么机制？</li>
+<li>[ ] <strong>核心机制</strong>：CSMA/CD的关键技术有哪些？CSMA/CA呢？</li>
+</ul>
+</li>
+</ul>
+<h4 id="六、局域网-LAN"><strong>六、局域网 (LAN)</strong></h4>
+<ul>
+<li>[ ] <strong>体系结构</strong>：
+<ul>
+<li>[ ] 局域网对应OSI模型的哪几层？</li>
+<li>[ ] 数据链路层被划分为哪两个子层？它们各自的职责是什么？</li>
+</ul>
+</li>
+<li>[ ] <strong>以太网与IEEE 802.3</strong>：
+<ul>
+<li>[ ] MAC地址有多少位？通常如何表示？</li>
+<li>[ ] 网卡会无条件接收所有帧吗？如果不是，它会接收哪三类目的地址的帧？</li>
+<li>[ ] <strong>以太网V2帧格式</strong>：你能默写出其所有字段及其字节数吗？（用“662n4”口诀辅助记忆）</li>
+<li>[ ] 帧的前导码和帧开始定界符属于哪一层？FCS校验范围是否包含它们？</li>
+<li>[ ] 以太网V2帧的数据字段长度范围是多少？如果不足最小长度怎么办？</li>
+<li>[ ] <strong>IEEE 802.3帧格式</strong>：它与以太网V2帧格式最关键的区别是什么字段？如何通过该字段的值区分这两种帧？</li>
+<li>[ ] 随着以太网速率的提高（如吉比特、10吉比特），CSMA/CD协议的使用情况有何变化？</li>
+</ul>
+</li>
+<li>[ ] <strong>IEEE 802.11 无线局域网</strong>：
+<ul>
+<li>[ ] BSS 和 ESS 的区别是什么？</li>
+<li>[ ] 802.11 MAC帧为什么最多需要4个地址字段？请设想一个需要用到地址3的场景。</li>
+</ul>
+</li>
+<li>[ ] <strong>VLAN (虚拟局域网)</strong>：
+<ul>
+<li>[ ] VLAN的主要作用是什么？它隔离的是冲突域还是广播域？</li>
+<li>[ ] 什么是802.1Q帧？它在标准以太网帧的哪个位置插入了什么内容？</li>
+<li>[ ] 插入的VLAN标签有多长？这使得最大帧长变为多少？</li>
+</ul>
+</li>
+</ul>
+<h4 id="七、广域网-WAN"><strong>七、广域网 (WAN)</strong></h4>
+<ul>
+<li>[ ] 广域网和局域网在覆盖范围、OSI层次、核心任务上有哪些主要区别？</li>
+<li>[ ] <strong>点对点协议 (PPP)</strong>：
+<ul>
+<li>[ ] PPP协议有哪些显著特点？（面向字节、透明传输、无纠错、无流量控制、全双工等）</li>
+<li>[ ] PPP是可靠的协议吗？</li>
+<li>[ ] PPP由哪三个部分组成？LCP和NCP分别负责什么？</li>
+<li>[ ] PPP帧格式中，地址字段A和控制字段C通常是什么固定值？协议字段的作用是什么？</li>
+</ul>
+</li>
+</ul>
+<h4 id="八、数据链路层设备"><strong>八、数据链路层设备</strong></h4>
+<ul>
+<li>[ ] <strong>以太网交换机</strong>：
+<ul>
+<li>[ ] 交换机工作在OSI的第几层？</li>
+<li>[ ] 它是如何实现“自学习”建立转发表的？</li>
+<li>[ ] 当交换机收到一个帧后，其转发/过滤决策过程是怎样的？（目的地址在表中、不在表中、是广播地址）</li>
+<li>[ ] 对比“直通交换”和“存储转发交换”的优缺点。</li>
+<li>[ ] 交换机和集线器（Hub）的核心区别是什么？（冲突域、带宽分配、工作层次）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="第4章-网络层"><strong>第4章 网络层</strong></h3>
+<h4 id="一、-网络层的功能"><strong>一、 网络层的功能</strong></h4>
+<h5 id="1-1-异构网络互连"><strong>1.1 异构网络互连</strong></h5>
+<ul>
+<li>[ ] 网络层意义上的“异构网络互连”指的是什么？它主要解决了哪些方面的“异构”问题？</li>
+<li>[ ] 请列出物理层、数据链路层、网络层及以上的中继系统，并说明它们分别是否以及如何分割<strong>冲突域</strong>和<strong>广播域</strong>？</li>
+<li>[ ] 为什么说使用路由器进行网络互连才算是真正的“网络互连”，而使用交换机或网桥只是“扩大了网络”？</li>
+<li>[ ] TCP/IP体系结构是如何通过网络层的标准化（IP协议）来实现异构网络互连的？它向传输层隐藏了哪些底层细节？</li>
+</ul>
+<h5 id="1-2-路由与转发"><strong>1.2 路由与转发</strong></h5>
+<ul>
+<li>[ ] 路由器的两大核心功能“路由选择”和“分组转发”分别是什么？它们在时间尺度上有什么区别（谁更慢，谁更快）？</li>
+<li>[ ] “路由选择”的核心任务是什么？它依赖什么（协议、算法）来生成和维护什么（数据结构）？</li>
+<li>[ ] “分组转发”的核心任务是什么？它依据什么（数据结构）来执行操作？</li>
+<li>[ ] 路由表和转发表有什么区别和联系？为什么需要将它们分开？在讨论原理时，我们通常说的“查路由表”实际指的是查哪个表？</li>
+</ul>
+<h5 id="1-3-网络层提供的两种服务"><strong>1.3 网络层提供的两种服务</strong></h5>
+<ul>
+<li>[ ] 网络层可以提供哪两种基本服务？它们的本质区别是“面向连接”还是“无连接”？</li>
+<li>[ ] <strong>针对虚电路服务：</strong>
+<ul>
+<li>[ ] 它的通信过程分为哪三个阶段？每个阶段的主要任务是什么？</li>
+<li>[ ] 在数据传输阶段，分组头部携带的是完整的目的地址还是一个更短的标识？这个标识叫什么？</li>
+<li>[ ] 虚电路服务能保证分组的顺序和可靠性吗？</li>
+<li>[ ] 如果网络中的某个中间结点或链路发生故障，会对使用虚电路服务的通信产生什么影响？</li>
+</ul>
+</li>
+<li>[ ] <strong>针对数据报服务：</strong>
+<ul>
+<li>[ ] 它在通信前需要建立连接吗？</li>
+<li>[ ] 每个分组是如何独立选择路径的？这依赖于分组头部的什么信息？</li>
+<li>[ ] 数据报服务能保证分组的顺序和可靠性吗？如果不能，这个责任交给了哪一层？</li>
+<li>[ ] 相比虚电路服务，数据报服务在应对网络结点故障时有什么优势？</li>
+</ul>
+</li>
+<li>[ ] <strong>对比辨析：</strong> 请从<strong>连接建立、目的地址、路由选择、分组顺序、可靠性、故障适应性</strong>六个方面，清晰地对比虚电路服务和数据报服务。</li>
+</ul>
+<h5 id="1-4-SDN（软件定义网络）"><strong>1.4 SDN（软件定义网络）</strong></h5>
+<ul>
+<li>[ ] SDN的核心思想是什么？它将网络设备的功能划分为了哪两个平面？</li>
+<li>[ ] 在SDN架构中，控制平面和数据平面分别负责什么工作？它们是集中式的还是分布式的？</li>
+<li>[ ] 路由器在SDN架构中被称为什么？它的功能相较于传统路由器是增强了还是简化了？</li>
+<li>[ ] SDN中的“流表”替代了传统网络中的什么？</li>
+<li>[ ] 什么是SDN的北向接口和南向接口？它们各自的作用是什么？OpenFlow协议属于哪种接口？</li>
+<li>[ ] 相比传统网络，SDN有哪些主要优缺点？（提示：从性能、灵活性、安全/可靠性等方面思考）</li>
+</ul>
+<h5 id="1-5-拥塞控制"><strong>1.5 拥塞控制</strong></h5>
+<ul>
+<li>[ ] 什么是网络拥塞？当拥塞发生时，网络的吞吐量和时延会发生什么变化？</li>
+<li>[ ] <strong>核心对比：</strong> 拥塞控制和流量控制的根本区别是什么？（提示：从作用范围和解决的问题角度回答）</li>
+<li>[ ] 开环控制和闭环控制在拥塞控制中分别指什么？它们是在网络运行前还是运行中起作用？</li>
+</ul>
+<hr>
+<h4 id="二、-IPv4"><strong>二、 IPv4</strong></h4>
+<h5 id="2-1-IPv4分组"><strong>2.1 IPv4分组</strong></h5>
+<ul>
+<li>[ ] IPv4数据报由哪两部分组成？其首部的固定长度是多少字节？最大长度是多少字节？</li>
+<li>[ ] <strong>关键字段辨析（选择题高频考点）：</strong>
+<ul>
+<li>[ ] “版本”字段：对于IPv4，其值是多少？</li>
+<li>[ ] “首部长度”字段：它的单位是什么？如果值为5，表示首部有多少字节？</li>
+<li>[ ] “总长度”字段：它的单位是什么？它限制了IP数据报最大为多少字节？</li>
+<li>[ ] “标识”、“标志(DF, MF)”、“片偏移”这三个字段是用来做什么的？</li>
+<li>[ ] “片偏移”字段的单位是什么？为什么除最后一个分片外，其他分片的数据长度必须是这个单位的整数倍？</li>
+<li>[ ] “生存时间(TTL)”的作用是什么？每经过一个什么设备，其值会减1？减到0会发生什么？</li>
+<li>[ ] “协议”字段的作用是什么？请说出TCP、UDP、ICMP对应的协议号。</li>
+<li>[ ] “首部检验和”字段<strong>只检验</strong>数据报的哪个部分？每经过一个路由器，该字段需要重新计算吗？为什么？</li>
+</ul>
+</li>
+<li>[ ] <strong>IP数据报分片（计算题考点）：</strong>
+<ul>
+<li>[ ] 触发IP数据报分片的条件是什么？（提示：与MTU有关）</li>
+<li>[ ] 分片操作是在哪里进行的？重组操作又是在哪里进行的？为什么中间路由器不进行重组？</li>
+<li>[ ] 假设一个数据载荷为3800B的IP报文（首部20B），要经过一个MTU为1500B的链路，请计算：</li>
+<li>[ ] 会被分成几个分片？</li>
+<li>[ ] 每个分片的数据载荷、总长度、MF标志位和片偏移分别是多少？</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-2-IPv4地址与NAT"><strong>2.2 IPv4地址与NAT</strong></h5>
+<ul>
+<li>[ ] 请写出A、B、C类地址的范围、默认子网掩码、以及网络号和主机号的位数。</li>
+<li>[ ] 以下特殊地址分别代表什么含义？
+<ul>
+<li>[ ] 主机号全为0的地址？</li>
+<li>[ ] 主机号全为1的地址？</li>
+<li>[ ] <code>127.0.0.1</code>？</li>
+<li>[ ] <code>0.0.0.0</code>？</li>
+<li>[ ] <code>255.255.255.255</code>？</li>
+</ul>
+</li>
+<li>[ ] 什么是NAT技术？它主要解决了什么问题？</li>
+<li>[ ] 请列出三个私有IP地址段。这些地址能出现在公共互联网上吗？</li>
+<li>[ ] 简述NAT的工作原理。当一个内部主机访问外部服务器时，NAT路由器需要修改IP报文的哪些字段？当服务器响应报文返回时，又需要修改哪些字段？</li>
+</ul>
+<h5 id="2-3-子网划分与子网掩码"><strong>2.3 子网划分与子网掩码</strong></h5>
+<ul>
+<li>[ ] 什么是子网划分？它是从IP地址的哪一部分借位来创建子网号的？</li>
+<li>[ ] 子网划分对外部网络是可见的吗？</li>
+<li>[ ] 子网掩码的作用是什么？如何通过IP地址和子网掩码计算出网络地址？</li>
+<li>[ ] 主机如何利用子网掩码判断目的主机是否与自己在同一个子网？如果不在，主机会将数据包发给谁？</li>
+</ul>
+<h5 id="2-4-CIDR（无分类域间路由选择）"><strong>2.4 CIDR（无分类域间路由选择）</strong></h5>
+<ul>
+<li>[ ] CIDR与传统的分类地址相比，最核心的变化是什么？</li>
+<li>[ ] <code>192.168.10.5/22</code> 这个地址表示什么？请计算出：
+<ul>
+<li>[ ] 它的子网掩码是什么？</li>
+<li>[ ] 它所在地址块的最小地址（网络地址）和最大地址（广播地址）是什么？</li>
+<li>[ ] 这个地址块总共有多少个地址？</li>
+</ul>
+</li>
+<li>[ ] 什么是路由聚合（构成超网）？它有什么好处？</li>
+<li>[ ] 路由器在查找转发表时遵循的“最长前缀匹配”原则是什么？为什么要这样做？</li>
+</ul>
+<h5 id="2-5-ARP（地址解析协议）"><strong>2.5 ARP（地址解析协议）</strong></h5>
+<ul>
+<li>[ ] ARP协议解决了什么问题？它是在哪两个地址之间进行转换？</li>
+<li>[ ] 描述ARP的工作流程：当主机A要发送数据给同一局域网内的主机B，但ARP缓存中没有B的条目时，会发生什么？（请说明ARP请求和响应分别是广播还是单播）</li>
+<li>[ ] 如果主机A要发送数据给<strong>不同网络</strong>的主机C，A会使用ARP解析谁的MAC地址？</li>
+</ul>
+<h5 id="2-6-DHCP（动态主机配置协议）"><strong>2.6 DHCP（动态主机配置协议）</strong></h5>
+<ul>
+<li>[ ] DHCP协议的作用是什么？它除了分配IP地址，还能提供哪些网络配置信息？</li>
+<li>[ ] DHCP是基于TCP还是UDP工作的？</li>
+<li>[ ] 请描述DHCP获取IP地址的四个步骤（Discover, Offer, Request, Acknowledge）。</li>
+<li>[ ] 在这四个步骤中，客户端和服务器发送的报文通常是广播还是单播？为什么初始阶段必须使用广播？</li>
+<li>[ ] 客户端在发送DHCP Discover报文时，使用的源IP地址和目的IP地址分别是什么？</li>
+</ul>
+<h5 id="2-7-ICMP（网际控制报文协议）"><strong>2.7 ICMP（网际控制报文协议）</strong></h5>
+<ul>
+<li>[ ] ICMP协议的主要功能是什么？它被封装在哪一层协议的数据部分？</li>
+<li>[ ] ICMP报文分为哪两大类？</li>
+<li>[ ] <strong>(高频考点)</strong> 请列举至少三种会发送ICMP<strong>差错报告报文</strong>的情况。</li>
+<li>[ ] <strong>(高频考点)</strong> 请列举至少三种<strong>不会</strong>发送ICMP差错报告报文的情况。</li>
+<li>[ ] <code>ping</code>命令利用了哪两种ICMP报文？</li>
+<li>[ ] <code>traceroute</code> (或 <code>tracert</code>) 命令利用了IPv4首部的哪个字段和ICMP的哪种报文类型来探测路径？</li>
+</ul>
+<h5 id="2-8-IPv4分组转发过程"><strong>2.8 IPv4分组转发过程</strong></h5>
+<ul>
+<li>[ ] 路由器转发分组的核心原则是基于“目的主机地址”还是“目的网络地址”？</li>
+<li>[ ] 描述路由器收到一个IP分组后的转发算法流程。（提示：从检查特定主机路由开始，到最长前缀匹配，再到默认路由）</li>
+<li>[ ] 当一个IP分组从源主机跨越多个路由器到达目的主机时，分组中的<strong>源/目的IP地址</strong>会改变吗？封装它的<strong>MAC帧的源/目的MAC地址</strong>会改变吗？</li>
+</ul>
+<hr>
+<h4 id="三、-IPv6"><strong>三、 IPv6</strong></h4>
+<h5 id="3-1-IPv6的主要特点"><strong>3.1 IPv6的主要特点</strong></h5>
+<ul>
+<li>[ ] 相比IPv4，IPv6最核心的改进是什么？地址长度从多少位增加到了多少位？</li>
+<li>[ ] IPv6的首部格式相比IPv4做了哪些简化？它取消了IPv4首部中的哪些字段？为什么可以取消检验和字段？</li>
+<li>[ ] IPv6的分片策略与IPv4有何根本不同？分片只能由谁来完成？如果中间路由器发现分组太大无法转发，它会怎么做？</li>
+<li>[ ] IPv6是如何实现即插即用的（自动配置）？</li>
+</ul>
+<h5 id="3-2-IPv6数据报的基本首部"><strong>3.2 IPv6数据报的基本首部</strong></h5>
+<ul>
+<li>[ ] IPv6的基本首部长度是固定的吗？是多少字节？</li>
+<li>[ ] IPv6首部中的“下一个首部”字段作用是什么？它如何支持扩展首部？</li>
+<li>[ ] IPv6首部中的“跳数限制”字段相当于IPv4中的哪个字段？</li>
+<li>[ ] IPv6新增的“流标号”字段有什么作用？主要用于支持哪类应用？</li>
+</ul>
+<h5 id="3-3-IPv6地址"><strong>3.3 IPv6地址</strong></h5>
+<ul>
+<li>[ ] 描述IPv6地址的冒号十六进制记法，并说明两种简化规则（前导零省略和零压缩）。</li>
+<li>[ ] IPv6定义了哪三种基本地址类型？任播（Anycast）地址与单播、多播有何不同？</li>
+<li>[ ] 什么是本地链路单播地址？它的前缀是什么？这种地址可以在公网路由吗？</li>
+</ul>
+<h5 id="3-4-从IPv4向IPv6过渡"><strong>3.4 从IPv4向IPv6过渡</strong></h5>
+<ul>
+<li>[ ] 为什么需要从IPv4向IPv6过渡的技术？</li>
+<li>[ ] 请解释“双协议栈”技术的工作原理。主机或路由器如何决定使用IPv4还是IPv6进行通信？</li>
+<li>[ ] 请解释“隧道技术”的工作原理。一个IPv6的报文是如何“穿越”IPv4网络的？</li>
+</ul>
+<hr>
+<h4 id="四、-路由算法与路由协议"><strong>四、 路由算法与路由协议</strong></h4>
+<h5 id="4-1-静态路由与动态路由"><strong>4.1 静态路由与动态路由</strong></h5>
+<ul>
+<li>[ ] 静态路由和动态路由的根本区别是什么？</li>
+<li>[ ] 它们各自的优缺点是什么？分别适用于什么样的网络环境？</li>
+</ul>
+<h5 id="4-2-距离-向量路由算法"><strong>4.2 距离-向量路由算法</strong></h5>
+<ul>
+<li>[ ] 距离-向量算法的核心思想是什么？（每个结点与谁交换信息？交换什么信息？）</li>
+<li>[ ] 该算法存在什么主要问题？（“好消息”和“坏消息”的传播速度有何不同？）</li>
+<li>[ ] 为解决路由环路问题，可以采用哪些机制？（如最大跳数限制、水平分割等）</li>
+</ul>
+<h5 id="4-3-链路状态路由算法"><strong>4.3 链路状态路由算法</strong></h5>
+<ul>
+<li>[ ] 链路状态算法的核心思想是什么？（每个结点向谁广播信息？广播什么信息？）</li>
+<li>[ ] 链路状态算法的工作步骤有哪些？（发现邻居、洪泛LSP、构建拓扑、计算路径）</li>
+<li>[ ] 该算法使用的最短路径算法是什么？</li>
+<li>[ ] 相比距离-向量算法，链路状态算法在收敛速度、路由环路、计算开销方面有何优缺点？</li>
+</ul>
+<h5 id="4-4-层次路由"><strong>4.4 层次路由</strong></h5>
+<ul>
+<li>[ ] 为什么要引入自治系统（AS）的概念，进行层次路由划分？</li>
+<li>[ ] 域内路由协议（IGP）和域间路由协议（EGP）的作用分别是什么？它们关注的重点有何不同？</li>
+<li>[ ] RIP、OSPF属于IGP还是EGP？BGP属于哪一种？</li>
+</ul>
+<h5 id="4-5-RIP"><strong>4.5 RIP</strong></h5>
+<ul>
+<li>[ ] RIP是基于<strong>距离-向量</strong>还是<strong>链路状态</strong>算法？</li>
+<li>[ ] RIP使用什么作为度量（metric）？最大值是多少，代表什么？</li>
+<li>[ ] RIP的路由信息是封装在TCP还是UDP报文中进行交换的？</li>
+<li>[ ] RIP的更新机制是怎样的？（与谁交换？交换什么内容？交换频率如何？）</li>
+<li>[ ] 简述RIP的“慢收敛”问题（特别是“坏消息”传播慢）是如何产生的。</li>
+</ul>
+<h5 id="4-6-OSPF"><strong>4.6 OSPF</strong></h5>
+<ul>
+<li>[ ] OSPF是基于<strong>距离-向量</strong>还是<strong>链路状态</strong>算法？</li>
+<li>[ ] OSPF的报文是直接封装在IP报文中还是封装在TCP/UDP中？（协议号是多少？）</li>
+<li>[ ] OSPF通过广播什么信息来同步网络状态？这种广播是在何时触发的？</li>
+<li>[ ] OSPF是如何通过“区域划分”来减少协议开销的？主干区域的作用是什么？</li>
+<li>[ ] OSPF的Hello分组的作用是什么？</li>
+<li>[ ] OSPF和RIP相比，主要优势有哪些？</li>
+</ul>
+<h5 id="4-7-BGP"><strong>4.7 BGP</strong></h5>
+<ul>
+<li>[ ] BGP是域内协议（IGP）还是域间协议（EGP）？它的主要作用是什么？</li>
+<li>[ ] BGP是基于TCP还是UDP工作的？为什么选择这个传输层协议？</li>
+<li>[ ] BGP交换的路由信息中，最重要的属性是什么？（提示：AS-PATH）</li>
+<li>[ ] BGP寻找的是“最优”路径吗？如果不是，它寻找的是什么样的路径？（提示：与策略有关）</li>
+<li>[ ] 简述BGP的“热土豆”路由选择原则。</li>
+</ul>
+<hr>
+<h4 id="五、-IP多播"><strong>五、 IP多播</strong></h4>
+<ul>
+<li>[ ] 什么是IP多播？与单播和广播相比，它在“一对多”通信场景下的主要优势是什么？</li>
+<li>[ ] IP多播地址属于哪一类地址（A/B/C/D/E）？它的范围是什么？</li>
+<li>[ ] IP多播地址可以作为IP分组的源地址吗？</li>
+<li>[ ] IP多播地址如何映射到硬件（MAC）多播地址？这种映射是“一对一”的吗？如果不是，会带来什么问题？</li>
+<li>[ ] <strong>IGMP协议</strong>的作用是什么？它工作在主机和哪个设备之间？</li>
+<li>[ ] <strong>多播路由协议</strong>（如PIM）的作用是什么？它工作在哪些设备之间？</li>
+<li>[ ] IGMP和多播路由协议是如何协同工作的？</li>
+</ul>
+<hr>
+<h4 id="六、-移动IP"><strong>六、 移动IP</strong></h4>
+<ul>
+<li>[ ] 移动IP技术要解决的核心问题是什么？它与DHCP有何本质区别？</li>
+<li>[ ] 移动IP中的三个关键功能实体是什么？（移动节点、归属代理、外地代理）</li>
+<li>[ ] 什么是“归属地址”和“转交地址”？在移动节点漫游过程中，哪个地址是固定的，哪个是临时的？</li>
+<li>[ ] 请描述一个分组从外部主机发送到漫游中的移动节点的完整路径。（提示：这涉及到“隧道技术”和“三角路由”问题）</li>
+<li>[ ] 移动节点向外部主机发送分组时，需要经过归属代理吗？</li>
+</ul>
+<hr>
+<h4 id="七、-网络层设备"><strong>七、 网络层设备</strong></h4>
+<ul>
+<li>[ ] <strong>核心概念辨析：</strong>
+<ul>
+<li>[ ] 什么是冲突域？集线器、交换机、路由器如何影响冲突域的范围？</li>
+<li>[ ] 什么是广播域？集线器、交换机、路由器如何影响广播域的范围？</li>
+<li>[ ] 哪个设备既能隔离冲突域，又能隔离广播域？</li>
+</ul>
+</li>
+<li>[ ] 路由器的组成可以划分为哪两个主要部分（或平面）？它们各自的功能是什么？</li>
+<li>[ ] 路由器的输入/输出端口除了物理层和数据链路层功能外，在网络层需要执行哪些操作？</li>
+<li>[ ] 路由表中常见的表项类型有哪些？（直连、静态、动态、默认）</li>
+<li>[ ] 默认路由（0.0.0.0/0）的作用是什么？</li>
+</ul>
+<hr>
+<h3 id="第5层-传输层"><strong>第5层 传输层</strong></h3>
+<h4 id="一、-传输层基础概念"><strong>一、 传输层基础概念</strong></h4>
+<ul>
+<li>
+<p>[ ] <strong>逻辑通信</strong></p>
+<ul>
+<li>[ ] 什么是传输层的“逻辑通信”？它为哪一层的什么实体提供服务？</li>
+<li>[ ] 为什么称之为“逻辑”通信？它屏蔽了底层网络的哪些复杂性？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>软件端口</strong></p>
+<ul>
+<li>[ ] 什么是软件端口？它在网络通信中的核心作用是什么？</li>
+<li>[ ] 软件端口和路由器的硬件端口有何本质区别？</li>
+<li>[ ] 为什么说端口号“仅具有本地意义”？</li>
+<li>[ ] 请解释传输层的“复用”和“分用”分别指什么？发送方如何实现复用？接收方又是根据什么信息实现分用的？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>端口号分类</strong></p>
+<ul>
+<li>[ ] 端口号字段占多少比特？这决定了总共有多少个可用端口？</li>
+<li>[ ] “熟知端口号”的范围是多少？由哪个机构分配？请至少举出 5 个常见的熟知端口及其对应的应用（如 HTTP, FTP, DNS 等）。</li>
+<li>[ ] “登记端口号”和“客户端端口号”（短暂端口号）的范围分别是多少？它们在使用上有什么区别？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>套接字（Socket）</strong></p>
+<ul>
+<li>[ ] 套接字（Socket）是由哪两个部分组成的？它的作用是什么？</li>
+<li>[ ] 在一次通信中，如何用套接字唯一标识一个应用进程？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>TCP连接的唯一标识（五元组）</strong></p>
+<ul>
+<li>[ ] 唯一标识一条 TCP 连接的“五元组”具体包含哪五个信息？</li>
+<li>[ ] 为什么需要五元组，而不是仅仅靠“源IP+目的IP”来区分连接？请举例说明其必要性。</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、-UDP协议（用户数据报协议）"><strong>二、 UDP协议（用户数据报协议）</strong></h4>
+<ul>
+<li>
+<p>[ ] <strong>UDP协议特点</strong></p>
+<ul>
+<li>[ ] UDP 是“无连接”的，这具体体现在通信过程的哪个阶段？</li>
+<li>[ ] 说 UDP “不可靠”，具体指它不保证哪些方面？</li>
+<li>[ ] UDP “面向报文”的含义是什么？它与 TCP 的“面向字节流”有何本质不同？</li>
+<li>[ ] 相较于 IP 层，UDP 额外提供了哪两个最主要的功能？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>UDP首部结构</strong></p>
+<ul>
+<li>[ ] UDP 首部的固定长度是多少字节？由哪几个字段组成？每个字段多长？</li>
+<li>[ ] UDP 的“源端口号”字段是必需的吗？如果设置为 0 代表什么？</li>
+<li>[ ] “UDP长度”字段计算的是哪部分的长度？其最小值是多少？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>伪首部与检验和</strong></p>
+<ul>
+<li>[ ] 什么是 UDP 的“伪首部”？它是否会随数据报一起发送？</li>
+<li>[ ] 为什么在计算检验和时要引入伪首部？它解决了什么问题？</li>
+<li>[ ] UDP 伪首部包含哪些字段？其中“协议字段”的值是多少？</li>
+<li>[ ] 简述 UDP 检验和的计算过程。如果数据部分长度为奇数个字节，如何处理？</li>
+<li>[ ] UDP 检验和与 IP 首部检验和的检验范围有何不同？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>UDP适用场景</strong></p>
+<ul>
+<li>[ ] 请列举至少三种适合使用 UDP 的应用场景，并说明为什么。</li>
+<li>[ ] 使用 UDP 的应用层协议，通常需要自己实现哪些可靠性机制？</li>
+</ul>
+</li>
+</ul>
+<h4 id="三、-TCP协议（传输控制协议）"><strong>三、 TCP协议（传输控制协议）</strong></h4>
+<ul>
+<li>
+<p>[ ] <strong>TCP协议特点</strong></p>
+<ul>
+<li>[ ] TCP “面向连接”体现在哪两个核心过程？</li>
+<li>[ ] TCP 如何保证“可靠传输”？请列举其使用的主要机制。</li>
+<li>[ ] 解释 TCP “面向字节流”的含义，并与 UDP 的“面向报文”进行对比。</li>
+<li>[ ] TCP 支持全双工通信，这意味着什么？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>TCP首部结构</strong></p>
+<ul>
+<li>[ ] TCP 首部的固定长度是多少字节？最大长度是多少？</li>
+<li>[ ] “数据偏移”字段的作用和单位是什么？它的最大值对应多少字节的首部？</li>
+<li>[ ] 请解释 TCP 首部中“序号（seq）”和“确认号（ack）”字段的精确含义。如果一个报文的确认号是 N，代表什么？</li>
+<li>[ ] 请解释 TCP 的 6 个经典控制标志位（URG, ACK, PSH, RST, SYN, FIN）各自的作用。</li>
+<li>[ ] <strong>（考研高频）</strong> 哪两个标志位在置 1 时，即使报文段不携带数据，也必须消耗一个序号？</li>
+<li>[ ] TCP 首部的“窗口”字段是用来做什么的？它属于流量控制还是拥塞控制的范畴？</li>
+<li>[ ] TCP 首部的选项字段中，最常见的 MSS 选项是在哪个阶段协商的？它的作用是什么？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>TCP差错检测与检验和</strong></p>
+<ul>
+<li>[ ] TCP 检验和的检验范围是什么？它和 UDP 的检验范围有何异同？</li>
+<li>[ ] TCP 计算检验和时使用的伪首部，其“协议”字段的值是多少？</li>
+<li>[ ] 对 IPv4 来说，TCP 检验和是可选的还是强制的？这与 UDP 有何不同？</li>
+<li>[ ] 当接收方检测到 TCP 报文段检验和错误时，会如何处理？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>TCP连接管理</strong></p>
+<ul>
+<li>[ ] <strong>三次握手（高频考点）</strong>
+<ul>
+<li>[ ] 请详细描述 TCP “三次握手”建立连接的全过程，包括每一- - 步双方发送报文段的哪些标志位被置 1、序号（seq）和确认号（ack）的值如何变化、以及双方的状态变迁。</li>
+<li>[ ] 为什么 TCP 连接建立需要三次握手，而不是两次？主要解决了什么问题？</li>
+</ul>
+</li>
+<li>[ ] <strong>四次挥手（高频考点）</strong>
+<ul>
+<li>[ ] 请详细描述 TCP “四次挥手”释放连接的全过程，包括每一- - 步的标志位、序号/确认号变化，以及双方的状态变迁。</li>
+<li>[ ] 为什么连接释放需要四次挥手，而建立连接通常只需要三次？</li>
+<li>[ ] 解释<code>CLOSE-WAIT</code>和<code>TIME-WAIT</code>状态分别出现在哪一方、在什么情况下？</li>
+<li>[ ] <code>TIME-WAIT</code>状态为什么需要持续 2MSL 的时间？它的两个主要作用是什么？</li>
+</ul>
+</li>
+<li>[ ] <strong>TCP保活计时器</strong>
+<ul>
+<li>[ ] TCP 保活计时器的作用是什么？它解决了什么场景下的问题？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>TCP可靠传输机制</strong></p>
+<ul>
+<li>[ ] 什么是“累积确认”？举例说明它的工作方式和优点。</li>
+<li>[ ] 超时重传时间（RTO）是固定的吗？它和 RTT 有什么关系？为什么 RTO 必须是动态调整的？</li>
+<li>[ ] <strong>快速重传（高频考点）</strong>
+<ul>
+<li>[ ] 什么是“冗余 ACK”？在什么情况下接收方会发送冗余 ACK？</li>
+<li>[ ] 快速重传机制是如何被触发的（需要几个冗余 ACK）？它相比超时重传有什么优势？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="四、-TCP流量控制与拥塞控制的对比及实现（难点与重点）"><strong>四、 TCP流量控制与拥塞控制的对比及实现（难点与重点）</strong></h4>
+<ul>
+<li>
+<p>[ ] <strong>流量控制（滑动窗口）</strong></p>
+<ul>
+<li>[ ] TCP 流量控制的目的是什么？它是基于什么机制（哪个窗口）实现的？</li>
+<li>[ ] 接收窗口（rwnd）的值是如何确定的？它通过 TCP 首部的哪个字段告知发送方？</li>
+<li>[ ] 发送方的实际发送窗口大小由哪两个值共同决定？是取最大值、最小值还是和？</li>
+<li>[ ] 当接收方发送“零窗口”通知后，可能会出现什么问题？TCP 使用什么机制（哪种计时器）来解决这个问题？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>拥塞控制（四大算法）</strong></p>
+<ul>
+<li>[ ] TCP 拥塞控制的目的是什么？它主要通过控制哪个窗口的大小来实现？</li>
+<li>[ ] <strong>慢开始算法</strong>：cwnd 如何增长（指数/线性）？增长的条件是什么？何时结束慢开始进入拥塞避免？</li>
+<li>[ ] <strong>拥塞避免算法</strong>：cwnd 如何增长（指数/线性）？</li>
+<li>[ ] 当网络发生拥塞（判断依据：超时）时，慢开始门限（ssthresh）和拥塞窗口（cwnd）会如何调整？之后进入哪个阶段？</li>
+<li>[ ] <strong>快重传与快恢复（以Reno为例）</strong>：当触发“快重传”（判断依据：3个冗余ACK）时，ssthresh 和 cwnd 会如何调整？之后进入哪个阶段？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>流量控制 vs. 拥塞控制（综合对比）</strong></p>
+<ul>
+<li>[ ] 请从<strong>控制目标</strong>、<strong>控制对象</strong>（端到端 vs. 全局）、<strong>控制依据</strong>、和<strong>控制窗口</strong>四个维度，全面对比 TCP 的流量控制和拥塞控制。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="第6章-应用层"><strong>第6章 应用层</strong></h3>
+<h4 id="一、-网络应用模型"><strong>一、 网络应用模型</strong></h4>
+<ul>
+<li>
+<p><strong>客户/服务器模型 (C/S模型)</strong></p>
+<ul>
+<li><code>[ ]</code> C/S 模型的核心思想是什么？谁是主动方，谁是被动方？</li>
+<li><code>[ ]</code> 请简述 C/S 模型的一个典型工作流程（从客户端发起请求到收到结果）。</li>
+<li><code>[ ]</code> 在 C/S 模型中，服务器和客户机在启动、地址知晓等方面有什么不同？</li>
+<li><code>[ ]</code> C/S 模型有哪些主要特点？为什么说它的可扩展性不佳？</li>
+<li><code>[ ]</code> 请列举至少三个典型的 C/S 模型应用。</li>
+</ul>
+</li>
+<li>
+<p><strong>P2P模型 (Peer-to-Peer模型)</strong></p>
+<ul>
+<li><code>[ ]</code> P2P 模型的核心思想是什么？它与 C/S 模型最本质的区别在哪里？</li>
+<li><code>[ ]</code> P2P 网络中的节点（Peer）同时扮演哪两种角色？</li>
+<li><code>[ ]</code> P2P 模型的节点地位和资源存储方式与 C/S 模型有何不同？</li>
+<li><code>[ ]</code> P2P 模型相较于 C/S 模型，在可扩展性、健壮性和服务器压力方面有哪些优点？</li>
+<li><code>[ ]</code> P2P 模型存在哪些主要缺点？（提示：从节点资源和网络流量角度思考）</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、-域名系统-Domain-Name-System-DNS"><strong>二、 域名系统 (Domain Name System, DNS)</strong></h4>
+<ul>
+<li>
+<p><strong>核心概念</strong></p>
+<ul>
+<li><code>[ ]</code> DNS 的核心功能是什么？它主要使用哪种传输层协议和哪个熟知端口号？</li>
+<li><code>[ ]</code> DNS 的三大核心组成部分是什么？</li>
+</ul>
+</li>
+<li>
+<p><strong>层次域名空间</strong></p>
+<ul>
+<li><code>[ ]</code> DNS 的域名空间是什么结构？</li>
+<li><code>[ ]</code> 域名的命名规则有哪些？（例如：字符限制、长度、大小写等）</li>
+<li><code>[ ]</code> 顶级域名（TLD）主要分为哪几类？请分别举例说明（如 .com, .cn, .org, .gov）。</li>
+</ul>
+</li>
+<li>
+<p><strong>域名服务器</strong></p>
+<ul>
+<li><code>[ ]</code> 根域名服务器在全球的数量和作用是什么？它会直接返回最终的 IP 地址吗？</li>
+<li><code>[ ]</code> 顶级域名服务器、权限域名服务器和本地域名服务器各自的职责是什么？</li>
+<li><code>[ ]</code> 当你在电脑上配置网络时，填写的“DNS服务器地址”通常是哪一种域名服务器？</li>
+</ul>
+</li>
+<li>
+<p><strong>域名解析过程</strong></p>
+<ul>
+<li><code>[ ]</code> <strong>[对比]</strong> 递归查询和迭代查询的定义是什么？请从“谁负责后续查询”和“请求/响应次数”的角度对比二者的区别。</li>
+<li><code>[ ]</code> 在实际的域名解析中，“主机到本地域名服务器”通常使用哪种查询？“本地域名服务器到根域名服务器”呢？为什么？</li>
+<li><code>[ ]</code> 请完整地描述一次域名解析的全过程（假设要查询的域名在本地域名服务器中没有缓存）。</li>
+<li><code>[ ]</code> DNS 的高速缓存机制起到了什么作用？缓存是永久有效的吗？哪些地方会存在缓存？</li>
+</ul>
+</li>
+</ul>
+<h4 id="三、-文件传输协议-File-Transfer-Protocol-FTP"><strong>三、 文件传输协议 (File Transfer Protocol, FTP)</strong></h4>
+<ul>
+<li>
+<p><strong>FTP 工作原理</strong></p>
+<ul>
+<li><code>[ ]</code> FTP 采用什么网络应用模型？它使用哪种传输层协议来保证可靠性？</li>
+<li><code>[ ]</code> FTP 服务器由哪两类进程组成？它们是如何分工协作的？</li>
+<li><code>[ ]</code> FTP 在工作期间是否需要保留用户状态？这属于“有状态”还是“无状态”协议？</li>
+</ul>
+</li>
+<li>
+<p><strong>控制连接与数据连接</strong></p>
+<ul>
+<li><code>[ ]</code> FTP 最显著的特点是使用两个并行的 TCP 连接，请问这两个连接分别是什么？它们的服务器端口号分别是多少？</li>
+<li><code>[ ]</code> 控制连接和数据连接各自的作用是什么？它们的生命周期有何不同？（哪个是持久的，哪个是临时的？）</li>
+<li><code>[ ]</code> <strong>[对比]</strong> FTP 的主动模式（PORT）和被动模式（PASV）在建立数据连接时，分别是由谁（客户端/服务器）主动发起的连接？</li>
+<li><code>[ ]</code> 为什么说 FTP 的控制信息是“带外传送”的？与此相对的“带内传送”是哪个协议的特点？</li>
+</ul>
+</li>
+</ul>
+<h4 id="四、-电子邮件-E-mail"><strong>四、 电子邮件 (E-mail)</strong></h4>
+<ul>
+<li>
+<p><strong>电子邮件系统的组成结构</strong></p>
+<ul>
+<li><code>[ ]</code> 一个完整的电子邮件系统由哪三部分组成？</li>
+<li><code>[ ]</code> 用户代理（UA）和邮件服务器在邮件收发过程中分别扮演什么角色？</li>
+<li><code>[ ]</code> 邮件系统中，“推协议”和“拉协议”分别指什么？SMTP、POP3、IMAP 分别属于哪一类？</li>
+<li><code>[ ]</code> 请简述从发件人A到收件人B的完整邮件投递过程，说明其中 SMTP 和 POP3/IMAP 协议各自作用的阶段。</li>
+</ul>
+</li>
+<li>
+<p><strong>电子邮件格式与 MIME</strong></p>
+<ul>
+<li><code>[ ]</code> 一封电子邮件的内容由哪两部分组成？其中 <code>To:</code>, <code>From:</code>, <code>Subject:</code> 属于哪一部分？</li>
+<li><code>[ ]</code> 为什么要引入 MIME 扩展？它解决了 SMTP 的什么根本性问题？</li>
+<li><code>[ ]</code> MIME 是一个新的邮件传输协议来取代 SMTP 吗？它的工作原理是什么？</li>
+</ul>
+</li>
+<li>
+<p><strong>SMTP 与 POP3</strong></p>
+<ul>
+<li><code>[ ]</code> SMTP 协议使用哪个传输层协议和端口号？</li>
+<li><code>[ ]</code> SMTP 通信包含哪三个阶段？其中，<code>MAIL FROM</code>, <code>RCPT TO</code>, <code>DATA</code> 等命令分别出现在哪个阶段？</li>
+<li><code>[ ]</code> POP3 协议的作用是什么？它使用哪个传输层协议和端口号？</li>
+<li><code>[ ]</code> <strong>[对比]</strong> 相比于 POP3，IMAP 协议有哪些优势？（提示：从文件夹管理、邮件获取方式、适用场景思考）</li>
+<li><code>[ ]</code> 对于基于 Web 的电子邮件（如 Gmail），用户浏览器和邮件服务器之间使用的是什么协议？邮件服务器之间呢？</li>
+</ul>
+</li>
+</ul>
+<h4 id="五、-万维网-World-Wide-Web-WWW"><strong>五、 万维网 (World Wide Web, WWW)</strong></h4>
+<ul>
+<li>
+<p><strong>WWW 的概念与组成结构</strong></p>
+<ul>
+<li><code>[ ]</code> 万维网（WWW）的三大核心标准是什么？</li>
+<li><code>[ ]</code> URL 的标准格式是什么？<code>&lt;协议&gt;://&lt;主机&gt;:&lt;端口&gt;/&lt;路径&gt;</code> 中，哪些部分是必需的？</li>
+</ul>
+</li>
+<li>
+<p><strong>超文本传输协议 (HTTP)</strong></p>
+<ul>
+<li><code>[ ]</code> HTTP 是面向事务的协议，它使用哪个传输层协议和默认端口号？</li>
+<li><code>[ ]</code> 为什么说 HTTP 是“无连接”的？（注意与 TCP 连接区分）</li>
+<li><code>[ ]</code> 为什么说 HTTP 是“无状态”的？现实中网站是如何跟踪用户状态的（例如购物车）？请简述 Cookie 的工作原理。</li>
+<li><code>[ ]</code> <strong>[对比]</strong> HTTP/1.0 的非持续连接和 HTTP/1.1 的持续连接有什么区别？哪个效率更高？为什么？</li>
+<li><code>[ ]</code> 在持续连接中，“流水线”和“非流水线”方式有何不同？哪个能进一步减少延迟？</li>
+<li><code>[ ]</code> HTTP 请求报文和响应报文都由哪三部分组成？</li>
+<li><code>[ ]</code> 请求报文的开始行（请求行）包含哪三部分？GET 和 POST 方法的主要区别是什么？</li>
+<li><code>[ ]</code> 响应报文的开始行（状态行）包含哪三部分？请列举至少三个常见的状态码并解释其含义（如 200, 404, 400）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="六、-动态主机配置协议-DHCP"><strong>六、 动态主机配置协议 (DHCP)</strong></h4>
+<ul>
+<li><code>[ ]</code> DHCP 协议的主要作用是什么？它解决了什么问题？</li>
+<li><code>[ ]</code> DHCP 运行在哪个传输层协议之上？客户端和服务器的端口号分别是多少？</li>
+<li><code>[ ]</code> DHCP 获取 IP 地址的核心四步交互过程是什么？（DORA）</li>
+<li><code>[ ]</code> 在 DORA 过程中，哪些报文通常是广播发送的？为什么？</li>
+<li><code>[ ]</code> DHCP 的“租约”机制是什么思想？它相比于静态分配地址有什么好处？</li>
+</ul>
+<h4 id="七、-边界网关协议-BGP"><strong>七、 边界网关协议 (BGP)</strong></h4>
+<ul>
+<li><code>[ ]</code> BGP 是域内（AS内部）还是域间（AS之间）的路由协议？</li>
+<li><code>[ ]</code> BGP 使用哪个传输层协议和端口号来保证其可靠性？</li>
+<li><code>[ ]</code> BGP 被称为“路径向量”协议，这里的“路径”具体指什么？（提示：AS-PATH）</li>
+<li><code>[ ]</code> BGP 协议中的 AS-PATH 属性有什么关键作用？（提示：路由选择和环路避免）</li>
+<li><code>[ ]</code> <strong>[对比]</strong> BGP 与 RIP/OSPF 等域内路由协议在作用范围、关注点和协议类型上有何根本不同？</li>
+</ul>
+<h4 id="八、-本章小结及疑难点"><strong>八、 本章小结及疑难点</strong></h4>
+<ul>
+<li><code>[ ]</code> <strong>[辨析]</strong> 服务器进程的端口号（熟知端口号）和客户进程的端口号（临时端口号）在分配方式和作用上有何区别？</li>
+<li><code>[ ]</code> <strong>[辨析]</strong> 因特网（Internet）和万维网（WWW）是同一个概念吗？请解释它们之间的关系。</li>
+</ul>
+<hr>
+<p><strong>使用建议：</strong></p>
+<ol>
+<li><strong>主动回忆</strong>：不要看笔记，尝试独立回答每一个问题。</li>
+<li><strong>标记掌握程度</strong>：对于回答不上或不确定的问题，在 <code>[ ]</code> 中做标记（如 <code>[?]</code> 或 <code>[x]</code>），然后返回笔记重点复习。</li>
+<li><strong>循环复习</strong>：定期回顾这份清单，直到所有问题都能脱口而出。</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://lazy11.top">Lazy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lazy11.top/2025/10/10/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91-%E8%87%AA%E6%9F%A5%E8%A1%A8/">https://lazy11.top/2025/10/10/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91-%E8%87%AA%E6%9F%A5%E8%A1%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/lazy-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/10/10/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E5%BC%BA%E5%8C%96/" title="强化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">强化</div></div><div class="info-2"><div class="info-item-1">一、OSI参考模型与TCP/IP模型 1. OSI参考模型 - 特色层次  网络层：虚电路服务 会话层：会话管理 表示层：数据格式转换与编码转换  - 考题回顾  虚电路与TCP/IP网络层对比 各层功能与协议关系  2. TCP/IP模型 - 层次结构  应用层：协议与传输层服务关系 网络层：IP、ARP、ICMP协议 数据链路层与物理层  - 考题回顾  协议间服务关系 分组交换与报文交换性能分析  二、物理层 1. 关键概念  香农定理与奈氏准则 调制技术与波特率、比特率关系 数字信号编码 物理层设备对冲突域与广播域的影响 香农定理与奈氏准则结合调制技术  2. 考题回顾  数字信号编码识别 物理层设备特性  三、数据链路层 1. 802.11协议与CSMA/CA协议  MAC地址特点 预约信道过程  2. CSMA/CD协议  单向传播时延与争用期 二进制指数退避算法 信道利用率与极限数据传输速率  3. 滑动窗口协议  停止等待、GBN与SR协议 窗口大小与序号比特数关系 信道利用率分析  4....</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Lazy</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lazyy11"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/lazyy11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:lazy11@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is Lazy's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">第1章 计算机网络体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">一、计算机网络概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E4%B8%8E%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">二、计算机网络体系结构与参考模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC2%E7%AB%A0-%E7%89%A9%E7%90%86%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">第2章 物理层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80"><span class="toc-number">2.1.</span> <span class="toc-text">一、通信基础</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.1.</span> <span class="toc-text">1. 基本概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E4%BF%A1%E9%81%93%E7%9A%84%E6%9E%81%E9%99%90%E5%AE%B9%E9%87%8F"><span class="toc-number">2.1.2.</span> <span class="toc-text">2. 信道的极限容量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E7%BC%96%E7%A0%81%E4%B8%8E%E8%B0%83%E5%88%B6"><span class="toc-number">2.1.3.</span> <span class="toc-text">3. 编码与调制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E4%BA%A4%E6%8D%A2%E6%8A%80%E6%9C%AF"><span class="toc-number">2.1.4.</span> <span class="toc-text">4. 交换技术</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BC%A0%E8%BE%93%E4%BB%8B%E8%B4%A8"><span class="toc-number">2.2.</span> <span class="toc-text">二、传输介质</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%AF%BC%E5%90%91%E4%BC%A0%E8%BE%93%E4%BB%8B%E8%B4%A8"><span class="toc-number">2.2.1.</span> <span class="toc-text">1. 导向传输介质</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E9%9D%9E%E5%AF%BC%E5%90%91%E4%BC%A0%E8%BE%93%E4%BB%8B%E8%B4%A8"><span class="toc-number">2.2.2.</span> <span class="toc-text">2. 非导向传输介质</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E7%89%A9%E7%90%86%E5%B1%82%E6%8E%A5%E5%8F%A3%E7%89%B9%E6%80%A7"><span class="toc-number">2.2.3.</span> <span class="toc-text">3. 物理层接口特性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%89%A9%E7%90%86%E5%B1%82%E8%AE%BE%E5%A4%87"><span class="toc-number">2.3.</span> <span class="toc-text">三、物理层设备</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-number">3.</span> <span class="toc-text">第3章 数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-number">3.1.</span> <span class="toc-text">一、数据链路层的功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BB%84%E5%B8%A7"><span class="toc-number">3.2.</span> <span class="toc-text">二、组帧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%B7%AE%E9%94%99%E6%8E%A7%E5%88%B6"><span class="toc-number">3.3.</span> <span class="toc-text">三、差错控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E4%B8%8E%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6"><span class="toc-number">3.4.</span> <span class="toc-text">四、流量控制与可靠传输机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%BB%8B%E8%B4%A8%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6-MAC"><span class="toc-number">3.5.</span> <span class="toc-text">五、介质访问控制 (MAC)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%B1%80%E5%9F%9F%E7%BD%91-LAN"><span class="toc-number">3.6.</span> <span class="toc-text">六、局域网 (LAN)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%B9%BF%E5%9F%9F%E7%BD%91-WAN"><span class="toc-number">3.7.</span> <span class="toc-text">七、广域网 (WAN)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E8%AE%BE%E5%A4%87"><span class="toc-number">3.8.</span> <span class="toc-text">八、数据链路层设备</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC4%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">4.</span> <span class="toc-text">第4章 网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-number">4.1.</span> <span class="toc-text">一、 网络层的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-%E5%BC%82%E6%9E%84%E7%BD%91%E7%BB%9C%E4%BA%92%E8%BF%9E"><span class="toc-number">4.1.1.</span> <span class="toc-text">1.1 异构网络互连</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%BD%AC%E5%8F%91"><span class="toc-number">4.1.2.</span> <span class="toc-text">1.2 路由与转发</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-%E7%BD%91%E7%BB%9C%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%8D%E5%8A%A1"><span class="toc-number">4.1.3.</span> <span class="toc-text">1.3 网络层提供的两种服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-4-SDN%EF%BC%88%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%BD%91%E7%BB%9C%EF%BC%89"><span class="toc-number">4.1.4.</span> <span class="toc-text">1.4 SDN（软件定义网络）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-5-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">4.1.5.</span> <span class="toc-text">1.5 拥塞控制</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-IPv4"><span class="toc-number">4.2.</span> <span class="toc-text">二、 IPv4</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-IPv4%E5%88%86%E7%BB%84"><span class="toc-number">4.2.1.</span> <span class="toc-text">2.1 IPv4分组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-IPv4%E5%9C%B0%E5%9D%80%E4%B8%8ENAT"><span class="toc-number">4.2.2.</span> <span class="toc-text">2.2 IPv4地址与NAT</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86%E4%B8%8E%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="toc-number">4.2.3.</span> <span class="toc-text">2.3 子网划分与子网掩码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-CIDR%EF%BC%88%E6%97%A0%E5%88%86%E7%B1%BB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%EF%BC%89"><span class="toc-number">4.2.4.</span> <span class="toc-text">2.4 CIDR（无分类域间路由选择）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-ARP%EF%BC%88%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">4.2.5.</span> <span class="toc-text">2.5 ARP（地址解析协议）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-6-DHCP%EF%BC%88%E5%8A%A8%E6%80%81%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">4.2.6.</span> <span class="toc-text">2.6 DHCP（动态主机配置协议）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-7-ICMP%EF%BC%88%E7%BD%91%E9%99%85%E6%8E%A7%E5%88%B6%E6%8A%A5%E6%96%87%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">4.2.7.</span> <span class="toc-text">2.7 ICMP（网际控制报文协议）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-8-IPv4%E5%88%86%E7%BB%84%E8%BD%AC%E5%8F%91%E8%BF%87%E7%A8%8B"><span class="toc-number">4.2.8.</span> <span class="toc-text">2.8 IPv4分组转发过程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81-IPv6"><span class="toc-number">4.3.</span> <span class="toc-text">三、 IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-IPv6%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9"><span class="toc-number">4.3.1.</span> <span class="toc-text">3.1 IPv6的主要特点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-IPv6%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%A6%96%E9%83%A8"><span class="toc-number">4.3.2.</span> <span class="toc-text">3.2 IPv6数据报的基本首部</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-IPv6%E5%9C%B0%E5%9D%80"><span class="toc-number">4.3.3.</span> <span class="toc-text">3.3 IPv6地址</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-%E4%BB%8EIPv4%E5%90%91IPv6%E8%BF%87%E6%B8%A1"><span class="toc-number">4.3.4.</span> <span class="toc-text">3.4 从IPv4向IPv6过渡</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%E4%B8%8E%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.4.</span> <span class="toc-text">四、 路由算法与路由协议</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-1-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-number">4.4.1.</span> <span class="toc-text">4.1 静态路由与动态路由</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-2-%E8%B7%9D%E7%A6%BB-%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="toc-number">4.4.2.</span> <span class="toc-text">4.2 距离-向量路由算法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="toc-number">4.4.3.</span> <span class="toc-text">4.3 链路状态路由算法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-%E5%B1%82%E6%AC%A1%E8%B7%AF%E7%94%B1"><span class="toc-number">4.4.4.</span> <span class="toc-text">4.4 层次路由</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-5-RIP"><span class="toc-number">4.4.5.</span> <span class="toc-text">4.5 RIP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-6-OSPF"><span class="toc-number">4.4.6.</span> <span class="toc-text">4.6 OSPF</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-7-BGP"><span class="toc-number">4.4.7.</span> <span class="toc-text">4.7 BGP</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81-IP%E5%A4%9A%E6%92%AD"><span class="toc-number">4.5.</span> <span class="toc-text">五、 IP多播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD%E3%80%81-%E7%A7%BB%E5%8A%A8IP"><span class="toc-number">4.6.</span> <span class="toc-text">六、 移动IP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%83%E3%80%81-%E7%BD%91%E7%BB%9C%E5%B1%82%E8%AE%BE%E5%A4%87"><span class="toc-number">4.7.</span> <span class="toc-text">七、 网络层设备</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC5%E5%B1%82-%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">5.</span> <span class="toc-text">第5层 传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">5.1.</span> <span class="toc-text">一、 传输层基础概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-UDP%E5%8D%8F%E8%AE%AE%EF%BC%88%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">二、 UDP协议（用户数据报协议）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81-TCP%E5%8D%8F%E8%AE%AE%EF%BC%88%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">5.3.</span> <span class="toc-text">三、 TCP协议（传输控制协议）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E4%B8%8E%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E7%9A%84%E5%AF%B9%E6%AF%94%E5%8F%8A%E5%AE%9E%E7%8E%B0%EF%BC%88%E9%9A%BE%E7%82%B9%E4%B8%8E%E9%87%8D%E7%82%B9%EF%BC%89"><span class="toc-number">5.4.</span> <span class="toc-text">四、 TCP流量控制与拥塞控制的对比及实现（难点与重点）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC6%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">6.</span> <span class="toc-text">第6章 应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="toc-number">6.1.</span> <span class="toc-text">一、 网络应用模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-Domain-Name-System-DNS"><span class="toc-number">6.2.</span> <span class="toc-text">二、 域名系统 (Domain Name System, DNS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE-File-Transfer-Protocol-FTP"><span class="toc-number">6.3.</span> <span class="toc-text">三、 文件传输协议 (File Transfer Protocol, FTP)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6-E-mail"><span class="toc-number">6.4.</span> <span class="toc-text">四、 电子邮件 (E-mail)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81-%E4%B8%87%E7%BB%B4%E7%BD%91-World-Wide-Web-WWW"><span class="toc-number">6.5.</span> <span class="toc-text">五、 万维网 (World Wide Web, WWW)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD%E3%80%81-%E5%8A%A8%E6%80%81%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE-DHCP"><span class="toc-number">6.6.</span> <span class="toc-text">六、 动态主机配置协议 (DHCP)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%83%E3%80%81-%E8%BE%B9%E7%95%8C%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE-BGP"><span class="toc-number">6.7.</span> <span class="toc-text">七、 边界网关协议 (BGP)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AB%E3%80%81-%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E5%8F%8A%E7%96%91%E9%9A%BE%E7%82%B9"><span class="toc-number">6.8.</span> <span class="toc-text">八、 本章小结及疑难点</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/10/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91-%E8%87%AA%E6%9F%A5%E8%A1%A8/" title="计网-自查表">计网-自查表</a><time datetime="2025-10-10T12:00:43.000Z" title="Created 2025-10-10 20:00:43">2025-10-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/10/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E5%BC%BA%E5%8C%96/" title="强化">强化</a><time datetime="2025-10-10T09:08:45.000Z" title="Created 2025-10-10 17:08:45">2025-10-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/09/%E8%80%83%E7%A0%94/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E4%BB%A3/%E7%BA%BF%E4%BB%A3%E9%A2%98%E9%9B%86/" title="线代题集">线代题集</a><time datetime="2025-10-09T07:27:26.000Z" title="Created 2025-10-09 15:27:26">2025-10-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/26/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E5%BA%94%E7%94%A8%E5%B1%82/" title="应用层">应用层</a><time datetime="2025-09-26T09:21:23.000Z" title="Created 2025-09-26 17:21:23">2025-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/26/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E4%BC%A0%E8%BE%93%E5%B1%82/" title="传输层">传输层</a><time datetime="2025-09-26T07:25:00.000Z" title="Created 2025-09-26 15:25:00">2025-09-26</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Lazy</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (true) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://waline.lazy11.top/',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章..." type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
