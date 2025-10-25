@@ -1,0 +1,1108 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>os-checklist | Lazy's Blog</title><meta name="author" content="Lazy,lazy11@foxmail.com"><meta name="copyright" content="Lazy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="操作系统自查表  第一章 操作系统概述 - 考点自查 Checklist 一、 概念要点 1. 操作系统的基本概念   操作系统的定义与层次  [ ] 你能从“资源管理者”和“服务提供者”两个不同角度，完整地阐述操作系统的定义吗？ [ ] 在“硬件、操作系统、应用程序、用户”这个分层模型中，操作系统扮演了什么角色？它的核心作用是什么？    操作系统的功能和目标  [ ] 操作系统的四大核心管理功">
+<meta property="og:type" content="article">
+<meta property="og:title" content="os-checklist">
+<meta property="og:url" content="https://lazy11.top/2025/10/13/%E8%80%83%E7%A0%94/408/OS/os-checklist/index.html">
+<meta property="og:site_name" content="Lazy&#39;s Blog">
+<meta property="og:description" content="操作系统自查表  第一章 操作系统概述 - 考点自查 Checklist 一、 概念要点 1. 操作系统的基本概念   操作系统的定义与层次  [ ] 你能从“资源管理者”和“服务提供者”两个不同角度，完整地阐述操作系统的定义吗？ [ ] 在“硬件、操作系统、应用程序、用户”这个分层模型中，操作系统扮演了什么角色？它的核心作用是什么？    操作系统的功能和目标  [ ] 操作系统的四大核心管理功">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lazy11.top/img/lazy-icon.png">
+<meta property="article:published_time" content="2025-10-13T10:22:43.000Z">
+<meta property="article:modified_time" content="2025-10-13T14:25:59.867Z">
+<meta property="article:author" content="Lazy">
+<meta property="article:tag" content="OS">
+<meta property="article:tag" content="checklist">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lazy11.top/img/lazy-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lazy11.top/2025/10/13/%E8%80%83%E7%A0%94/408/OS/os-checklist/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'os-checklist',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">45</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "/img/lazy-icon.png" data-lazy-src="/img/index.png" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">os-checklist</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-comments"></i><span> Daily Musings</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">os-checklist</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-10-13T10:22:43.000Z" title="Created 2025-10-13 18:22:43">2025-10-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-10-13T14:25:59.867Z" title="Updated 2025-10-13 22:25:59">2025-10-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%80%83%E7%A0%94/">考研</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%80%83%E7%A0%94/408/">408</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%80%83%E7%A0%94/408/OS/">OS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span class="waline-pageview-count" data-path="/2025/10/13/%E8%80%83%E7%A0%94/408/OS/os-checklist/"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="操作系统自查表">操作系统自查表</h2>
+<hr>
+<h3 id="第一章-操作系统概述-考点自查-Checklist">第一章 操作系统概述 - 考点自查 Checklist</h3>
+<h4 id="一、-概念要点"><strong>一、 概念要点</strong></h4>
+<h5 id="1-操作系统的基本概念"><strong>1. 操作系统的基本概念</strong></h5>
+<ul>
+<li>
+<p><strong>操作系统的定义与层次</strong></p>
+<ul>
+<li>[ ] 你能从“资源管理者”和“服务提供者”两个不同角度，完整地阐述操作系统的定义吗？</li>
+<li>[ ] 在“硬件、操作系统、应用程序、用户”这个分层模型中，操作系统扮演了什么角色？它的核心作用是什么？</li>
+</ul>
+</li>
+<li>
+<p><strong>操作系统的功能和目标</strong></p>
+<ul>
+<li>[ ] 操作系统的四大核心管理功能是什么？请为每一项管理功能，至少列举出2个具体的管理任务。（例如：处理机管理 -&gt; 进程调度、进程同步）</li>
+<li>[ ] 操作系统提供给用户的接口有哪两类？这两类接口中的“联机命令接口”和“脱机命令接口”分别适用于哪种类型的操作系统？</li>
+<li>[ ] 应用程序员通过什么方式来请求操作系统服务？我们常用的图形用户界面（GUI）属于操作系统的核心部分吗？为什么？</li>
+<li>[ ] 操作系统的两个核心目标是什么？它如何实现将“裸机”改造为“扩充机器”？</li>
+</ul>
+</li>
+<li>
+<p><strong>操作系统的特征（高频考点）</strong></p>
+<ul>
+<li>[ ] <strong>并发 vs 并行</strong>：请用一句话说出“并发”与“并行”最根本的区别。单核CPU上能否实现并行？能否实现并发？</li>
+<li>[ ] <strong>共享</strong>：资源共享分为哪两种方式？打印机属于哪一种共享方式？硬盘文件属于哪一种？为什么必须这样划分？</li>
+<li>[ ] <strong>并发与共享的关系</strong>：为什么说并发和共享是互为存在条件？</li>
+<li>[ ] <strong>虚拟</strong>：虚拟技术是通过哪两种核心技术实现的？请分别为“时分复用”和“空分复用”技术各举一个典型的例子。</li>
+<li>[ ] <strong>异步</strong>：进程的“异步性”是指什么？这种特性对程序设计提出了什么挑战？操作系统必须为此提供什么保证？</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-操作系统的发展历程"><strong>2. 操作系统的发展历程</strong></h5>
+<ul>
+<li>[ ] <strong>手工操作阶段</strong>：这个阶段最突出的问题是什么？（提示：从人与机器两个角度回答）</li>
+<li>[ ] <strong>批处理阶段</strong>：
+<ul>
+<li>[ ] “单道批处理系统”相比手工操作，解决了什么核心问题？但它自身最主要的缺点是什么？（提示：与CPU利用率有关）</li>
+<li>[ ] “多道批处理系统”的核心思想是什么？它又是如何解决单道批处理系统缺点的？</li>
+<li>[ ] 多道批处理系统的引入，给操作系统带来了哪四大需要解决的新问题？</li>
+<li>[ ] 多道批处理系统的主要优点是什么？它最大的缺点又是什么？（提示：与用户交互有关）</li>
+</ul>
+</li>
+<li>[ ] <strong>分时操作系统</strong>：
+<ul>
+<li>[ ] 分时系统设计的首要目标是什么？其核心技术是什么？</li>
+<li>[ ] 请描述分时系统的四个主要特征，并解释“及时性”与实时系统的“及时性”有何不同。</li>
+</ul>
+</li>
+<li>[ ] <strong>实时操作系统</strong>：
+<ul>
+<li>[ ] 实时系统最重要的特征是什么？它与分时系统的关键区别在哪里？</li>
+<li>[ ] “硬实时”和“软实时”系统如何区分？请各举一个例子。</li>
+</ul>
+</li>
+<li>[ ] <strong>网络OS vs 分布式OS</strong>：这两个概念极易混淆。请问它们最本质的区别是什么？（提示：从多台计算机的“关系”和“任务目标”上区分）</li>
+</ul>
+<h5 id="3-操作系统的运行环境（重中之重）"><strong>3. 操作系统的运行环境（重中之重）</strong></h5>
+<ul>
+<li>
+<p><strong>CPU运行模式与指令</strong></p>
+<ul>
+<li>[ ] CPU为什么要有“用户态”和“内核态”之分？这两种状态在权限上的核心区别是什么？硬件上通常用什么来标识当前状态？</li>
+<li>[ ] 什么是“特权指令”？请至少举出2个例子。如果一个在用户态下运行的程序试图执行特权指令，会发生什么？</li>
+<li>[ ] 内核在内核态下运行时，主要执行哪几类核心功能？“原语”是什么？它最重要的特性是什么？如何保证这个特性？</li>
+</ul>
+</li>
+<li>
+<p><strong>中断和异常（必考点）</strong></p>
+<ul>
+<li>[ ] 中断和异常的根本区别是什么？（提示：从事件来源区分）</li>
+<li>[ ] 中断分为哪两类？异常分为哪三类？“缺页”属于哪一种？“系统调用”的陷入指令属于哪一种？</li>
+<li>[ ] <strong>中断/异常处理全流程</strong>：请详细描述从中断/异常发生，到处理完成返回的全过程。在这个过程中，哪些步骤是由<strong>硬件自动</strong>完成的？哪些是由<strong>操作系统</strong>完成的？（此点极为重要）</li>
+<li>[ ] 什么是中断向量表？它的作用是什么？</li>
+<li>[ ] 中断处理和子程序调用有何区别？（至少说出三点）</li>
+</ul>
+</li>
+<li>
+<p><strong>系统调用</strong></p>
+<ul>
+<li>[ ] 为什么说系统调用是应用程序访问操作系统内核功能的<strong>唯一</strong>途径？</li>
+<li>[ ] <strong>系统调用处理全流程</strong>：请描述用户程序发起一次系统调用的完整步骤，包括参数传递、如何从用户态陷入内核态、内核如何找到对应的服务程序、以及最后如何返回用户态。</li>
+<li>[ ] 我们在C语言中使用的<code>printf()</code>或<code>fopen()</code>这类库函数，和系统调用是什么关系？调用库函数的开销和直接调用系统调用的开销，哪个更大？为什么？</li>
+</ul>
+</li>
+</ul>
+<h5 id="4-操作系统结构"><strong>4. 操作系统结构</strong></h5>
+<ul>
+<li>
+<p>[ ] <strong>宏内核 vs 微内核（高频对比）</strong></p>
+<ul>
+<li>[ ] 宏内核的结构是怎样的？它最大的优点和最致命的缺点分别是什么？</li>
+<li>[ ] 微内核的设计哲学是什么？哪些最核心的功能被保留在内核中？文件系统、设备驱动等服务在哪里运行？</li>
+<li>[ ] 应用程序在微内核架构下，是如何与文件系统这类服务交互的？</li>
+<li>[ ] 微内核的“机制与策略分离”原则是指什么？</li>
+<li>[ ] 请总结微内核相较于宏内核的优点（至少三点）和其最主要的缺点。</li>
+</ul>
+</li>
+<li>
+<p><strong>其他结构</strong></p>
+<ul>
+<li>[ ] 分层结构的核心设计规则是什么？它最大的优点和缺点是什么？</li>
+</ul>
+</li>
+</ul>
+<h5 id="5-操作系统引导"><strong>5. 操作系统引导</strong></h5>
+<ul>
+<li>[ ] 请按时间顺序，简述从计算机通电到操作系统内核成功加载的全过程，并说明 <strong>BIOS、POST、MBR、PBR、Bootloader</strong> 在其中各自扮演的角色。</li>
+<li>[ ] MBR（主引导记录）位于硬盘的什么位置？它包含了哪两部分关键信息？</li>
+</ul>
+<h5 id="6-虚拟机"><strong>6. 虚拟机</strong></h5>
+<ul>
+<li>[ ] 虚拟机监视器（VMM）的作用是什么？</li>
+<li>[ ] <strong>第一类VMM vs 第二类VMM</strong>：请从运行位置、性能、是否需要宿主操作系统三个方面对比这两种VMM。我们个人电脑上常用的VMware Workstation或VirtualBox属于哪一类？</li>
+</ul>
+<h5 id="7-本章疑难点辨析"><strong>7. 本章疑难点辨析</strong></h5>
+<ul>
+<li>[ ] <strong>访管指令与访管中断</strong>：“访管指令”是一条特权指令吗？它运行在什么态？它起到了什么关键的桥梁作用？</li>
+<li>[ ] 请用自己的话，再次总结微内核的四大核心设计特征。</li>
+</ul>
+<hr>
+<h3 id="第二章-操作系统核心：进程与线程自查清单"><strong>第二章 操作系统核心：进程与线程自查清单</strong></h3>
+<h4 id="一、进程与线程基础"><strong>一、进程与线程基础</strong></h4>
+<h5 id="1-进程的概念与特征"><strong>1. 进程的概念与特征</strong></h5>
+<ul>
+<li>[x] 进程的准确定义是什么？它和“程序”的本质区别是什么？</li>
+<li>[ ] 为什么要引入“进程”这个概念？它解决了早期多道程序环境下程序的哪些问题（如封闭性、间断性）？</li>
+<li>[ ] 进程的四大基本特征是什么？请分别解释动态性、并发性、独立性和异步性。</li>
+<li>[ ] 四大特征中，哪一个是最基本的特征？哪一个是为了实现并发引入的？</li>
+<li>[x] “并发性”和“并行性”有什么区别？</li>
+</ul>
+<h5 id="2-进程的组成"><strong>2. 进程的组成</strong></h5>
+<ul>
+<li>[x] 一个进程实体由哪三部分组成？哪一部分是进程存在的<strong>唯一标志</strong>？</li>
+<li>[ ] PCB（进程控制块）的核心作用是什么？它通常包含哪四类信息？请为每一类举例说明。</li>
+<li>[ ] PCB的组织方式有哪两种？它们是如何工作的？</li>
+<li>[x] 进程的“程序段”为什么可以被多个进程共享？</li>
+<li>[ ] 进程的“数据段”通常包含哪三个主要区域？请解释静态数据区（data/BSS）、堆（heap）和栈（stack）分别存放什么内容。</li>
+<li>[ ] 同一进程内的多个线程，它们共享哪些数据区域？哪些是线程私有的？</li>
+<li>[ ] 什么是“写时复制（Copy-On-Write, COW）”机制？它在<code>fork()</code>时起到了什么优化作用？</li>
+</ul>
+<h5 id="3-进程的状态与转换"><strong>3. 进程的状态与转换</strong></h5>
+<ul>
+<li>[ ] 请画出包含“挂起”状态的进程状态转换图，并标出每条转换路径的触发条件。</li>
+<li>[ ] “就绪态”和“阻塞态”的核心区别是什么？（提示：缺什么资源？）</li>
+<li>[ ] “就绪态”和“就绪挂起态”的核心区别是什么？从就绪挂起态到就绪态需要经过哪一级调度？</li>
+<li>[ ] 从“运行态”到“阻塞态”的转换是进程<strong>主动</strong>的还是<strong>被动</strong>的？从“阻塞态”到“就绪态”呢？</li>
+</ul>
+<h5 id="4-进程控制"><strong>4. 进程控制</strong></h5>
+<ul>
+<li>[ ] 什么是“原语”？它在执行时有什么关键特性（不可中断）？</li>
+<li>[ ] 进程创建（如 <code>fork()</code>）的主要步骤是什么？</li>
+<li>[ ] 父子进程之间会继承哪些资源或属性？内存空间是完全复制还是共享的？</li>
+<li>[ ] <code>fork()</code> 和 <code>exec()</code> 的区别与联系是什么？一个进程的PID在<code>exec()</code>调用后会改变吗？</li>
+<li>[ ] 什么是“僵尸进程”？什么是“孤儿进程”？它们分别是如何产生和被处理的？</li>
+<li>[ ] Block（阻塞）和 Wakeup（唤醒）原语为什么必须成对使用？如果缺失会有什么后果？</li>
+</ul>
+<h5 id="5-进程通信"><strong>5. 进程通信</strong></h5>
+<ul>
+<li>[ ] 信号（Signal）机制是用于什么的？进程在什么时候会检查和处理待处理的信号？</li>
+<li>[ ] 信号的处理方式有哪三种？</li>
+<li>[ ] 高级进程通信方式主要有哪三种？请从以下几个维度对比它们的异同：
+<ul>
+<li>数据传输是否需要经过内核？</li>
+<li>通信速度谁最快？</li>
+<li>是否需要额外的同步互斥机制？</li>
+<li>适用于什么场景？</li>
+</ul>
+</li>
+<li>[ ] 管道通信的“半双工”特性是什么意思？如果要实现全双工通信该怎么做？</li>
+<li>[ ] 当管道为空或为满时，读/写进程会分别发生什么？</li>
+<li>[ ] 匿名管道和命名管道（FIFO）的主要区别是什么？哪种可以用于非亲缘关系的进程间通信？</li>
+</ul>
+<h5 id="6-线程与多线程模型"><strong>6. 线程与多线程模型</strong></h5>
+<ul>
+<li>[ ] 引入“线程”的主要目的是什么？它解决了进程并发的什么核心痛点？</li>
+<li>[ ] 请从<strong>调度单位</strong>、<strong>资源拥有</strong>、<strong>系统开销</strong>、<strong>并发性</strong>等角度，全面对比进程和线程。</li>
+<li>[ ] TCB（线程控制块）中包含了哪些核心信息？与 PCB 相比，它缺少了哪些内容？</li>
+<li>[ ] <strong>用户级线程（ULT）</strong> 和 <strong>内核级线程（KLT）</strong> 的区别是什么？请从线程管理主体、切换开销、多核CPU利用、系统调用阻塞问题等方面进行对比。</li>
+<li>[ ] 为什么说用户级线程“一个线程阻塞会导致整个进程阻塞”？</li>
+<li>[ ] 请解释<strong>多对一</strong>、<strong>一对一</strong>、<strong>多对多</strong>这三种线程模型的映射关系、优缺点及适用场景。</li>
+<li>[ ] 当前主流操作系统（如 Windows、Linux NPTL）主要采用哪种线程模型？</li>
+</ul>
+<h4 id="二、CPU调度与上下文切换"><strong>二、CPU调度与上下文切换</strong></h4>
+<h5 id="1-调度的基本概念"><strong>1. 调度的基本概念</strong></h5>
+<ul>
+<li>[ ] 调度的三个层次（高级、中级、低级）分别负责什么？它们的调度频率有何差异？哪个是必不可少的？</li>
+</ul>
+<h5 id="2-调度的实现"><strong>2. 调度的实现</strong></h5>
+<ul>
+<li>[ ] 调度程序由哪三部分组成？分派器（Dispatcher）和上下文切换器（Context Switcher）各自的作用是什么？</li>
+<li>[ ] 发生CPU调度的时机有哪些？</li>
+<li>[ ] 在哪些情况下，CPU是<strong>不可</strong>进行调度的？（例如：中断处理、原子操作）</li>
+<li>[ ] <strong>抢占式</strong>调度和<strong>非抢占式</strong>调度的根本区别是什么？时间片轮转算法属于哪一种？</li>
+<li>[ ] “闲逛进程”（Idle Process）的作用是什么？它有什么特点？</li>
+</ul>
+<h5 id="3-调度的目标"><strong>3. 调度的目标</strong></h5>
+<ul>
+<li>[ ] CPU调度的核心评价指标有哪些？请解释它们的含义。</li>
+<li>[ ] 周转时间、平均周转时间、带权周转时间的计算公式分别是什么？带权周转时间能更好地衡量什么？</li>
+<li>[ ] 对于交互式系统，哪个调度指标最为关键？</li>
+</ul>
+<h5 id="4-CPU调度算法"><strong>4. CPU调度算法</strong></h5>
+<ul>
+<li>[ ] <strong>FCFS (先来先服务)</strong>：它的调度原则、优缺点是什么？它对长作业和短作业哪个更有利？什么是“护航效应”？</li>
+<li>[ ] <strong>SJF (短作业优先)</strong>：它的非抢占式和抢占式（SRTF）版本有何区别？它的主要优点和致命缺点（饥饿）是什么？</li>
+<li>[ ] <strong>HRRN (高响应比优先)</strong>：它的响应比计算公式是什么？这个公式是如何同时兼顾等待时间和运行时间的？它是如何解决SJF的饥饿问题的？</li>
+<li>[ ] <strong>优先级调度</strong>：静态优先级和动态优先级的区别是什么？设置优先级的一般原则有哪些（系统&gt;用户，I/O型&gt;计算型）？</li>
+<li>[ ] <strong>RR (时间片轮转)</strong>：时间片的大小对系统性能有何影响（过大/过小会怎样）？</li>
+<li>[ ] <strong>多级队列调度</strong>：它的核心思想是什么？不同队列的进程可以相互移动吗？它的主要缺点是什么？</li>
+<li>[ ] <strong>多级反馈队列调度 (MLFQ)</strong>：它是如何克服多级队列调度的缺点的？请描述一个新进程在该算法下的完整生命周期（如何进入队列、如何降级、如何避免饥饿）。</li>
+<li>[ ] <strong>实时调度</strong>：RMS 和 EDF 算法的优先级分配原则分别是什么？哪个是静态优先级，哪个是动态优先级？</li>
+</ul>
+<h5 id="5-多处理机调度"><strong>5. 多处理机调度</strong></h5>
+<ul>
+<li>[ ] 对称多处理机（SMP）和非对称多处理机（AMP）的主要区别是什么？</li>
+<li>[ ] 什么是“处理器亲和性”（Processor Affinity）？分为哪两种？它为什么能提高性能？</li>
+<li>[ ] 什么是“负载平衡”（Load Balancing）？推迁移（Push）和拉迁移（Pull）有何不同？</li>
+<li>[ ] 公共就绪队列和私有就绪队列两种方案的优缺点分别是什么？</li>
+</ul>
+<h5 id="6-上下文切换机制"><strong>6. 上下文切换机制</strong></h5>
+<ul>
+<li>[ ] 什么是“上下文切换”？切换时需要保存和恢复哪些核心信息？</li>
+<li>[ ] <strong>进程上下文切换</strong>和<strong>同进程内线程上下文切换</strong>相比，多了哪些关键步骤（如页表切换、TLB刷新）？哪个开销更大？</li>
+<li>[ ] <strong>上下文切换</strong>和<strong>模式切换</strong>（用户态/内核态切换）的区别与联系是什么？</li>
+</ul>
+<h4 id="三、同步与互斥"><strong>三、同步与互斥</strong></h4>
+<h5 id="1-同步与互斥的基本概念"><strong>1. 同步与互斥的基本概念</strong></h5>
+<ul>
+<li>[ ] 什么是临界资源？什么是临界区？</li>
+<li>[ ] 实现临界区互斥必须遵循的四个准则是什么？“让权等待”是必需的吗？它有什么好处？</li>
+<li>[ ] “同步”和“互斥”的根本区别是什么？（提示：制约关系来源）</li>
+<li>[ ] 什么是“竞态条件”（Race Condition）？请举例说明。</li>
+</ul>
+<h5 id="2-实现临界区互斥的基本方法"><strong>2. 实现临界区互斥的基本方法</strong></h5>
+<ul>
+<li>[ ] 对于软件实现方法（单标志法、双标志法、Peterson），请说明它们各自的核心逻辑，并指出它们分别违反了四大准则中的哪几条。</li>
+<li>[ ] 对于硬件实现方法（中断屏蔽、TSL、Swap），它们的核心原理是什么？主要缺点是什么？（提示：忙等待、多CPU适用性）</li>
+</ul>
+<h5 id="3-互斥锁（Mutex-Lock）"><strong>3. 互斥锁（Mutex Lock）</strong></h5>
+<ul>
+<li>[ ] 互斥锁通过哪两个原子操作实现互斥？</li>
+<li>[ ] 自旋锁和阻塞锁的区别是什么？它们分别适用于什么场景？</li>
+</ul>
+<h5 id="4-信号量（Semaphore）"><strong>4. 信号量（Semaphore）</strong></h5>
+<ul>
+<li>[ ] 整型信号量和记录型信号量的主要区别是什么？哪种避免了“忙等待”？</li>
+<li>[ ] <code>wait(S)</code> (P操作) 和 <code>signal(S)</code> (V操作) 在记录型信号量中的完整执行流程是怎样的？（S.value的变化、进程状态的转换）</li>
+<li>[ ] 如何用信号量实现<strong>互斥</strong>？互斥信号量的初值应该设为多少？</li>
+<li>[ ] 如何用信号量实现<strong>同步</strong>（前驱关系）？同步信号量的初值应该设为多少？</li>
+</ul>
+<h5 id="5-经典同步问题"><strong>5. 经典同步问题</strong></h5>
+<ul>
+<li>[ ] <strong>生产者-消费者问题</strong>：
+<ul>
+<li>需要设置哪三个信号量？它们的名称、初值和物理含义分别是什么？</li>
+<li>在生产者和消费者的代码中，<code>wait()</code>操作的顺序为什么至关重要？如果把 <code>wait(mutex)</code> 放在 <code>wait(empty/full)</code> 之前，会发生什么？</li>
+</ul>
+</li>
+<li>[ ] <strong>读者-写者问题</strong>（读者优先）：
+<ul>
+<li>需要设置哪些信号量和一个计数器？它们的初值和含义是什么？</li>
+<li>第一个读者和最后一个读者分别需要执行哪些特殊的P/V操作？为什么？</li>
+</ul>
+</li>
+<li>[ ] <strong>哲学家进餐问题</strong>：
+<ul>
+<li>这个问题描述的场景可能导致什么严重后果（死锁）？</li>
+<li>请至少说出两种破坏死锁的方法（如限制人数、奇偶分别拿筷）。</li>
+</ul>
+</li>
+</ul>
+<h5 id="6-管程（Monitor）"><strong>6. 管程（Monitor）</strong></h5>
+<ul>
+<li>[ ] 管程是为了解决信号量机制的什么问题而提出的？它的核心特性（封装、互斥）是什么？</li>
+<li>[ ] 管程通过什么机制实现同步？<code>wait()</code> 和 <code>signal()</code> 操作与信号量的P/V操作有何不同？</li>
+<li>[ ] 请对比管程和信号量在封装性、互斥实现和易用性上的差异。</li>
+</ul>
+<h4 id="四、死锁"><strong>四、死锁</strong></h4>
+<h5 id="1-死锁的基本概念"><strong>1. 死锁的基本概念</strong></h5>
+<ul>
+<li>[ ] 死锁的准确定义是什么？</li>
+<li>[ ] <strong>死锁</strong>和<strong>饥饿</strong>的区别是什么？（提示：进程状态、是否循环等待）</li>
+<li>[ ] 产生死锁的<strong>四个必要条件</strong>是什么？必须同时满足吗？</li>
+</ul>
+<h5 id="2-死锁的处理策略"><strong>2. 死锁的处理策略</strong></h5>
+<ul>
+<li>[ ] 处理死锁的三种基本策略（预防、避免、检测与解除）的核心思想分别是什么？</li>
+</ul>
+<h5 id="3-死锁预防"><strong>3. 死锁预防</strong></h5>
+<ul>
+<li>[ ] 针对死锁的四个必要条件，分别说明如何<strong>破坏</strong>它们，以及每种破坏方法的优缺点。</li>
+<li>[ ] “资源有序分配法”破坏的是哪个条件？</li>
+</ul>
+<h5 id="4-死锁避免"><strong>4. 死锁避免</strong></h5>
+<ul>
+<li>[ ] “安全状态”和“不安全状态”的定义是什么？系统处于不安全状态就一定会发生死锁吗？</li>
+<li>[ ] <strong>银行家算法</strong>的核心思想是什么？它需要哪些核心数据结构（Available, Max, Allocation, Need）？</li>
+<li>[ ] 请简述银行家算法在收到资源请求后的执行步骤，以及其中“安全性算法”的判断流程。</li>
+</ul>
+<h5 id="5-死锁的检测与解除"><strong>5. 死锁的检测与解除</strong></h5>
+<ul>
+<li>[ ] 如何利用“资源分配图”来检测死锁？（图的简化过程）</li>
+<li>[ ] 死锁解除的主要方法有哪些？请对比<strong>撤销进程</strong>和<strong>剥夺资源</strong>两种方法的优缺点。</li>
+</ul>
+<hr>
+<h3 id="第三章-内存管理自查清单-Checklist"><strong>第三章 内存管理自查清单 (Checklist)</strong></h3>
+<h4 id="一、-内存管理基础"><strong>一、 内存管理基础</strong></h4>
+<ul>
+<li>
+<p>[ ] <strong>基本原理与要求</strong></p>
+<ul>
+<li>[ ] 内存管理的<strong>根本目标</strong>是什么？为了实现这个目标，它必须提供哪<strong>五大核心功能</strong>？</li>
+<li>[ ] <strong>地址转换</strong>功能依赖什么<strong>硬件</strong>支持？它的核心任务是什么？</li>
+<li>[ ] <strong>内存保护</strong>是如何实现的？请说出至少两种基于<strong>硬件寄存器</strong>的保护机制，并说明它们的工作原理（“加法”还是“比大小”）。</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>逻辑地址与物理地址</strong></p>
+<ul>
+<li>[ ] 如何向一个非专业的同学解释<strong>逻辑地址</strong>和<strong>物理地址</strong>的区别？为什么不同进程可以有相同的逻辑地址？</li>
+<li>[ ] <strong>地址重定位</strong>（或地址映射）是什么时候发生的？<strong>静态重定位</strong>和<strong>动态重定位</strong>的核心区别是什么？</li>
+<li>[ ] 动态重定位依赖于哪个<strong>关键硬件</strong>？这个硬件里存放的是什么值？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>程序的链接与装入</strong></p>
+<ul>
+<li>[ ] 一个<code>.c</code>源文件到最终在内存中执行，需要经历哪<strong>三个主要步骤</strong>？</li>
+<li>[ ] <strong>绝对装入</strong>方式适用于什么场景？它的逻辑地址和物理地址是什么关系？</li>
+<li>[ ] **可重定位装入（静态重定位）**在何时完成地址转换？它有什么致命缺点，导致进程无法在内存中移动？</li>
+<li>[ ] <strong>动态运行时装入</strong>的地址转换被推迟到了什么时候？它最大的<strong>优点</strong>是什么？</li>
+<li>[ ] <strong>静态链接</strong>、<strong>装入时动态链接</strong>和<strong>运行时动态链接</strong>三者在<strong>链接时机</strong>和<strong>效率</strong>上有何不同？哪种方式最节省内存？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>进程的内存映像</strong></p>
+<ul>
+<li>[ ] 请画出一个典型的进程内存映像图，并标出<strong>代码段、数据段（.data, .bss）、堆、栈</strong>的位置。堆和栈的增长方向是怎样的？</li>
+<li>[ ] 进程的<strong>PCB</strong>是存放在该进程的用户地址空间内，还是在操作系统内核区？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>内存共享与保护</strong></p>
+<ul>
+<li>[ ] 什么是<strong>可重入代码（纯代码）</strong>？实现可重入代码的关键是什么？</li>
+<li>[ ] 在实现代码共享时，<strong>分页管理</strong>和<strong>分段管理</strong>哪个更方便、更自然？为什么？</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、-连续分配管理方式"><strong>二、 连续分配管理方式</strong></h4>
+<ul>
+<li>
+<p>[ ] <strong>核心概念</strong></p>
+<ul>
+<li>[ ] <strong>内部碎片</strong>和<strong>外部碎片</strong>的定义是什么？请分别举例说明在哪种分配方式下会产生。</li>
+<li>[ ] <strong>紧凑技术</strong>是用来解决哪种碎片的？它能被成功实施的<strong>前提条件</strong>是什么？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>分区分配</strong></p>
+<ul>
+<li>[ ] <strong>单一连续分配</strong>和<strong>固定分区分配</strong>的主要缺点分别是什么？</li>
+<li>[ ] <strong>动态分区分配</strong>的“动态”体现在哪里？它又是如何管理空闲内存的（依赖什么数据结构）？</li>
+<li>[ ] <strong>四大分配算法对比</strong>：
+<ul>
+<li>[ ] <strong>首次适应(First Fit)</strong> 的查找策略是什么？它倾向于在哪里留下碎片？</li>
+<li>[ ] <strong>邻近适应(Next Fit)</strong> 和首次适应的区别是什么？它有什么潜在的缺点？</li>
+<li>[ ] <strong>最佳适应(Best Fit)</strong> 如何选择分区？它最大的问题是什么（产生最多哪种碎片）？</li>
+<li>[ ] <strong>最坏适应(Worst Fit)</strong> 如何选择分区？它为什么会导致大分区被快速耗尽？</li>
+</ul>
+</li>
+<li>[ ] <strong>伙伴系统</strong>是如何分配内存的？其分区大小有什么特点（必须是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">2^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span>）？回收时，如何判断两个分区是否为“伙伴”并可以合并？</li>
+<li>[ ] 描述一下当回收一块内存时，可能发生的<strong>四种与相邻空闲分区合并</strong>的情况。</li>
+</ul>
+</li>
+</ul>
+<h4 id="三、-基本分页存储管理"><strong>三、 基本分页存储管理</strong></h4>
+<ul>
+<li>
+<p>[ ] <strong>基本概念</strong></p>
+<ul>
+<li>[ ] <strong>页面</strong>和<strong>页框</strong>是一回事吗？它们分别属于逻辑地址空间还是物理地址空间？</li>
+<li>[ ] 为什么<strong>页面大小</strong>通常被设置为2的整数次幂？页面大小<strong>过大</strong>或<strong>过小</strong>会分别带来什么问题？</li>
+<li>[ ] <strong>逻辑地址结构</strong>是如何划分的？给定一个32位逻辑地址和4KB的页面大小，你能立刻算出页号和页内偏移量各占多少位吗？</li>
+<li>[ ] <strong>页表</strong>的作用是什么？一个最基本的<strong>页表项(PTE)</strong> 必须包含什么信息？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>地址变换</strong></p>
+<ul>
+<li>[ ] 描述<strong>基本分页</strong>的地址变换全过程。这个过程中需要访问<strong>几次内存</strong>？</li>
+<li>[ ] <strong>页表寄存器(PTR)</strong> 中存放了哪两个关键信息？</li>
+<li>[ ] <strong>快表(TLB)</strong> 的本质是什么？它位于哪里？为什么能加速地址变换？</li>
+<li>[ ] 描述<strong>带有快表</strong>的地址变换过程。当<strong>TLB命中</strong>和<strong>未命中</strong>时，访存次数分别是多少？</li>
+<li>[ ] <strong>有效访问时间(EAT)</strong> 的计算公式是什么？（用命中率<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span>、TLB访问时间<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mrow><mi>T</mi><mi>L</mi><mi>B</mi></mrow></msub></mrow><annotation encoding="application/x-tex">t_{TLB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7651em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mord mathnormal mtight">L</span><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>和内存访问时间<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mrow><mi>m</mi><mi>e</mi><mi>m</mi></mrow></msub></mrow><annotation encoding="application/x-tex">t_{mem}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7651em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>表示）</li>
+<li>[ ] 为什么需要<strong>多级页表</strong>？它的核心思想是什么（对什么进行分页）？</li>
+<li>[ ] 使用<strong>二级页表</strong>进行一次地址变换，需要访问<strong>几次内存</strong>？</li>
+</ul>
+</li>
+</ul>
+<h4 id="四、-基本分段存储管理"><strong>四、 基本分段存储管理</strong></h4>
+<ul>
+<li>
+<p>[ ] <strong>基本概念与地址变换</strong></p>
+<ul>
+<li>[ ] 分段是基于<strong>物理单位</strong>还是<strong>逻辑单位</strong>？段的大小是固定的吗？</li>
+<li>[ ] 分段的地址空间是<strong>几维</strong>的？逻辑地址由哪两部分构成？</li>
+<li>[ ] <strong>段表</strong>的作用是什么？一个段表项至少需要包含哪<strong>两个</strong>核心信息？</li>
+<li>[ ] 描述<strong>分段管理</strong>的地址变换过程。这个过程涉及哪<strong>两次越界检查</strong>？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>分页与分段的对比 (高频考点)</strong></p>
+<ul>
+<li>[ ] 从<strong>单位性质、大小、地址空间、用户透明性、碎片类型</strong>这五个维度，详细对比分页和分段的区别。</li>
+</ul>
+</li>
+</ul>
+<h4 id="五、-段页式存储管理"><strong>五、 段页式存储管理</strong></h4>
+<ul>
+<li>[ ] <strong>核心机制</strong>
+<ul>
+<li>[ ] 段页式管理试图结合分页和分段的哪些<strong>优点</strong>？</li>
+<li>[ ] 段页式管理的逻辑地址由哪<strong>三部分</strong>构成？</li>
+<li>[ ] 一次完整的段页式地址变换需要访问<strong>几次内存</strong>？（不考虑快表）</li>
+<li>[ ] 在段页式系统中，需要哪些核心数据结构来支持地址变换？（例如：每个进程有几个段表？每个段有几个页表？）</li>
+</ul>
+</li>
+</ul>
+<h4 id="六、-虚拟内存管理"><strong>六、 虚拟内存管理</strong></h4>
+<ul>
+<li>
+<p>[ ] <strong>基本概念</strong></p>
+<ul>
+<li>[ ] 虚拟内存解决了传统存储管理的哪两大<strong>核心缺陷</strong>（一次性、驻留性）？</li>
+<li>[ ] <strong>时间局部性</strong>和<strong>空间局部性</strong>原理分别是什么？它们是虚拟内存技术的理论基础，为什么？</li>
+<li>[ ] 虚拟内存的<strong>三大核心特征</strong>是什么？（多次性、对换性、虚拟性）</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>请求分页管理</strong></p>
+<ul>
+<li>[ ] 相较于基本页表项，<strong>请求分页</strong>的页表项额外增加了哪些关键<strong>标志位</strong>？它们各自的作用是什么？（状态位P、访问位A、修改位M）</li>
+<li>[ ] <strong>缺页中断</strong>是一种<strong>中断</strong>还是<strong>异常</strong>？它在指令执行的哪个阶段产生？</li>
+<li>[ ] 详细描述处理一次<strong>缺页中断</strong>的完整流程（从中断发生到返回用户态）。</li>
+<li>[ ] 如果处理缺页中断时<strong>没有空闲页框</strong>，操作系统会如何做？如果被淘汰的页面的<strong>修改位M=1</strong>，需要执行什么额外操作？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>页面置换算法 (核心考点)</strong></p>
+<ul>
+<li>[ ] <strong>最佳(OPT)</strong> 算法的置换策略是什么？它的现实意义是什么？</li>
+<li>[ ] <strong>先进先出(FIFO)</strong> 算法的策略是什么？它可能产生什么<strong>异常现象</strong>？</li>
+<li>[ ] <strong>最近最久未使用(LRU)</strong> 算法的策略是什么？它为什么性能好但实现开销大？</li>
+<li>[ ] <strong>时钟(CLOCK)</strong> 算法是如何用一个<strong>访问位(A)</strong> 来近似实现LRU的？描述其查找和替换过程。</li>
+<li>[ ] <strong>改进型CLOCK</strong> 算法同时考虑了哪两个标志位（A和M）？它淘汰页面的<strong>优先级顺序</strong>是怎样的（从<code>(0,0)</code>到<code>(1,1)</code>）？为什么这样设计能减少磁盘I/O？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>抖动与工作集</strong></p>
+<ul>
+<li>[ ] 什么是<strong>抖动（颠簸）</strong>？产生的根本原因是什么？</li>
+<li>[ ] 什么是<strong>工作集</strong>？如何利用工作集模型来防止抖动？</li>
+<li>[ ] <strong>驻留集</strong>和<strong>工作集</strong>之间应该保持什么关系，才能让进程高效运行？</li>
+</ul>
+</li>
+<li>
+<p>[ ] <strong>内存映射文件 (mmap)</strong></p>
+<ul>
+<li>[ ] 内存映射文件的<strong>基本原理</strong>是什么？它如何将文件I/O操作转换为内存访问？</li>
+<li>[ ] 使用内存映射文件进行进程间通信，其<strong>共享机制</strong>是怎样的？</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="第四章-文件管理-·-考研408自查清单">第四章 文件管理 · 考研408自查清单</h3>
+<h4 id="一、-文件系统基础"><strong>一、 文件系统基础</strong></h4>
+<ul>
+<li>
+<p><strong>[ ] 文件的基本概念：</strong></p>
+<ul>
+<li>[ ] 请用你自己的话解释什么是“文件”？操作系统通过什么来实现对文件的管理？</li>
+<li>[ ] 文件从数据组织的角度，自底向上可以分为哪三个层次？</li>
+<li>[ ] 文件的“元数据”（或称文件属性）通常包含哪些信息？请至少列举 6 项。</li>
+<li>[ ] 文件按用途和性质可分为哪几类？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 文件控制块（FCB）与索引节点（inode）：</strong></p>
+<ul>
+<li>[ ] 什么是文件控制块（FCB）？它在实现“按名存取”中扮演了什么角色？</li>
+<li>[ ] 传统 FCB 的设计存在什么主要的效率缺陷？</li>
+<li>[ ] 索引节点（inode）是如何解决传统 FCB 缺陷的？其核心思想是什么？</li>
+<li>[ ] 磁盘索引节点（on-disk inode）和内存索引节点（in-memory inode）在存储的信息上有何不同？内存 inode 为何要增加“状态”和“访问计数”等信息？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 文件的操作：</strong></p>
+<ul>
+<li>[ ] <strong>基本操作：</strong> 创建一个新文件和删除一个现有文件，操作系统分别需要完成哪两件核心工作？</li>
+<li>[ ] <strong>读写指针：</strong> 文件的“读/写指针”（或称文件偏移）是存储在 FCB/inode 中，还是其他地方？当多个进程打开同一个文件时，它们是共享一个读写指针，还是各自独立？</li>
+<li>[ ] <strong>打开与关闭：</strong>
+<ul>
+<li>[ ] 为什么要引入“打开(open)”操作，而不是每次读写都直接通过文件名在目录中查找？</li>
+<li>[ ] 请描述<strong>系统级打开文件表</strong>和<strong>进程级打开文件表</strong>的结构和作用。它们分别存储哪些关键信息？二者之间是如何关联的？</li>
+<li>[ ] 当一个进程首次打开文件 <code>file.txt</code> 时，操作系统内部发生了什么？（描述从查找目录到返回文件描述符的完整流程）</li>
+<li>[ ] 当多个进程先后打开<strong>同一个文件</strong>时，上述两张表是如何变化的？哪个表只会增加计数，哪个表会新增条目？</li>
+<li>[ ] “关闭(close)”操作的主要作用是什么？它如何影响打开文件表中的计数器？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 文件的逻辑结构：</strong></p>
+<ul>
+<li>[ ] 什么是文件的逻辑结构？它与物理结构有何根本区别？</li>
+<li>[ ] <strong>无结构文件</strong>（流式文件）的特点是什么？它适用于什么场景？</li>
+<li>[ ] <strong>顺序文件</strong>的优缺点分别是什么？对于定长记录的顺序文件，如何优化查找效率？</li>
+<li>[ ] <strong>索引文件</strong>是如何解决对变长记录文件快速检索问题的？其代价是什么？</li>
+<li>[ ] <strong>索引顺序文件</strong>是如何组织的？对于一个包含 N 个记录的文件，为何其平均查找次数约为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mi>N</mi></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.1133em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9267em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-2.8867em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1133em;"><span></span></span></span></span></span></span></span></span>？</li>
+<li>[ ] <strong>直接/散列文件</strong>的存取速度为何非常快？它必须解决的一个主要问题是什么？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 文件的物理结构：</strong></p>
+<ul>
+<li>[ ] <strong>对比分析：</strong> 请从<strong>访问方式</strong>（顺序/随机）、<strong>碎片类型</strong>（内/外）、<strong>动态增长</strong>和<strong>可靠性</strong>四个维度，对比连续分配、链接分配和索引分配。</li>
+<li>[ ] <strong>连续分配：</strong>
+<ul>
+<li>[ ] 它的优点和致命缺点分别是什么？</li>
+<li>[ ] 访问文件逻辑块号为 <code>i</code> 的数据，需要几次磁盘 I/O 操作？</li>
+</ul>
+</li>
+<li>[ ] <strong>链接分配：</strong>
+<ul>
+<li>[ ] <strong>隐式链接</strong>如何组织文件块？它的主要缺点是什么（尤其是在随机访问和可靠性方面）？</li>
+<li>[ ] **显式链接（FAT）**是如何改进隐式链接的？为什么说它的随机访问效率仍然不高，并非真正的 O(1)？</li>
+<li>[ ] FAT 表本身的大小由什么因素决定？</li>
+</ul>
+</li>
+<li>[ ] <strong>索引分配：</strong>
+<ul>
+<li>[ ] <strong>单级索引：</strong> 假设一个磁盘块大小为 4KB，一个地址项占 4B，那么一个索引块能管理多大的文件？</li>
+<li>[ ] <strong>多级索引：</strong> 在上述条件下，一个二级索引文件最大可以支持多大？访问一个逻辑块最多需要启动几次磁盘 I/O？</li>
+<li>[ ] <strong>混合索引（UNIX）：</strong>
+<ul>
+<li>[ ] 为什么要采用混合索引结构？它试图兼顾什么？</li>
+<li>[ ] 请描述 UNIX inode 中 13 个地址项的经典结构（直接、一级、二级、三级）。</li>
+<li>[ ] 在上述盘块和地址项大小的条件下，仅使用直接地址块，文件最大是多大？如果文件大小为 50KB，需要用到哪几类地址项？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 文件保护：</strong></p>
+<ul>
+<li>[ ] 请对比口令保护、加密保护和访问控制这三种机制的优缺点。</li>
+<li>[ ] UNIX/Linux 系统中精简的访问控制机制是如何对用户进行分类的？</li>
+<li>[ ] <strong>权限语义辨析：</strong> 对于一个<strong>目录</strong>，拥有 <code>r</code>、<code>w</code>、<code>x</code> 权限分别意味着什么？</li>
+<li>[ ] <strong>场景题：</strong>
+<ul>
+<li>[ ] 如果我想要列出（<code>ls</code>）一个目录下的所有文件名，我需要该目录的什么权限？</li>
+<li>[ ] 如果我想要进入（<code>cd</code>）一个目录，我需要该目录的什么权限？</li>
+<li>[ ] 如果我想要在一个目录中<strong>创建或删除</strong>一个文件，我需要该目录的什么权限？这和文件本身的权限有关系吗？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、-目录"><strong>二、 目录</strong></h4>
+<ul>
+<li>
+<p><strong>[ ] 目录结构：</strong></p>
+<ul>
+<li>[ ] 请对比单级、两级和树形目录结构的优缺点。</li>
+<li>[ ] 什么是<strong>绝对路径</strong>和<strong>相对路径</strong>？“当前工作目录”的设计有何意义？</li>
+<li>[ ] 无环图目录结构是如何实现文件/目录共享的？为了避免“悬空指针”，它引入了什么机制？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 目录实现：</strong></p>
+<ul>
+<li>[ ] 目录实现最简单的两种方式是什么（线性列表和哈希表）？它们的优缺点是什么？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 文件共享（硬链接 vs. 软链接）：</strong></p>
+<ul>
+<li>[ ] <strong>请从以下 5 个维度，详细对比硬链接和软链接（符号链接）：</strong>
+<ol>
+<li><strong>本质：</strong> 一个是指向 inode，一个是指向路径名，请说明其具体含义。</li>
+<li><strong>链接计数：</strong> 创建/删除它们时，inode 的链接计数（link count）如何变化？</li>
+<li><strong>跨文件系统：</strong> 哪个可以跨文件系统，哪个不可以？为什么？</li>
+<li><strong>源文件删除：</strong> 当源文件被删除后，访问链接文件会发生什么？</li>
+<li><strong>资源占用：</strong> 它们是否会占用独立的 inode 和数据块？</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="三、-文件系统"><strong>三、 文件系统</strong></h4>
+<ul>
+<li>
+<p><strong>[ ] 文件系统结构与布局：</strong></p>
+<ul>
+<li>[ ] 文件系统自下而上可以分为哪四个层次？各自的主要功能是什么？</li>
+<li>[ ] <strong>磁盘布局：</strong> 请描述一个典型磁盘分区中文件系统的布局，并说明 MBR、引导块、超级块、inode 区、根目录和数据区的各自作用。</li>
+<li>[ ] <strong>内存结构：</strong> 当一个文件系统被挂载（mount）时，操作系统会在内存中建立哪些关键的数据结构来管理它？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 外存空闲空间管理：</strong></p>
+<ul>
+<li>[ ] <strong>方法对比：</strong> 请简述空闲表法、空闲链表法、位示图法和成组链接法的基本思想。</li>
+<li>[ ] <strong>位示图法：</strong>
+<ul>
+<li>[ ] 它的主要优点是什么？</li>
+<li>[ ] <strong>公式应用：</strong> 假设位示图每行有 n 位，请写出：
+<ul>
+<li>将盘块号 <code>b</code> 转换为位示图中的行号 <code>i</code> 和列号 <code>j</code> 的公式。</li>
+<li>将位示图中的 <code>(i, j)</code> 位置转换回盘块号 <code>b</code> 的公式。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[ ] <strong>成组链接法：</strong>
+<ul>
+<li>[ ] 它是如何组织空闲块的？</li>
+<li>[ ] 当需要分配一个空闲块，且超级块中的栈为空时，系统会执行什么操作？</li>
+<li>[ ] 当回收一个空闲块，且超级块中的栈已满时，系统会执行什么操作？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 虚拟文件系统（VFS）：</strong></p>
+<ul>
+<li>[ ] 引入 VFS 层的目的是什么？它解决了什么问题？</li>
+<li>[ ] VFS 抽象出的四个核心对象类型是什么？</li>
+</ul>
+</li>
+<li>
+<p><strong>[ ] 文件系统挂载（Mounting）：</strong></p>
+<ul>
+<li>[ ] 什么是文件系统的“挂载”？什么是“挂载点”？</li>
+<li>[ ] 在 UNIX/Linux 系统中，挂载文件系统时，原挂载点目录下的文件会怎么样？</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="第五章-I-O管理自查清单"><strong>第五章 I/O管理自查清单</strong></h3>
+<h4 id="一、I-O管理基础"><strong>一、I/O管理基础</strong></h4>
+<p><strong>1. I/O设备</strong></p>
+<ul>
+<li><strong>[ ] 核心分类</strong>
+<ul>
+<li>[ ] 块设备和字符设备的核心区别是什么（交换单位、传输速率、可否寻址）？请各举一个实例。</li>
+<li>[ ] 独占设备、共享设备和虚拟设备三者有何不同？SPOOLing技术是如何将独占设备改造为共享设备的？</li>
+</ul>
+</li>
+<li><strong>[ ] I/O接口（设备控制器）</strong>
+<ul>
+<li>[ ] I/O接口（设备控制器）在CPU和I/O设备之间扮演了什么“桥梁”角色？它的存在解放了CPU的哪些工作？</li>
+<li>[ ] 一个设备控制器通常由哪三部分组成？它们各自的功能是什么？</li>
+<li>[ ] 请回忆并说明设备控制器的至少四项核心功能。</li>
+</ul>
+</li>
+<li><strong>[ ] I/O端口</strong>
+<ul>
+<li>[ ] 什么是I/O端口？它主要包含哪三种功能的寄存器，各自用途是什么？</li>
+<li>[ ] <strong>【对比】</strong> I/O端口的<strong>独立编址</strong>和**统一编址（内存映射I/O）**有何根本区别？请从地址空间、访问指令、优缺点等角度进行全面对比。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. I/O控制方式</strong></p>
+<ul>
+<li>[ ] I/O控制方式的演进历史，其核心目标是什么？（即，从程序直接控制到通道，CPU的干预程度是如何变化的？）</li>
+<li><strong>[ ] 程序直接控制方式（轮询）</strong>
+<ul>
+<li>[ ] 轮询方式的工作流程是怎样的？CPU在其中扮演什么角色？</li>
+<li>[ ] 为什么说轮询方式的CPU利用率极低？</li>
+</ul>
+</li>
+<li><strong>[ ] 中断驱动方式</strong>
+<ul>
+<li>[ ] 中断驱动方式相比轮询方式，是如何显著提升CPU利用率的？请从CPU和设备两个视角描述其工作流程。</li>
+<li>[ ] 采用中断方式后，数据传输是否还需要经过CPU的寄存器？</li>
+</ul>
+</li>
+<li><strong>[ ] DMA方式</strong>
+<ul>
+<li>[ ] DMA方式相比中断方式，进一步解决了什么问题？它的核心思想是什么？</li>
+<li>[ ] DMA控制器（DMAC）由哪四个核心寄存器组成？它们分别用来存放什么信息？</li>
+<li>[ ] 请描述一次完整的DMA传输过程（从CPU设置DMAC到传输结束中断CPU）。</li>
+</ul>
+</li>
+<li><strong>[ ] 通道控制方式</strong>
+<ul>
+<li>[ ] 通道可以看作一个特殊的处理器，它与通用CPU有何区别？</li>
+<li>[ ] 通道控制方式与DMA方式的主要区别是什么？它引入了什么新概念来管理复杂的I/O流程？</li>
+<li>[ ] 为什么说通道方式能实现CPU、通道、I/O设备三者的并行工作？</li>
+</ul>
+</li>
+<li><strong>[ ] 【408易考】控制方式对比</strong>
+<ul>
+<li>[ ] 请从CPU干预程度、数据传输单位、硬件支持复杂度等方面，总结对比程序控制、中断、DMA、通道这四种I/O控制方式。</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. I/O软件层次结构</strong></p>
+<ul>
+<li>[ ] 为什么I/O软件要采用分层结构设计？其主要优点是什么？</li>
+<li><strong>[ ] 用户层软件</strong>
+<ul>
+<li>[ ] 用户层软件在I/O层次结构中处于哪一层？它主要负责什么？<code>printf</code>函数属于哪一层？</li>
+</ul>
+</li>
+<li><strong>[ ] 设备独立性软件</strong>
+<ul>
+<li>[ ] “设备独立性”或“设备无关性”指的是什么？其核心目标是什么？</li>
+<li>[ ] 它是如何通过“逻辑设备名”和“物理设备名”的映射来实现设备独立性的？</li>
+<li>[ ] I/O重定向是什么？它依赖于哪一层软件的功能才得以实现？</li>
+</ul>
+</li>
+<li><strong>[ ] 设备驱动程序</strong>
+<ul>
+<li>[ ] 设备驱动程序的核心作用是什么？它在I/O软件层次中扮演了怎样的“承上启下”角色？</li>
+<li>[ ] 为什么说设备驱动程序是与硬件和I/O控制方式（中断/DMA）紧密相关的？</li>
+</ul>
+</li>
+<li><strong>[ ] 中断处理程序</strong>
+<ul>
+<li>[ ] 中断处理程序位于整个层次结构的最底层，它的核心任务是什么？</li>
+</ul>
+</li>
+</ul>
+<p><strong>4. 应用程序I/O接口</strong></p>
+<ul>
+<li>[ ] 什么是<strong>阻塞I/O</strong>？当一个进程发起阻塞I/O调用后，它的状态会如何变化？</li>
+<li>[ ] 什么是<strong>非阻塞I/O</strong>？调用后进程可以做什么？如何知道I/O是否完成？</li>
+<li>[ ] <strong>【408易错点】</strong> 非阻塞I/O等同于异步I/O吗？为什么？</li>
+</ul>
+<h4 id="二、设备独立软件"><strong>二、设备独立软件</strong></h4>
+<p><strong>1. 缓冲区管理</strong></p>
+<ul>
+<li>[ ] 引入缓冲区管理机制的核心目的是什么？（至少说出三点）</li>
+<li><strong>[ ] 缓冲区类型</strong>
+<ul>
+<li>[ ] <strong>单缓冲</strong>的工作原理是怎样的？在处理一块数据时，其耗时公式 <code>Max(C, T) + M</code> 中，C, T, M分别代表什么？为什么M不能与C, T并行？</li>
+<li>[ ] <strong>双缓冲</strong>如何提高CPU与I/O的并行度？其耗时公式 <code>Max(C + M, T)</code> 是如何得出的？</li>
+<li>[ ] 在什么场景下，双缓冲仍显不足，需要使用<strong>循环缓冲</strong>或<strong>缓冲池</strong>？</li>
+<li>[ ] 缓冲池通常包含哪几类缓冲区队列？请描述“提取输入”和“收容输入”两个过程是如何利用这些队列的。</li>
+</ul>
+</li>
+<li><strong>[ ] 【对比】高速缓存与缓冲区</strong>
+<ul>
+<li>[ ] 高速缓存（Cache）和缓冲区（Buffer）的核心区别是什么？（请从服务对象、设计目的、数据流向等方面分析）</li>
+</ul>
+</li>
+<li><strong>[ ] 【408易考】缓存与写策略</strong>
+<ul>
+<li>[ ] 什么是**延迟写（写回）**策略？它有什么优点和潜在的风险？什么操作可以强制数据落盘以规避风险？</li>
+<li>[ ] 什么是<strong>直写</strong>策略？它与延迟写相比有何不同？</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 设备分配与回收</strong></p>
+<ul>
+<li>[ ] 为了管理设备，操作系统通常使用哪些核心数据结构（DCT, COCT, CHCT, SDT）？它们之间的层次关系是怎样的？</li>
+<li>[ ] 当一个进程请求一个独占设备时，设备分配的完整流程是怎样的？（涉及查找SDT、DCT、COCT、CHCT）</li>
+<li>[ ] 设备分配的<strong>安全分配方式</strong>和<strong>不安全分配方式</strong>有何区别？哪种方式可能导致死锁？</li>
+<li>[ ] <strong>【408易考】设备分配与死锁</strong>
+<ul>
+<li>[ ] 设备分配过程中，为什么可能会发生死锁？请结合死锁的四个必要条件举一个例子。</li>
+<li>[ ] 如何通过破坏“占有且等待”或“循环等待”条件来规避设备分配中的死锁？</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. SPOOLing技术（假脱机技术）</strong></p>
+<ul>
+<li>[ ] SPOOLing技术的全称是什么？它的核心思想是如何用“空间换时间”的？</li>
+<li>[ ] SPOOLing系统由哪些主要部分组成（输入/输出井、缓冲区、进程等）？</li>
+<li>[ ] 请以打印机为例，描述SPOOLing系统是如何将一台物理打印机虚拟成多台逻辑打印机，从而实现共享的？</li>
+</ul>
+<h4 id="三、外存管理"><strong>三、外存管理</strong></h4>
+<p><strong>1. 磁盘管理</strong></p>
+<ul>
+<li>[ ] 请解释磁盘的物理存储单位：磁道、扇区、柱面，以及它们之间的关系。</li>
+<li>[ ] 磁盘容量的计算公式是什么？</li>
+<li>[ ] 磁盘投入使用前需要经过哪三个步骤？（低级格式化、分区、高级格式化）请简述每一步的核心作用。</li>
+<li>[ ] 计算机是如何从磁盘启动操作系统的？请描述该引导流程（涉及ROM、MBR、引导分区）。</li>
+</ul>
+<p><strong>2. 磁盘调度算法</strong></p>
+<ul>
+<li>[ ] 磁盘调度算法的核心优化目标是什么？为什么是这个目标，而不是其他（如旋转延迟）？</li>
+<li>[ ] 磁盘访问时间由哪三部分构成？其中哪部分是磁盘调度的主要优化对象？</li>
+<li><strong>[ ] 【算法对比】</strong>
+<ul>
+<li>[ ] <strong>FCFS</strong>：算法规则？优点？缺点？</li>
+<li>[ ] <strong>SSTF</strong>：算法规则？相比FCFS有何改进？存在什么严重问题（饥饿）？</li>
+<li>[ ] <strong>SCAN（电梯算法）</strong>：工作原理？如何解决SSTF的饥饿问题？它对哪些位置的磁道请求更“有利”？</li>
+<li>[ ] <strong>C-SCAN（循环扫描）</strong>：相比SCAN算法做了什么改变？这种改变带来了什么好处（响应时间更均匀）？</li>
+<li>[ ] <strong>LOOK/C-LOOK</strong>：它们是对SCAN/C-SCAN的优化，具体优化了什么，从而减少了什么开销？</li>
+</ul>
+</li>
+<li><strong>[ ] 【408易考】调度算法综合</strong>
+<ul>
+<li>[ ] 在给定的磁道请求序列和初始磁头位置下，你能否手动模拟并计算出上述各算法的磁头移动总距离？</li>
+<li>[ ] FCFS、SSTF、SCAN、C-SCAN这四种算法，哪些可能导致饥饿？哪个算法最公平？哪个平均寻道时间通常最短？</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 固态硬盘（SSD）管理</strong></p>
+<ul>
+<li>[ ] SSD的读、写、擦除的基本单位分别是什么？它们的大小关系是怎样的？</li>
+<li>[ ] 为什么说SSD的“写”操作比“读”操作复杂且慢？（提示：先擦除后写入）</li>
+<li>[ ] 相比机械硬盘（HDD），SSD有哪些核心优缺点？</li>
+<li>[ ] 什么是**磨损均衡（Wear Leveling）**技术？为什么SSD需要这项技术，而HDD不需要？</li>
+<li>[ ] 为什么传统的磁盘调度算法（如SCAN）对SSD意义不大？</li>
+</ul>
+<p><strong>4. 提高磁盘I/O速度的方法</strong></p>
+<ul>
+<li>[ ] 除了采用更优的磁盘调度算法，还有哪些方法可以提高磁盘I/O速度？（请至少说出四种，如磁盘缓存、提前读、延迟写、RAID等）</li>
+</ul>
+<hr>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://lazy11.top">Lazy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lazy11.top/2025/10/13/%E8%80%83%E7%A0%94/408/OS/os-checklist/">https://lazy11.top/2025/10/13/%E8%80%83%E7%A0%94/408/OS/os-checklist/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OS/">OS</a><a class="post-meta__tags" href="/tags/checklist/">checklist</a></div><div class="post-share"><div class="social-share" data-image="/img/lazy-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/13/%E8%80%83%E7%A0%94/408/OS/%E5%BC%BA%E5%8C%96%E7%AC%94%E8%AE%B0/" title="强化笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">强化笔记</div></div><div class="info-2"><div class="info-item-1">408操作系统大题强化笔记：PV操作与进程同步互斥 1. 核心知识框架 (Mind Map/Outline)  操作系统大题考情分析  题目构成  总分：35分 小题：10道 x 2分 = 20分 大题：2道，共15分 (通常为 7+8 或 6+9)   高频章节分布  绝对核心：进程同步与互斥 (PV操作) - 近乎每年必考 重要章节：内存管理 (分页、虚拟存储) - 频率高，可能与计组跨学科考察 次重点：文件管理 - 考过6次，计算题可能较复杂 新兴趋势：I/O管理 - 近年频繁出现综合性、系统性的简答题   考题风格变化 (2021年至今)  旧大纲：侧重各模块（进程、内存、文件、I/O）的独立理解。 新大纲 (2022年及以后)：极其强调从系统整体角度理解“应用程序-操作系统内核-计算机硬件”如何协作完成任务，考察综合性、底层原理的理解。     PV操作大题解题方法论  核心问题分类  生产者-消费者模型 (最常考) 单纯的同步问题 (前驱图) 哲学家进餐问题 (死锁专题) 读者-写者问题   六步解题法...</div></div></div></a><a class="pagination-related" href="/2025/10/10/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91-%E8%87%AA%E6%9F%A5%E8%A1%A8/" title="计网-自查表"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">计网-自查表</div></div><div class="info-2"><div class="info-item-1">第1章 计算机网络体系结构 一、计算机网络概述   [ ] 计算机网络的概念  [ ] 能否用自己的话复述计算机网络的定义？定义中“分散”和“自治”是什么意思？ [ ] internet（互连网）和 Internet（互联网）的根本区别是什么？（提示：从通用/专用名词、协议角度回答）    [ ] 计算机网络的组成  [ ] 从组成部分看，网络由哪三要素构成？协议在其中扮演什么角色？ [ ] 从工作方式看，互联网的边缘部分和核心部分分别由什么组成？各自的核心功能是什么？ [ ] 从功能组成看，通信子网和资源子网的分工是什么？    [ ] 三种数据交换方式（高频考点）  [ ] 电路交换  [ ] 电路交换通信的三个核心步骤是什么？ [ ] 为什么说电路交换的通信时延小，但线路利用率低？“独占资源”是其关键特性吗？ [ ] 为什么电路交换不适合计算机之间突发式的通信？   [ ] 报文交换  [ ] 报文交换的核心技术是什么？它与电路交换最本质的区别是什么？ [ ] 相比电路交换，报文交换的优缺点分别是什么？（提示：从连接建立、线路利用率、时延、缓存角度分析） [ ]...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/09/19/%E8%80%83%E7%A0%94/408/OS/IO%E7%AE%A1%E7%90%86/" title="IO管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-19</div><div class="info-item-2">IO管理</div></div><div class="info-2"><div class="info-item-1">操作系统：输入/输出（I/O）管理 一、I/O管理基础   1....</div></div></div></a><a class="pagination-related" href="/2025/09/18/%E8%80%83%E7%A0%94/408/OS/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="内存管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-18</div><div class="info-item-2">内存管理</div></div><div class="info-2"><div class="info-item-1">操作系统：内存管理 内存管理基础   内存管理的基本原理和要求  定义：操作系统对内存空间进行合理划分和有效的动态分配，是操作系统设计中最重要、最复杂的内容之一，用于支持多道程序并发执行，解决内存容量有限与进程内存需求的矛盾。 主要功能：  内存空间的分配与回收：记录内存空闲空间和分配情况，回收已结束进程的内存。 地址转换：将进程的逻辑地址转换为物理地址，需硬件（如内存管理单元(Memory Management Unit, MMU)）支持。 内存空间的扩充：利用虚拟存储技术从逻辑上扩充内存容量。 内存共享：允许多个进程访问内存同一部分（如可重入代码），需受控访问机制。 存储保护：保证进程在各自存储空间运行，互不干扰，需硬件寄存器（如上下限寄存器、重定位寄存器）配合。      逻辑地址与物理地址  逻辑地址（虚拟地址）：  定义：编译后目标模块从0号单元编址的相对地址，链接后形成统一的逻辑地址空间（32位系统范围为000 ~...</div></div></div></a><a class="pagination-related" href="/2025/09/15/%E8%80%83%E7%A0%94/408/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" title="操作系统概述"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-15</div><div class="info-item-2">操作系统概述</div></div><div class="info-2"><div class="info-item-1">操作系统概述 概念要点 1....</div></div></div></a><a class="pagination-related" href="/2025/09/19/%E8%80%83%E7%A0%94/408/OS/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" title="文件管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-19</div><div class="info-item-2">文件管理</div></div><div class="info-2"><div class="info-item-1">操作系统：文件管理 学习导览（408）  文件系统基础（概念/FCB/inode/打开文件表） 文件的逻辑结构（顺序/索引/索引顺序/散列） 文件的物理结构（连续/链接/FAT/索引/混合） 外存空闲空间管理（空闲表/链表/位示图/成组链接） 目录（结构/实现）与共享（硬/软链接） 文件保护（rwx/目录权限语义/ACL） 文件系统结构与布局、挂载（MBR/超级块/根目录/数据区/挂载） 虚拟文件系统...</div></div></div></a><a class="pagination-related" href="/2025/10/13/%E8%80%83%E7%A0%94/408/OS/%E5%BC%BA%E5%8C%96%E7%AC%94%E8%AE%B0/" title="强化笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-13</div><div class="info-item-2">强化笔记</div></div><div class="info-2"><div class="info-item-1">408操作系统大题强化笔记：PV操作与进程同步互斥 1. 核心知识框架 (Mind Map/Outline)  操作系统大题考情分析  题目构成  总分：35分 小题：10道 x 2分 = 20分 大题：2道，共15分 (通常为 7+8 或 6+9)   高频章节分布  绝对核心：进程同步与互斥 (PV操作) - 近乎每年必考 重要章节：内存管理 (分页、虚拟存储) - 频率高，可能与计组跨学科考察 次重点：文件管理 - 考过6次，计算题可能较复杂 新兴趋势：I/O管理 - 近年频繁出现综合性、系统性的简答题   考题风格变化 (2021年至今)  旧大纲：侧重各模块（进程、内存、文件、I/O）的独立理解。 新大纲 (2022年及以后)：极其强调从系统整体角度理解“应用程序-操作系统内核-计算机硬件”如何协作完成任务，考察综合性、底层原理的理解。     PV操作大题解题方法论  核心问题分类  生产者-消费者模型 (最常考) 单纯的同步问题 (前驱图) 哲学家进餐问题 (死锁专题) 读者-写者问题   六步解题法...</div></div></div></a><a class="pagination-related" href="/2025/09/16/%E8%80%83%E7%A0%94/408/OS/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" title="进程与线程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="info-item-2">进程与线程</div></div><div class="info-2"><div class="info-item-1">操作系统核心：进程与线程 一、进程与线程基础   1. 进程的概念与特征  定义：在多道程序环境下，为描述程序并发执行的动态过程、实现操作系统并发性与共享性，引入的动态执行单位。进程是进程实体（程序段+相关数据段+进程控制块（Process Control Block, PCB））的运行过程，是系统资源分配和调度的独立单位。 引入背景：多道程序并发执行时，程序失去封闭性、具有间断性和不可再现性，静态程序无法描述动态执行过程，故引入进程。 特征：  动态性：进程是程序的一次执行，有创建、活动、暂停、终止的生命周期（最基本特征）。 并发性：多个进程同存于内存，能在一段时间内同时运行（引入进程的核心目的之一）。 独立性：进程是独立运行、获取资源、接受调度的基本单位（未建PCB的程序无独立性）。 异步性：进程按独立、不可预知的速度推进，可能导致执行结果不可再现（需同步机制解决）。      2. 进程的组成  结构/组成：进程实体由三部分构成，核心是进程控制块（Process Control Block, PCB）。  进程控制块（Process Control Block,...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "/img/lazy-icon.png" data-lazy-src="/img/lazy-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Lazy</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">45</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lazyy11"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/lazyy11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:lazy11@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is Lazy's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%87%AA%E6%9F%A5%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">操作系统自查表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0-%E8%80%83%E7%82%B9%E8%87%AA%E6%9F%A5-Checklist"><span class="toc-number">1.1.</span> <span class="toc-text">第一章 操作系统概述 - 考点自查 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E6%A6%82%E5%BF%B5%E8%A6%81%E7%82%B9"><span class="toc-number">1.1.1.</span> <span class="toc-text">一、 概念要点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">1. 操作系统的基本概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">2. 操作系统的发展历程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%EF%BC%88%E9%87%8D%E4%B8%AD%E4%B9%8B%E9%87%8D%EF%BC%89"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">3. 操作系统的运行环境（重中之重）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">4. 操作系统结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">5. 操作系统引导</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-number">1.1.1.6.</span> <span class="toc-text">6. 虚拟机</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E6%9C%AC%E7%AB%A0%E7%96%91%E9%9A%BE%E7%82%B9%E8%BE%A8%E6%9E%90"><span class="toc-number">1.1.1.7.</span> <span class="toc-text">7. 本章疑难点辨析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A0%B8%E5%BF%83%EF%BC%9A%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%87%AA%E6%9F%A5%E6%B8%85%E5%8D%95"><span class="toc-number">1.2.</span> <span class="toc-text">第二章 操作系统核心：进程与线程自查清单</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.1.</span> <span class="toc-text">一、进程与线程基础</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%89%B9%E5%BE%81"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">1. 进程的概念与特征</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2. 进程的组成</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">3. 进程的状态与转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">4. 进程控制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">5. 进程通信</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">6. 线程与多线程模型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81CPU%E8%B0%83%E5%BA%A6%E4%B8%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2"><span class="toc-number">1.2.2.</span> <span class="toc-text">二、CPU调度与上下文切换</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E8%B0%83%E5%BA%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">1. 调度的基本概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E8%B0%83%E5%BA%A6%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2. 调度的实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E8%B0%83%E5%BA%A6%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">3. 调度的目标</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-CPU%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">4. CPU调度算法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%A4%9A%E5%A4%84%E7%90%86%E6%9C%BA%E8%B0%83%E5%BA%A6"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">5. 多处理机调度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E6%9C%BA%E5%88%B6"><span class="toc-number">1.2.2.6.</span> <span class="toc-text">6. 上下文切换机制</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BA%92%E6%96%A5"><span class="toc-number">1.2.3.</span> <span class="toc-text">三、同步与互斥</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">1. 同步与互斥的基本概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">2. 实现临界区互斥的基本方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%88Mutex-Lock%EF%BC%89"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">3. 互斥锁（Mutex Lock）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E4%BF%A1%E5%8F%B7%E9%87%8F%EF%BC%88Semaphore%EF%BC%89"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">4. 信号量（Semaphore）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E7%BB%8F%E5%85%B8%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.3.5.</span> <span class="toc-text">5. 经典同步问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E7%AE%A1%E7%A8%8B%EF%BC%88Monitor%EF%BC%89"><span class="toc-number">1.2.3.6.</span> <span class="toc-text">6. 管程（Monitor）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%AD%BB%E9%94%81"><span class="toc-number">1.2.4.</span> <span class="toc-text">四、死锁</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%AD%BB%E9%94%81%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">1. 死锁的基本概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%AD%BB%E9%94%81%E7%9A%84%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">2. 死锁的处理策略</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E6%AD%BB%E9%94%81%E9%A2%84%E9%98%B2"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">3. 死锁预防</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E6%AD%BB%E9%94%81%E9%81%BF%E5%85%8D"><span class="toc-number">1.2.4.4.</span> <span class="toc-text">4. 死锁避免</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E6%AD%BB%E9%94%81%E7%9A%84%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%A7%A3%E9%99%A4"><span class="toc-number">1.2.4.5.</span> <span class="toc-text">5. 死锁的检测与解除</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E8%87%AA%E6%9F%A5%E6%B8%85%E5%8D%95-Checklist"><span class="toc-number">1.3.</span> <span class="toc-text">第三章 内存管理自查清单 (Checklist)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%9F%BA%E7%A1%80"><span class="toc-number">1.3.1.</span> <span class="toc-text">一、 内存管理基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E8%BF%9E%E7%BB%AD%E5%88%86%E9%85%8D%E7%AE%A1%E7%90%86%E6%96%B9%E5%BC%8F"><span class="toc-number">1.3.2.</span> <span class="toc-text">二、 连续分配管理方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81-%E5%9F%BA%E6%9C%AC%E5%88%86%E9%A1%B5%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86"><span class="toc-number">1.3.3.</span> <span class="toc-text">三、 基本分页存储管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E5%9F%BA%E6%9C%AC%E5%88%86%E6%AE%B5%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86"><span class="toc-number">1.3.4.</span> <span class="toc-text">四、 基本分段存储管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81-%E6%AE%B5%E9%A1%B5%E5%BC%8F%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86"><span class="toc-number">1.3.5.</span> <span class="toc-text">五、 段页式存储管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD%E3%80%81-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">1.3.6.</span> <span class="toc-text">六、 虚拟内存管理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86-%C2%B7-%E8%80%83%E7%A0%94408%E8%87%AA%E6%9F%A5%E6%B8%85%E5%8D%95"><span class="toc-number">1.4.</span> <span class="toc-text">第四章 文件管理 · 考研408自查清单</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80"><span class="toc-number">1.4.1.</span> <span class="toc-text">一、 文件系统基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E7%9B%AE%E5%BD%95"><span class="toc-number">1.4.2.</span> <span class="toc-text">二、 目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.4.3.</span> <span class="toc-text">三、 文件系统</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-I-O%E7%AE%A1%E7%90%86%E8%87%AA%E6%9F%A5%E6%B8%85%E5%8D%95"><span class="toc-number">1.5.</span> <span class="toc-text">第五章 I&#x2F;O管理自查清单</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81I-O%E7%AE%A1%E7%90%86%E5%9F%BA%E7%A1%80"><span class="toc-number">1.5.1.</span> <span class="toc-text">一、I&#x2F;O管理基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%AE%BE%E5%A4%87%E7%8B%AC%E7%AB%8B%E8%BD%AF%E4%BB%B6"><span class="toc-number">1.5.2.</span> <span class="toc-text">二、设备独立软件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%A4%96%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">1.5.3.</span> <span class="toc-text">三、外存管理</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/25/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BB%84/%E8%AE%A1%E7%BB%84%E5%BC%BA%E5%8C%96%E7%AC%94%E8%AE%B0/" title="计组强化笔记.md">计组强化笔记.md</a><time datetime="2025-10-25T09:22:50.000Z" title="Created 2025-10-25 17:22:50">2025-10-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/25/%E8%80%83%E7%A0%94/%E6%95%B0%E5%AD%A6/%E9%AB%98%E6%95%B0/%E9%AB%98%E6%95%B0%E9%A2%98%E9%9B%86/" title="高数题集.md">高数题集.md</a><time datetime="2025-10-25T03:06:46.000Z" title="Created 2025-10-25 11:06:46">2025-10-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/24/%E8%80%83%E7%A0%94/408/%E8%AE%A1%E7%BB%84/IO%E7%B3%BB%E7%BB%9F/" title="IO系统">IO系统</a><time datetime="2025-10-24T06:48:39.000Z" title="Created 2025-10-24 14:48:39">2025-10-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/24/%E8%80%83%E7%A0%94/%E6%95%B0%E5%AD%A6/%E9%AB%98%E6%95%B0/%E6%95%B0%E5%88%97%E6%9E%81%E9%99%90/" title="数列极限">数列极限</a><time datetime="2025-10-24T02:39:16.000Z" title="Created 2025-10-24 10:39:16">2025-10-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/23/%E8%80%83%E7%A0%94/%E6%95%B0%E5%AD%A6/%E9%AB%98%E6%95%B0/%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD/" title="函数的极限与连续">函数的极限与连续</a><time datetime="2025-10-23T13:34:02.000Z" title="Created 2025-10-23 21:34:02">2025-10-23</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(45deg, #002FA7, #00B4FF);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Lazy</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (true) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://waline.lazy11.top/',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章..." type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
